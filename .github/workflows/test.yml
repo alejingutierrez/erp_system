@@ -1,0 +1,16 @@
+name: Unit Tests
+
+on: [pull_request]
+
+jobs:
+  vitest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 9
+      - name: Install deps
+        run: pnpm i --frozen-lockfile
+      - name: Run Vitest
+        run: pnpm test

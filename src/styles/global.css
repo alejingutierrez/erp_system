@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------- CSS RESET (Meyer mod) -------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-neutral-50 text-neutral-900 font-sans antialiased;
+  margin: 0;
+}
+
+/* -------- Design‑tokens via CSS variables -------- */
+:root {
+  --color-surface-glass: theme(colors.mocha / 0.3);
+  --color-primary: theme(colors.peri);
+  --color-secondary: theme(colors.classic);
+}
+
+/* -------- Helpers for Liquid Glass -------- */
+.glass {
+  background: var(--color-surface-glass);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
