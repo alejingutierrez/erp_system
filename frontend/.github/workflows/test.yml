@@ -1,0 +1,19 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    paths:
+      - 'frontend/**'
+
+jobs:
+  vitest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 9
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Run Vitest
+        run: pnpm test:frontend
