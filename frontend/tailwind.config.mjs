@@ -1,23 +1,41 @@
+import { tokens } from './src/styles/theme';
+
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: ["class"],
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  darkMode: 'class',
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
       colors: {
-        primary: '#000000',
-        secondary: '#60CBC5',
-        tertiary: '#FF837A',
-        quaternary: '#FBE267',
-        success: '#9EDC75',
-        'alt-primary': '#233640',
-        surfaceGlass: 'rgba(190, 138, 111, 0.3)',
+        ...tokens.colors.neutral,
+        ...tokens.colors.brand,
+        border: 'hsl(var(--border))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        surfaceGlass: 'hsl(var(--surface-glass))',
       },
-      fontFamily: {
-        sans: ['"Cairo Play"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        heading: ['Anta', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-      },
-    }
+      borderRadius: tokens.radius,
+      boxShadow: tokens.shadow,
+      fontFamily: tokens.fontFamily,
+    },
   },
-  plugins: [require("@tailwindcss/forms")]
+  plugins: [require('@tailwindcss/forms')],
 };
+

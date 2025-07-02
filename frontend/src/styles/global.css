@@ -2,37 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
-/* -------- CSS RESET (Meyer mod) -------- */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@layer base {
+  /*
+   * ==========================================================================
+   * DESIGN TOKENS (CSS VARIABLES)
+   * ==========================================================================
+   * Centralized values for colors and radius, enabling dynamic theme switching.
+   * Light mode is default, .dark class overrides for dark mode.
+   */
 
-html, body, #root {
-  height: 100%;
-}
+  /* Light mode variables (default) */
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 210 10% 13%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 176 48% 58%;
+    --secondary-foreground: 210 10% 13%;
+    --destructive: 4 100% 76%;
+    --destructive-foreground: 0 0% 100%;
+    --muted: 210 17% 95%;
+    --muted-foreground: 210 7% 53%;
+    --border: 210 14% 89%;
+    --ring: 176 48% 58%;
+    --surface-glass: 210 17% 95% / 0.3;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+  }
 
-body {
-  @apply bg-white text-primary font-sans antialiased;
-  margin: 0;
-}
+  /* Dark mode variables */
+  .dark {
+    --background: 210 10% 3.9%;
+    --foreground: 210 17% 98%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 176 48% 58%;
+    --secondary-foreground: 210 17% 98%;
+    --destructive: 4 100% 76%;
+    --destructive-foreground: 210 17% 98%;
+    --muted: 210 11% 22%;
+    --muted-foreground: 210 15% 63%;
+    --border: 210 11% 22%;
+    --ring: 176 48% 58%;
+    --surface-glass: 210 10% 13% / 0.3;
+  }
 
-/* -------- Design‑tokens via CSS variables -------- */
-:root {
-  --color-surface-glass: theme(colors.surfaceGlass);
-  --color-primary: theme(colors.primary);
-  --color-secondary: theme(colors.secondary);
-  --color-tertiary: theme(colors.tertiary);
-  --color-quaternary: theme(colors.quaternary);
-  --color-success: theme(colors.success);
-  --color-alt-primary: theme(colors.altPrimary);
-}
+  /*
+   * ==========================================================================
+   * BASE & TYPOGRAPHIC STYLES
+   * ==========================================================================
+   * Global reset, body styles, and a consistent typographic scale.
+   */
 
-/* -------- Helpers for Liquid Glass -------- */
-.glass {
-  background: var(--color-surface-glass);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-color: hsl(var(--border));
+  }
+
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    margin: 0;
+  }
+
+  /* Typographic Scale */
+  h1 {
+    @apply font-heading text-5xl font-bold tracking-tight;
+  }
+  h2 {
+    @apply font-heading text-4xl font-semibold tracking-tight;
+  }
+  h3 {
+    @apply font-heading text-3xl font-semibold tracking-tight;
+  }
+  h4 {
+    @apply font-heading text-2xl font-semibold tracking-tight;
+  }
+  p, ul, ol {
+    @apply text-base leading-relaxed;
+  }
+
+  /*
+   * ==========================================================================
+   * GLOBAL UTILITIES & POLISH
+   * ==========================================================================
+   * Accessibility improvements and other small visual refinements.
+   */
+
+  /* Accessible focus states */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  /* Branded text selection */
+  ::selection {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* Liquid Glass effect helper */
+  .glass {
+    background: hsl(var(--surface-glass));
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
 }
