@@ -24,6 +24,7 @@ const meta: Meta<TextareaProps> = {
     placeholder: { control: "text" },
     label: { control: "text" },
     showCharCount: { control: "boolean" },
+    autoResize: { control: "boolean" },
   },
 };
 
@@ -47,4 +48,8 @@ export const WithCounter: Story = {
 };
 export const Ghost: Story = {
   args: { placeholder: "Ghost variant", variant: "ghost" },
+};
+
+export const AutoResize: Story = {
+  args: { placeholder: "Auto resize", autoResize: true },
 };

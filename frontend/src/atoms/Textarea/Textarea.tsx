@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const textareaVariants = cva(
-  "peer block w-full rounded-md bg-white text-foreground placeholder:text-muted-foreground resize-y focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+  "peer block w-full rounded-md bg-white text-foreground placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       size: {
@@ -49,6 +49,7 @@ export interface TextareaProps
   label?: string;
   showCharCount?: boolean;
   error?: boolean;
+  autoResize?: boolean;
 }
 
 const sizeRows: Record<NonNullable<VariantProps<typeof textareaVariants>["size"]>, number> = {
@@ -67,6 +68,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       label,
       showCharCount,
       error,
+      autoResize,
       onChange,
       rows,
       id,
@@ -78,27 +80,59 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       (props.value ?? props.defaultValue ?? "").toString().length,
     );
 
+    const internalRef = React.useRef<HTMLTextAreaElement>(null);
+
+    const setRefs = React.useCallback(
+      (node: HTMLTextAreaElement) => {
+        internalRef.current = node;
+        if (typeof ref === "function") {
+          ref(node);
+        } else if (ref) {
+          (ref as React.RefObject<HTMLTextAreaElement>).current = node;
+        }
+      },
+      [ref],
+    );
+
+    const resize = React.useCallback((el: HTMLTextAreaElement | null) => {
+      if (!el) return;
+      el.style.height = "auto";
+      el.style.height = `${el.scrollHeight}px`;
+    }, []);
+
+    React.useEffect(() => {
+      if (autoResize) {
+        resize(internalRef.current);
+      }
+    }, [autoResize, resize, props.value]);
+
     const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
       onChange?.(e);
       if (showCharCount && props.value === undefined) {
         setCount(e.target.value.length);
+      }
+      if (autoResize) {
+        resize(e.target);
       }
     };
 
     const textareaId =
       id || label ? `${id ?? label?.replace(/\s+/g, "-").toLowerCase()}` : undefined;
 
-    const appliedRows = rows ?? sizeRows[size ?? "md"];
+    const appliedRows = rows ?? (autoResize ? 1 : sizeRows[size ?? "md"]);
 
     return (
       <div className="relative">
         <textarea
           id={textareaId}
-          ref={ref}
+          ref={setRefs}
           rows={appliedRows}
           aria-invalid={error ? "true" : undefined}
           placeholder={label ? " " : props.placeholder}
-          className={cn(textareaVariants({ size, variant, color, error, className }))}
+          className={cn(
+            textareaVariants({ size, variant, color, error, className }),
+            autoResize ? "resize-none overflow-hidden transition-all" : "resize-y",
+          )}
           onChange={handleChange}
           {...props}
         />
