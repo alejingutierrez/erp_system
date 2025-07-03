@@ -86,7 +86,7 @@ describe('Button', () => {
         <Button variant="icon" intent="success" LeftIcon={MockIcon} aria-label="Icon" />,
       );
       const button = screen.getByRole('button', { name: /icon/i });
-      expect(button.className).toContain('text-success');
+      expect(button.className).toContain('bg-success');
     });
   });
 
