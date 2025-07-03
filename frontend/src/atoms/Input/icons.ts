@@ -17,6 +17,7 @@ import {
   Minus,
   MoreHorizontal,
   Plus,
+  Mic,
   Save,
   Search,
   Settings,
@@ -26,7 +27,7 @@ import {
   Heart,
   Star,
   X,
-} from 'lucide-react';
+} from "lucide-react";
 
 export const iconMap = {
   AlertCircle,
@@ -47,6 +48,7 @@ export const iconMap = {
   Minus,
   MoreHorizontal,
   Plus,
+  Mic,
   Save,
   Search,
   Settings,
