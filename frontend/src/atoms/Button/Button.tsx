@@ -17,11 +17,11 @@ const buttonVariants = cva(
         icon: 'p-0 border-transparent',
       },
       intent: {
-        primary: 'bg-gradient-to-br from-primary to-primary/90 text-primary-foreground',
-        secondary: 'bg-gradient-to-br from-secondary to-secondary/80 text-secondary-foreground',
-        tertiary: 'bg-tertiary text-tertiary-foreground hover:bg-tertiary/90',
-        quaternary: 'bg-quaternary text-quaternary-foreground hover:bg-quaternary/90',
-        success: 'bg-success text-success-foreground hover:bg-success/90',
+        primary: 'text-primary-foreground',
+        secondary: 'text-secondary-foreground',
+        tertiary: 'text-tertiary-foreground',
+        quaternary: 'text-quaternary-foreground',
+        success: 'text-success-foreground',
       },
       size: {
         sm: 'h-9',
@@ -31,6 +31,11 @@ const buttonVariants = cva(
     },
     compoundVariants: [
       // Default variant styles
+      { variant: 'default', intent: 'primary', className: 'bg-gradient-to-br from-primary to-primary/90' },
+      { variant: 'default', intent: 'secondary', className: 'bg-gradient-to-br from-secondary to-secondary/80' },
+      { variant: 'default', intent: 'tertiary', className: 'bg-tertiary hover:bg-tertiary/90' },
+      { variant: 'default', intent: 'quaternary', className: 'bg-quaternary hover:bg-quaternary/90' },
+      { variant: 'default', intent: 'success', className: 'bg-success hover:bg-success/90' },
       { variant: 'default', size: 'sm', className: 'px-4 min-w-[8rem]' },
       { variant: 'default', size: 'md', className: 'px-6 min-w-[10rem]' },
       { variant: 'default', size: 'lg', className: 'px-8 min-w-[12rem]' },

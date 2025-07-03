@@ -12,14 +12,14 @@ describe('Button', () => {
     render(<Button>Default</Button>);
     const button = screen.getByRole('button');
     // Check for a class that is part of the primary intent and md size
-    expect(button.className).toContain('bg-primary');
+    expect(button.className).toContain('from-primary');
     expect(button.className).toContain('h-10');
   });
 
   it('applies specified variant classes', () => {
     render(<Button intent="secondary" size="lg">Custom</Button>);
     const button = screen.getByRole('button');
-    expect(button.className).toContain('bg-secondary');
+    expect(button.className).toContain('from-secondary');
     expect(button.className).toContain('h-11');
   });
 
