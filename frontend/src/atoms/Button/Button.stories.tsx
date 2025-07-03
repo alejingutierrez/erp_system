@@ -24,6 +24,7 @@ const meta: Meta<ButtonStoryProps> = {
     loadingText: { control: 'text', if: { arg: 'isLoading', eq: true } },
     disabled: { control: 'boolean' },
     children: { control: 'text' },
+    onClick: { action: 'clicked', table: { category: 'Events' } },
     leftIconName: { name: 'Left Icon', control: { type: 'select' }, options: [undefined, ...iconOptions], table: { category: 'Icons' } },
     rightIconName: { name: 'Right Icon', control: { type: 'select' }, options: [undefined, ...iconOptions], table: { category: 'Icons' } },
     LeftIcon: { table: { disable: true } },
