@@ -19,6 +19,12 @@
     --primary-foreground: 0 0% 100%;
     --secondary: 176 48% 58%;
     --secondary-foreground: 210 10% 13%;
+    --tertiary: 4 100% 74%;
+    --tertiary-foreground: 210 10% 13%;
+    --quaternary: 54 95% 70%;
+    --quaternary-foreground: 210 10% 13%;
+    --success: 98 60% 66%;
+    --success-foreground: 210 10% 13%;
     --destructive: 4 100% 76%;
     --destructive-foreground: 0 0% 100%;
     --muted: 210 17% 95%;
@@ -39,6 +45,12 @@
     --primary-foreground: 0 0% 100%;
     --secondary: 176 48% 58%;
     --secondary-foreground: 210 17% 98%;
+    --tertiary: 4 100% 74%;
+    --tertiary-foreground: 210 17% 98%;
+    --quaternary: 54 95% 70%;
+    --quaternary-foreground: 210 17% 98%;
+    --success: 98 60% 66%;
+    --success-foreground: 210 17% 98%;
     --destructive: 4 100% 76%;
     --destructive-foreground: 210 17% 98%;
     --muted: 210 11% 22%;

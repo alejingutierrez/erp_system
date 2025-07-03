@@ -51,6 +51,15 @@ export const tokens = {
     secondary: palette.brand.secondary,
     'secondary-foreground': palette.neutral[900],
 
+    tertiary: palette.brand.tertiary,
+    'tertiary-foreground': palette.neutral[900],
+
+    quaternary: palette.brand.quaternary,
+    'quaternary-foreground': palette.neutral[900],
+
+    success: palette.brand.success,
+    'success-foreground': palette.neutral[900],
+
     // Destructive/Error states
     destructive: palette.brand.tertiary,
     'destructive-foreground': palette.white,
@@ -75,6 +84,15 @@ export const tokens = {
 
       secondary: palette.brand.secondary,
       'secondary-foreground': palette.neutral[50],
+
+      tertiary: palette.brand.tertiary,
+      'tertiary-foreground': palette.neutral[50],
+
+      quaternary: palette.brand.quaternary,
+      'quaternary-foreground': palette.neutral[50],
+
+      success: palette.brand.success,
+      'success-foreground': palette.neutral[50],
 
       destructive: palette.brand.tertiary,
       'destructive-foreground': palette.neutral[50],
