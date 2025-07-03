@@ -67,4 +67,12 @@ describe('Textarea', () => {
     fireEvent.change(textarea, { target: { value: 'abc' } });
     expect(screen.getByText('3/10')).toBeInTheDocument();
   });
+
+  it('auto resizes when typing', () => {
+    render(<Textarea autoResize />);
+    const textarea = screen.getByRole('textbox');
+    Object.defineProperty(textarea, 'scrollHeight', { value: 80, writable: true });
+    fireEvent.change(textarea, { target: { value: 'test' } });
+    expect(textarea.style.height).toBe('80px');
+  });
 });
