@@ -80,5 +80,27 @@ describe('Button', () => {
       expect(icon).toBeInTheDocument();
       expect(button.textContent).toBe('');
     });
+
+    it('applies intent color to an icon-only button', () => {
+      render(
+        <Button variant="icon" intent="success" LeftIcon={MockIcon} aria-label="Icon" />,
+      );
+      const button = screen.getByRole('button', { name: /icon/i });
+      expect(button.className).toContain('text-success');
+    });
+  });
+
+  it('applies spacing classes for ghost and outline variants', () => {
+    render(
+      <>
+        <Button variant="ghost" size="md">Ghost</Button>
+        <Button variant="outline" size="md">Outline</Button>
+        <Button variant="glass" size="md">Glass</Button>
+      </>,
+    );
+    const buttons = screen.getAllByRole('button');
+    buttons.forEach((button) => {
+      expect(button.className).toContain('px-6');
+    });
   });
 });
