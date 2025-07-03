@@ -18,6 +18,12 @@ const meta: Meta<InputStoryProps> = {
     disabled: { control: 'boolean' },
     error: { control: 'boolean' },
     placeholder: { control: 'text' },
+    label: { control: 'text' },
+    showCharCount: { control: 'boolean' },
+    color: {
+      control: 'select',
+      options: ['primary', 'secondary', 'tertiary', 'quaternary', 'success', 'destructive'],
+    },
     leftIconName: { name: 'Left Icon', control: 'select', options: [undefined, ...iconOptions] },
     rightIconName: { name: 'Right Icon', control: 'select', options: [undefined, ...iconOptions] },
     LeftIcon: { table: { disable: true } },
@@ -38,3 +44,7 @@ export const WithError: Story = { args: { placeholder: 'Invalid', error: true } 
 export const Disabled: Story = { args: { placeholder: 'Disabled', disabled: true } };
 export const Small: Story = { args: { size: 'sm', placeholder: 'Small size' } };
 export const Large: Story = { args: { size: 'lg', placeholder: 'Large size' } };
+export const WithLabel: Story = { args: { label: 'Email', color: 'secondary' } };
+export const WithCounter: Story = {
+  args: { label: 'Bio', showCharCount: true, maxLength: 50, color: 'tertiary' },
+};

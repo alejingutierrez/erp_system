@@ -46,4 +46,16 @@ describe('Input', () => {
     expect(handleChange).toHaveBeenCalled();
     expect((input as HTMLInputElement).value).toBe('hi');
   });
+
+  it('renders floating label', () => {
+    render(<Input label="Email" id="email" />);
+    expect(screen.getByText('Email')).toHaveAttribute('for', 'email');
+  });
+
+  it('shows character count', () => {
+    render(<Input showCharCount label="Bio" maxLength={10} />);
+    const input = screen.getByLabelText('Bio');
+    fireEvent.change(input, { target: { value: 'abc' } });
+    expect(screen.getByText('3/10')).toBeInTheDocument();
+  });
 });
