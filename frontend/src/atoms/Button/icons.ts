@@ -23,6 +23,8 @@ import {
   Trash2,
   Upload,
   User,
+  Heart,
+  Star,
   X,
 } from 'lucide-react';
 
@@ -51,6 +53,8 @@ export const iconMap = {
   Trash2,
   Upload,
   User,
+  Heart,
+  Star,
   X,
 };
 
