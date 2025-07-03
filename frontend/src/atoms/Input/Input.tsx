@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const inputVariants = cva(
-  'block w-full rounded-md border border-border bg-white text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50',
+  'peer block w-full rounded-md border border-border bg-white text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       size: {
@@ -17,12 +17,21 @@ const inputVariants = cva(
       rightIcon: {
         true: 'pr-10',
       },
+      color: {
+        primary: 'border-primary focus:ring-primary',
+        secondary: 'border-secondary focus:ring-secondary',
+        tertiary: 'border-tertiary focus:ring-tertiary',
+        quaternary: 'border-quaternary focus:ring-quaternary',
+        success: 'border-success focus:ring-success',
+        destructive: 'border-destructive focus:ring-destructive',
+      },
       error: {
         true: 'border-destructive focus:ring-destructive',
       },
     },
     defaultVariants: {
       size: 'md',
+      color: 'primary',
     },
   }
 );
@@ -33,45 +42,109 @@ export interface InputProps
   LeftIcon?: React.ElementType;
   RightIcon?: React.ElementType;
   error?: boolean;
+  label?: string;
+  showCharCount?: boolean;
+  color?: VariantProps<typeof inputVariants>['color'];
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
-    { className, size, LeftIcon, RightIcon, error, ...props },
+    {
+      className,
+      size,
+      LeftIcon,
+      RightIcon,
+      error,
+      label,
+      showCharCount,
+      color,
+      onChange,
+      id,
+      ...props
+    },
     ref
   ) => {
     const iconSize = size === 'lg' ? 20 : size === 'md' ? 18 : 16;
     const hasLeft = Boolean(LeftIcon);
     const hasRight = Boolean(RightIcon);
+    const [count, setCount] = React.useState(
+      (props.value ?? props.defaultValue ?? '').toString().length
+    );
+
+    const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+      onChange?.(e);
+      if (showCharCount && props.value === undefined) {
+        setCount(e.target.value.length);
+      }
+    };
+
+    const inputId = id || label ? `${id ?? label?.replace(/\s+/g, '-').toLowerCase()}` : undefined;
+    const iconFocusMap: Record<string, string> = {
+      primary: 'group-focus-within:text-primary',
+      secondary: 'group-focus-within:text-secondary',
+      tertiary: 'group-focus-within:text-tertiary',
+      quaternary: 'group-focus-within:text-quaternary',
+      success: 'group-focus-within:text-success',
+      destructive: 'group-focus-within:text-destructive',
+    };
+    const iconFocusColor = color ? iconFocusMap[color] : '';
 
     return (
-      <div className="relative">
+      <div className="relative group">
         {LeftIcon && (
           <LeftIcon
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-muted"
+            className={cn(
+              'absolute left-3 top-1/2 -translate-y-1/2 text-muted',
+              iconFocusColor
+            )}
             size={iconSize}
           />
         )}
         <input
+          id={inputId}
           type="text"
           ref={ref}
           aria-invalid={error ? 'true' : undefined}
+          placeholder={label ? ' ' : props.placeholder}
           className={cn(
             inputVariants({
               size,
               error,
               leftIcon: hasLeft,
               rightIcon: hasRight,
+              color,
               className,
             })
           )}
+          onChange={handleChange}
           {...props}
         />
+        {label && (
+          <label
+            htmlFor={inputId}
+            className={cn(
+              'pointer-events-none absolute left-3 top-2 text-xs text-muted-foreground transition-all',
+              'peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2',
+              'peer-focus:top-0 peer-focus:-translate-y-full'
+            )}
+          >
+            {label}
+          </label>
+        )}
         {RightIcon && (
           <RightIcon
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted"
+            className={cn(
+              'absolute right-3 top-1/2 -translate-y-1/2 text-muted',
+              iconFocusColor
+            )}
             size={iconSize}
           />
+        )}
+        {showCharCount && (
+          <span className="absolute bottom-1 right-3 text-xs text-muted-foreground">
+            {count}
+            {props.maxLength ? `/${props.maxLength}` : ''}
+          </span>
         )}
       </div>
     );
