@@ -6,7 +6,7 @@ import { Spinner } from '@/atoms/Spinner/Spinner';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'group inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary disabled:pointer-events-none disabled:opacity-50 hover:-translate-y-px hover:shadow-md active:translate-y-0 active:shadow-sm active:scale-[0.98]',
+  'group inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium shadow-sm ring-offset-background transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary disabled:pointer-events-none disabled:opacity-50 hover:-translate-y-px hover:shadow-md active:translate-y-0 active:shadow-sm active:scale-[0.98]',
   {
     variants: {
       variant: {
@@ -43,11 +43,11 @@ const buttonVariants = cva(
       { variant: 'icon', size: 'sm', className: 'w-9' },
       { variant: 'icon', size: 'md', className: 'w-10' },
       { variant: 'icon', size: 'lg', className: 'w-11' },
-      { variant: 'icon', intent: 'primary', className: 'text-primary' },
-      { variant: 'icon', intent: 'secondary', className: 'text-secondary' },
-      { variant: 'icon', intent: 'tertiary', className: 'text-tertiary' },
-      { variant: 'icon', intent: 'quaternary', className: 'text-quaternary' },
-      { variant: 'icon', intent: 'success', className: 'text-success' },
+      { variant: 'icon', intent: 'primary', className: 'bg-primary text-primary-foreground' },
+      { variant: 'icon', intent: 'secondary', className: 'bg-secondary text-primary-foreground' },
+      { variant: 'icon', intent: 'tertiary', className: 'bg-tertiary text-primary-foreground' },
+      { variant: 'icon', intent: 'quaternary', className: 'bg-quaternary text-primary-foreground' },
+      { variant: 'icon', intent: 'success', className: 'bg-success text-primary-foreground' },
       // Outline variant styles
       { variant: 'outline', intent: 'primary', className: 'border-primary text-primary hover:bg-primary hover:text-primary-foreground' },
       { variant: 'outline', intent: 'secondary', className: 'border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground' },
