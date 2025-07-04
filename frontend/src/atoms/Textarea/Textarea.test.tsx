@@ -56,9 +56,11 @@ describe('Textarea', () => {
     expect((textarea as HTMLTextAreaElement).value).toBe('hi');
   });
 
-  it('renders floating label', () => {
+  it('renders floating label with updated offset', () => {
     render(<Textarea label="Notes" id="notes" />);
-    expect(screen.getByText('Notes')).toHaveAttribute('for', 'notes');
+    const label = screen.getByText('Notes');
+    expect(label).toHaveAttribute('for', 'notes');
+    expect(label.className).toContain('-translate-y-[1.6rem]');
   });
 
   it('shows character count', () => {

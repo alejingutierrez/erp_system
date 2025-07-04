@@ -88,7 +88,8 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         if (typeof ref === "function") {
           ref(node);
         } else if (ref) {
-          (ref as React.RefObject<HTMLTextAreaElement>).current = node;
+          // Cast to MutableRefObject so that `current` is writable
+          (ref as React.MutableRefObject<HTMLTextAreaElement | null>).current = node;
         }
       },
       [ref],
@@ -142,7 +143,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             className={cn(
               "pointer-events-none absolute left-3 top-2 text-xs text-muted-foreground transition-all",
               "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2",
-              "peer-focus:top-0 peer-focus:-translate-y-[1.2rem]",
+              "peer-focus:top-0 peer-focus:-translate-y-[1.6rem]",
             )}
           >
             {label}
