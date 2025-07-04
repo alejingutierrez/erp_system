@@ -63,19 +63,22 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         aria-checked={checked}
         onClick={() => onCheckedChange(!checked)}
         onKeyUp={(e) => {
-          if (e.key === ' ' || e.key === 'Space' || e.key === 'Spacebar') {
+          const key = e.key.toLowerCase();
+          if (key === ' ' || key === 'space' || key === 'spacebar') {
             e.preventDefault();
             onCheckedChange(!checked);
           }
         }}
         onKeyDown={(e) => {
-          if (e.key === 'Enter') {
+          const key = e.key.toLowerCase();
+          if (key === 'enter') {
             e.preventDefault();
             onCheckedChange(!checked);
           }
         }}
         onKeyPress={(e) => {
-          if (e.key === ' ' || e.key === 'Space' || e.key === 'Spacebar') {
+          const key = e.key.toLowerCase();
+          if (key === ' ' || key === 'space' || key === 'spacebar') {
             e.preventDefault();
             onCheckedChange(!checked);
           }
