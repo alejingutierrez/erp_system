@@ -19,7 +19,7 @@ describe('Text', () => {
     expect(screen.getByText('small')).toHaveClass('text-sm');
 
     rerender(<Text size="lg">large</Text>);
-    expect(screen.getByText('large')).toHaveClass('text-2xl');
+    expect(screen.getByText('large')).toHaveClass('text-xl');
   });
 
   it('applies weight variants', () => {
