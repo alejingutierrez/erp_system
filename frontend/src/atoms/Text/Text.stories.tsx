@@ -53,3 +53,14 @@ export const Colors: Story = {
   ),
   args: {},
 };
+
+export const Weights: Story = {
+  render: (args) => (
+    <div className="space-y-2">
+      <Text {...args} weight="normal">Normal weight</Text>
+      <Text {...args} weight="semibold">Semibold weight</Text>
+      <Text {...args} weight="bold">Bold weight</Text>
+    </div>
+  ),
+  args: {},
+};
