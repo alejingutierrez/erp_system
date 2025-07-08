@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Text } from './Text';
+
+<Meta title="Atoms/Text" of={Text} />
+
+# Text
+
+The `Text` component provides consistent styling for paragraph or inline text. Use the `size`, `weight`, and `color` props to control its appearance.
+
+<Canvas>
+  <Story name="Examples">
+    <>
+      <Text>Lorem ipsum dolor sit amet.</Text>
+      <Text size="sm" muted>Small muted text</Text>
+      <Text size="lg" weight="semibold">Large semibold text</Text>
+    </>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Text} />
