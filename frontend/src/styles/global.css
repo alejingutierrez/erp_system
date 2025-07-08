@@ -149,6 +149,16 @@
     width: var(--slider-thumb-size, 1rem);
     background-color: hsl(var(--slider-color, var(--primary)));
   }
+  .slider::-moz-range-track {
+    height: var(--slider-track-height, 0.375rem);
+    background-color: hsl(var(--muted));
+    border-radius: 9999px;
+  }
+  .slider::-moz-range-progress {
+    height: var(--slider-track-height, 0.375rem);
+    background-color: hsl(var(--slider-color, var(--primary)));
+    border-radius: 9999px;
+  }
   .slider-sm {
     --slider-track-height: 0.25rem;
     --slider-thumb-size: 0.75rem;
