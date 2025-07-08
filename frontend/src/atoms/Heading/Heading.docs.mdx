@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Heading } from './Heading';
+
+<Meta title="Atoms/Heading" of={Heading} />
+
+# Heading
+
+The `Heading` component renders semantic heading elements with the design system's typography. Use the `level` prop to choose the heading size.
+
+<Canvas>
+  <Story name="Examples">
+    <>
+      <Heading level={1}>Heading 1</Heading>
+      <Heading level={2}>Heading 2</Heading>
+      <Heading level={3}>Heading 3</Heading>
+    </>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Heading} />
