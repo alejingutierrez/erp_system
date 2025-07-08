@@ -19,7 +19,15 @@ describe('Text', () => {
     expect(screen.getByText('small')).toHaveClass('text-sm');
 
     rerender(<Text size="lg">large</Text>);
-    expect(screen.getByText('large')).toHaveClass('text-lg');
+    expect(screen.getByText('large')).toHaveClass('text-2xl');
+  });
+
+  it('applies weight variants', () => {
+    const { rerender } = render(<Text weight="normal">w1</Text>);
+    expect(screen.getByText('w1')).toHaveClass('font-normal');
+
+    rerender(<Text weight="bold">w2</Text>);
+    expect(screen.getByText('w2')).toHaveClass('font-bold');
   });
 
   it('applies muted style', () => {
