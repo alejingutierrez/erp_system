@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import type { Meta, StoryObj, StoryFn } from '@storybook/react';
+import React, { useState } from 'react';
 import { Slider, SliderProps } from './Slider';
 
 const meta: Meta<SliderProps> = {
@@ -23,8 +23,17 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { value: 50 },
-};
+  render: (args) => {
+    const [val, setVal] = useState(50);
+    return (
+      <Slider
+        {...args}
+        value={val}
+        onChange={(e) => setVal(Number(e.target.value))}
+      />
+    );
+  },
+}; 
 
 export const Sizes: Story = {
   render: (args) => (
@@ -52,4 +61,18 @@ export const Colors: Story = {
 
 export const Disabled: Story = {
   args: { value: 60, disabled: true },
+};
+
+export const WithIndicator: Story = {
+  render: (args) => {
+    const [val, setVal] = useState(30);
+    return (
+      <Slider
+        {...args}
+        value={val}
+        onChange={(e) => setVal(Number(e.target.value))}
+      />
+    );
+  },
+  args: {},
 };
