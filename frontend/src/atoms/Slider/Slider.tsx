@@ -44,9 +44,13 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
     },
     ref,
   ) => {
+    const inputRef = React.useRef<HTMLInputElement>(null);
+    React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
+
     const [internal, setInternal] = React.useState(
       Number(value ?? defaultValue ?? min),
     );
+    const [showTip, setShowTip] = React.useState(false);
 
     React.useEffect(() => {
       if (value !== undefined) {
@@ -64,24 +68,58 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
     const percentage =
       ((internal - Number(min)) / (Number(max) - Number(min))) * 100;
 
+    const handleTrackClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+      if (!inputRef.current) return;
+      const rect = inputRef.current.getBoundingClientRect();
+      const clickPercentage = (e.clientX - rect.left) / rect.width;
+      const newValue =
+        Number(min) + clickPercentage * (Number(max) - Number(min));
+      const stepped = Math.round(newValue / Number(step)) * Number(step);
+      if (value === undefined) {
+        setInternal(stepped);
+      }
+      inputRef.current.value = stepped.toString();
+      const event = new Event('input', { bubbles: true });
+      inputRef.current.dispatchEvent(event);
+      const changeEvent = new Event('change', { bubbles: true });
+      inputRef.current.dispatchEvent(changeEvent);
+    };
+
     return (
-      <input
-        type="range"
-        role="slider"
-        ref={ref}
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        defaultValue={defaultValue}
-        onChange={handleChange}
-        className={cn(sliderVariants({ size, color, className }))}
+      <div
+        className="relative w-full"
+        onPointerDown={() => setShowTip(true)}
+        onPointerUp={() => setShowTip(false)}
+        onPointerLeave={() => setShowTip(false)}
+        onClick={handleTrackClick}
         style={{
           // @ts-ignore -- CSS variable for background size
           "--slider-percentage": `${percentage}%`,
         }}
-        {...props}
-      />
+      >
+        <input
+          type="range"
+          role="slider"
+          ref={inputRef}
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          defaultValue={defaultValue}
+          onChange={handleChange}
+          className={cn(sliderVariants({ size, color, className }))}
+          {...props}
+        />
+        {showTip && (
+          <span
+            data-testid="slider-indicator"
+            className="pointer-events-none absolute -top-6 -translate-x-1/2 rounded bg-gray-700 px-1 py-0.5 text-xs text-white"
+            style={{ left: `${percentage}%` }}
+          >
+            {internal}
+          </span>
+        )}
+      </div>
     );
   },
 );

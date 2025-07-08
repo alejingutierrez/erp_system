@@ -29,6 +29,23 @@ describe('Slider', () => {
     expect(slider).toHaveValue('30');
   });
 
+  it('shows indicator while dragging', () => {
+    render(<Slider defaultValue={20} />);
+    const slider = screen.getByRole('slider');
+    fireEvent.pointerDown(slider);
+    expect(screen.getByTestId('slider-indicator')).toBeInTheDocument();
+    fireEvent.pointerUp(slider);
+    expect(screen.queryByTestId('slider-indicator')).not.toBeInTheDocument();
+  });
+
+  it('updates value when track is clicked', () => {
+    const handleChange = vi.fn();
+    render(<Slider onChange={handleChange} />);
+    const slider = screen.getByRole('slider');
+    fireEvent.click(slider, { clientX: 10 });
+    expect(handleChange).toHaveBeenCalled();
+  });
+
   it('is disabled when disabled prop is true', () => {
     render(<Slider disabled />);
     expect(screen.getByRole('slider')).toBeDisabled();
