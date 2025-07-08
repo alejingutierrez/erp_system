@@ -3,15 +3,15 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
 
-const headingVariants = cva('', {
+const headingVariants = cva('font-heading', {
   variants: {
     level: {
-      '1': 'font-heading text-5xl font-bold tracking-tight',
-      '2': 'font-heading text-4xl font-semibold tracking-tight',
-      '3': 'font-heading text-3xl font-semibold tracking-tight',
-      '4': 'font-heading text-2xl font-semibold tracking-tight',
-      '5': 'font-heading text-xl font-semibold tracking-tight',
-      '6': 'font-heading text-lg font-semibold tracking-tight',
+      '1': 'text-5xl font-bold tracking-tight',
+      '2': 'text-4xl font-semibold tracking-tight',
+      '3': 'text-3xl font-semibold tracking-tight',
+      '4': 'text-2xl font-semibold tracking-tight',
+      '5': 'text-xl font-semibold tracking-tight',
+      '6': 'text-lg font-semibold tracking-tight',
     },
     align: {
       left: 'text-left',

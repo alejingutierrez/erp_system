@@ -6,8 +6,8 @@ const textVariants = cva('font-sans', {
   variants: {
     size: {
       sm: 'text-sm',
-      md: 'text-base',
-      lg: 'text-lg',
+      md: 'text-lg',
+      lg: 'text-xl',
     },
     weight: {
       normal: 'font-normal',
