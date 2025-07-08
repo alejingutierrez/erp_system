@@ -1,0 +1,16 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Slider } from './Slider';
+
+<Meta title="Atoms/Slider" of={Slider} />
+
+# Slider
+
+The `Slider` component lets users select a numeric value within a range by dragging a thumb along a track.
+
+<Canvas>
+  <Story name="Default">
+    <Slider defaultValue={50} />
+  </Story>
+</Canvas>
+
+<ArgsTable of={Slider} />
