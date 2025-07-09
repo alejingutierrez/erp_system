@@ -7,7 +7,7 @@ const meta: Meta<TextProps> = {
   tags: ['autodocs'],
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    weight: { control: 'select', options: ['normal', 'semibold', 'bold'] },
+    weight: { control: 'select', options: ['normal', 'medium', 'semibold', 'bold'] },
     color: {
       control: 'select',
       options: [undefined, 'primary', 'secondary', 'tertiary', 'quaternary', 'success'],
@@ -58,6 +58,7 @@ export const Weights: Story = {
   render: (args) => (
     <div className="space-y-2">
       <Text {...args} weight="normal">Normal weight</Text>
+      <Text {...args} weight="medium">Medium weight</Text>
       <Text {...args} weight="semibold">Semibold weight</Text>
       <Text {...args} weight="bold">Bold weight</Text>
     </div>

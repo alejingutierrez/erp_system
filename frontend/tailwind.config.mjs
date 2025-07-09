@@ -5,6 +5,7 @@ export default {
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
+    fontFamily: tokens.fontFamily,
     extend: {
       colors: {
         ...tokens.colors.neutral,
@@ -45,7 +46,6 @@ export default {
       },
       borderRadius: tokens.radius,
       boxShadow: tokens.shadow,
-      fontFamily: tokens.fontFamily,
     },
   },
   plugins: [require('@tailwindcss/forms')],
