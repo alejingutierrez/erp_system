@@ -11,6 +11,7 @@ const textVariants = cva('font-sans', {
     },
     weight: {
       normal: 'font-normal',
+      medium: 'font-medium',
       semibold: 'font-semibold',
       bold: 'font-bold',
     },

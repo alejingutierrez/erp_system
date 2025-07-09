@@ -26,8 +26,11 @@ describe('Text', () => {
     const { rerender } = render(<Text weight="normal">w1</Text>);
     expect(screen.getByText('w1')).toHaveClass('font-normal');
 
-    rerender(<Text weight="bold">w2</Text>);
-    expect(screen.getByText('w2')).toHaveClass('font-bold');
+    rerender(<Text weight="medium">w2</Text>);
+    expect(screen.getByText('w2')).toHaveClass('font-medium');
+
+    rerender(<Text weight="bold">w3</Text>);
+    expect(screen.getByText('w3')).toHaveClass('font-bold');
   });
 
   it('applies muted style', () => {
