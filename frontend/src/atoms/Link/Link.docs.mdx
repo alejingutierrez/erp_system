@@ -1,0 +1,22 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Link } from './Link';
+
+<Meta title="Atoms/Link" of={Link} />
+
+# Link
+
+The `Link` component provides styled anchor elements consistent with the design system. Use the `color` and `underline` variants to control its appearance. Set `isExternal` to open the link in a new tab.
+
+<Canvas>
+  <Story name="Examples">
+    <>
+      <Link href="#">Default Link</Link>
+      <br />
+      <Link href="#" underline={false}>No underline</Link>
+      <br />
+      <Link href="https://example.com" isExternal>External Link</Link>
+    </>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Link} />
