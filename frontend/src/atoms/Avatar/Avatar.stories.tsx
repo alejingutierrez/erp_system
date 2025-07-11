@@ -58,3 +58,10 @@ export const Colors: Story = {
   ),
   args: {},
 };
+
+export const HoverEffect: Story = {
+  args: {
+    src: 'https://placehold.co/100x100',
+    alt: 'Hover avatar',
+  },
+};

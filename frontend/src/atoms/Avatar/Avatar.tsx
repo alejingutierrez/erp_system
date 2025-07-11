@@ -5,7 +5,7 @@ import { User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const avatarVariants = cva(
-  'relative inline-flex items-center justify-center overflow-hidden rounded-full bg-muted select-none text-muted-foreground',
+  'relative inline-flex items-center justify-center overflow-hidden rounded-full bg-muted select-none text-muted-foreground shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5',
   {
     variants: {
       size: {

@@ -26,6 +26,9 @@ describe('Avatar', () => {
     const container = screen.getByTestId('avatar');
     expect(container.className).toContain('h-6');
 
+    // default classes include shadow and hover animation
+    expect(container.className).toContain('shadow-sm');
+
     rerender(<Avatar size="lg" data-testid="avatar" />);
     expect(container.className).toContain('h-16');
   });
