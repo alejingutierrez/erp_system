@@ -10,7 +10,10 @@ const meta: Meta<LinkProps> = {
       control: 'select',
       options: ['primary', 'secondary', 'tertiary', 'quaternary', 'success'],
     },
-    underline: { control: 'boolean' },
+    underline: {
+      control: 'select',
+      options: ['always', 'hover', 'none'],
+    },
     isExternal: { control: 'boolean' },
     href: { control: 'text' },
     target: { table: { disable: true } },
@@ -35,11 +38,15 @@ export const Colors: Story = {
       <Link {...args} color="success">Success</Link>
     </div>
   ),
-  args: { href: '#', underline: true },
+  args: { href: '#', underline: 'always' },
 };
 
 export const NoUnderline: Story = {
-  args: { href: '#', underline: false, children: 'No underline' },
+  args: { href: '#', underline: 'none', children: 'No underline' },
+};
+
+export const HoverUnderline: Story = {
+  args: { href: '#', underline: 'hover', children: 'Underline on hover' },
 };
 
 export const External: Story = {

@@ -14,13 +14,14 @@ const linkVariants = cva(
         success: 'text-success hover:text-success/80',
       },
       underline: {
-        true: 'underline',
-        false: 'no-underline',
+        always: 'underline',
+        hover: 'hover:underline',
+        none: 'no-underline',
       },
     },
     defaultVariants: {
       color: 'secondary',
-      underline: true,
+      underline: 'always',
     },
   },
 );
