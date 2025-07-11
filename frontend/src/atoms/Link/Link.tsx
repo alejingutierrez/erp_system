@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const linkVariants = cva(
-  'text-sm font-medium underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ring-offset-background',
+  'text-sm font-medium underline underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ring-offset-background',
   {
     variants: {
       color: {
@@ -13,15 +13,9 @@ const linkVariants = cva(
         quaternary: 'text-quaternary hover:text-quaternary/80',
         success: 'text-success hover:text-success/80',
       },
-      underline: {
-        always: 'underline',
-        hover: 'hover:underline',
-        none: 'no-underline',
-      },
     },
     defaultVariants: {
       color: 'secondary',
-      underline: 'always',
     },
   },
 );
@@ -34,11 +28,11 @@ export interface LinkProps
 }
 
 const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, color, underline, isExternal, target, rel, ...props }, ref) => {
+  ({ className, color, isExternal, target, rel, ...props }, ref) => {
     return (
       <a
         ref={ref}
-        className={cn(linkVariants({ color, underline }), className)}
+        className={cn(linkVariants({ color }), className)}
         target={isExternal ? '_blank' : target}
         rel={isExternal ? 'noopener noreferrer' : rel}
         {...props}

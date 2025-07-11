@@ -15,16 +15,10 @@ describe('Link', () => {
     expect(link.className).toContain('text-tertiary');
   });
 
-  it('removes underline when underline is "none"', () => {
-    render(<Link href="#" underline="none">No Underline</Link>);
-    const link = screen.getByRole('link', { name: /no underline/i });
-    expect(link.className).toContain('no-underline');
-  });
-
-  it('applies hover underline when underline is "hover"', () => {
-    render(<Link href="#" underline="hover">Hover</Link>);
-    const link = screen.getByRole('link', { name: /hover/i });
-    expect(link.className).toContain('hover:underline');
+  it('has underline by default', () => {
+    render(<Link href="#">Default</Link>);
+    const link = screen.getByRole('link', { name: /default/i });
+    expect(link.className).toContain('underline');
   });
 
   it('adds target and rel for external links', () => {
