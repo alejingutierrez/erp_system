@@ -1,0 +1,24 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import Breadcrumbs from './Breadcrumbs';
+
+<Meta title="Atoms/Breadcrumbs" of={Breadcrumbs} />
+
+# Breadcrumbs
+
+Breadcrumbs show users where they are in the application hierarchy.
+Provide an array of `{ label, href }` items. The last item represents the current page.
+
+<Canvas>
+  <Story name="Example">
+    <Breadcrumbs
+      items={[
+        { label: 'Inicio', href: '#' },
+        { label: 'Inventario', href: '#' },
+        { label: 'Productos', href: '#' },
+        { label: 'Camisa X' },
+      ]}
+    />
+  </Story>
+</Canvas>
+
+<ArgsTable of={Breadcrumbs} />
