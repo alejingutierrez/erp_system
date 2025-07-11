@@ -1,0 +1,19 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Tooltip } from './Tooltip';
+import { Button } from '../Button/Button';
+
+<Meta title="Atoms/Tooltip" of={Tooltip} />
+
+# Tooltip
+
+The `Tooltip` component displays supplemental information when users hover or focus on an element.
+
+<Canvas>
+  <Story name="Example">
+    <Tooltip content="Save changes">
+      <Button variant="outline">Hover me</Button>
+    </Tooltip>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Tooltip} />
