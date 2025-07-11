@@ -23,16 +23,17 @@ const linkVariants = cva(
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof linkVariants> {
-  /** If true, the link opens in a new tab */
+  /** Si es true, el enlace se abre en una pestaña nueva */
   isExternal?: boolean;
 }
 
 const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ className, color, isExternal, target, rel, ...props }, ref) => {
+  ({ className, color, isExternal, target, rel, style, ...props }, ref) => {
     return (
       <a
         ref={ref}
         className={cn(linkVariants({ color }), className)}
+        style={{ textDecoration: 'underline', ...(style ?? {}) }}
         target={isExternal ? '_blank' : target}
         rel={isExternal ? 'noopener noreferrer' : rel}
         {...props}
