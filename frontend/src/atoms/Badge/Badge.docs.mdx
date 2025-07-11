@@ -1,0 +1,21 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Badge } from './Badge';
+
+<Meta title="Atoms/Badge" of={Badge} />
+
+# Badge
+
+The `Badge` component displays a small label for counts or status information. Use the `variant` prop to adjust its color.
+
+<Canvas>
+  <Story name="Examples">
+    <>
+      <Badge variant="success">Activo</Badge>
+      <Badge variant="warning" className="ml-2">En curso</Badge>
+      <Badge variant="destructive" className="ml-2">Error</Badge>
+      <Badge variant="info" className="ml-2">99+</Badge>
+    </>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Badge} />
