@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Tag } from './Tag';
+
+<Meta title="Atoms/Tag" of={Tag} />
+
+# Tag
+
+The `Tag` component displays small labels used for categorization or selected filters. Use the `variant` and `color` props to match your theme. Enable `closable` to show a remove button.
+
+<Canvas>
+  <Story name="Examples">
+    <>
+      <Tag>Etiqueta</Tag>
+      <Tag variant="solid" color="secondary" className="ml-2">VIP</Tag>
+      <Tag closable className="ml-2">Filtro: Azul</Tag>
+    </>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Tag} />
