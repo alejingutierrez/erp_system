@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Icon } from './Icon';
+
+<Meta title="Atoms/Icon" of={Icon} />
+
+# Icon
+
+The `Icon` component renders SVG icons from the design system library. Use the `name` prop to select an icon and the `size` or `color` variants to adapt it to your needs. Provide the optional `label` prop when the icon conveys meaning so that it is announced to assistive technologies.
+
+<Canvas>
+  <Story name="Examples">
+    <div className="flex gap-4">
+      <Icon name="Search" />
+      <Icon name="Heart" color="tertiary" />
+      <Icon name="Star" size="lg" color="quaternary" />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Icon} />
