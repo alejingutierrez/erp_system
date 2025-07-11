@@ -23,7 +23,7 @@ const linkVariants = cva(
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof linkVariants> {
-  /** If true, the link opens in a new tab */
+  /** Si es true, el enlace se abre en una pestaña nueva */
   isExternal?: boolean;
 }
 
