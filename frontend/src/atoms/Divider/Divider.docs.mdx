@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Divider } from './Divider';
+
+<Meta title="Atoms/Divider" of={Divider} />
+
+# Divider
+
+Use the `Divider` component to visually separate content. It supports horizontal and vertical orientations as well as configurable spacing and color.
+
+<Canvas>
+  <Story name="Examples">
+    <>
+      <p>Section 1</p>
+      <Divider />
+      <p>Section 2</p>
+    </>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Divider} />
