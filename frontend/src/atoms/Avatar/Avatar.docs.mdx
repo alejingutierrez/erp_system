@@ -1,0 +1,19 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Avatar } from './Avatar';
+
+<Meta title="Atoms/Avatar" of={Avatar} />
+
+# Avatar
+
+The `Avatar` component displays a user or entity image. If no image is provided or it fails to load, it falls back to initials or a generic user icon. It also includes a subtle shadow and a small hover animation for a polished feel.
+
+<Canvas>
+  <Story name="Examples">
+    <div className="flex items-center gap-4">
+      <Avatar src="https://placehold.co/60" alt="User" />
+      <Avatar name="Jane Doe" color="primary" />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Avatar} />
