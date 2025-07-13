@@ -1,0 +1,22 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Alert } from './Alert';
+
+<Meta title="Atoms/Alert" of={Alert} />
+
+# Alert
+
+The `Alert` component displays feedback messages for various states such as success, error, warning and information. Use the `variant` prop to change the color scheme. If `dismissable` is enabled, users can close the alert.
+
+<Canvas>
+  <Story name="Examples">
+    <>
+      <Alert variant="success" title="Éxito">Cliente guardado con éxito.</Alert>
+      <Alert variant="error" title="Error" className="mt-4">Error al cargar datos.</Alert>
+      <Alert variant="warning" title="Advertencia" className="mt-4">Falta completar un campo.</Alert>
+      <Alert variant="info" title="Info" className="mt-4" dismissable>Puede cerrar este mensaje.</Alert>
+    </>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Alert} />
+
