@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { FileUpload } from './FileUpload';
+
+<Meta title="Atoms/FileUpload" of={FileUpload} />
+
+# FileUpload
+
+The `FileUpload` component enhances the default file input by hiding the native field and presenting a styled button. After selecting a file it displays the file name or, when `multiple` is enabled, the number of selected files.
+
+<Canvas>
+  <Story name="Examples">
+    <>
+      <FileUpload />
+      <br />
+      <FileUpload multiple buttonText="Subir archivos" />
+    </>
+  </Story>
+</Canvas>
+
+<ArgsTable of={FileUpload} />
