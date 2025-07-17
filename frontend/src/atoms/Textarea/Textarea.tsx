@@ -123,20 +123,20 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     const appliedRows = rows ?? (autoResize ? 1 : sizeRows[size ?? "md"]);
 
     return (
-      <div className="relative">
-        <textarea
-          id={textareaId}
-          ref={setRefs}
-          rows={appliedRows}
-          aria-invalid={error ? "true" : undefined}
-          placeholder={label ? " " : props.placeholder}
-          className={cn(
-            textareaVariants({ size, variant, color, error, className }),
-            autoResize ? "resize-none overflow-hidden transition-all" : "resize-y",
-          )}
-          onChange={handleChange}
-          {...props}
-        />
+        <div className="relative">
+          <textarea
+            id={textareaId}
+            ref={setRefs}
+            rows={appliedRows}
+            aria-invalid={error ? "true" : undefined}
+            className={cn(
+              textareaVariants({ size, variant, color, error, className }),
+              autoResize ? "resize-none overflow-hidden transition-all" : "resize-y",
+            )}
+            onChange={handleChange}
+            {...props}
+            placeholder={label ? " " : props.placeholder}
+          />
         {label && (
           <label
             htmlFor={textareaId}
