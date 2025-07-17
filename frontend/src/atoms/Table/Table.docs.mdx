@@ -1,0 +1,36 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Table } from './Table';
+
+<Meta title="Atoms/Table" of={Table} />
+
+# Table
+
+The `Table` component applies consistent styles to HTML tables. Use the `variant`, `size`, and `color` props to control the appearance.
+
+<Canvas>
+  <Story name="Example">
+    <Table caption="Sample data">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Stock</th>
+          <th>Precio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Camiseta</td>
+          <td>25</td>
+          <td>$12</td>
+        </tr>
+        <tr>
+          <td>Pantalón</td>
+          <td>10</td>
+          <td>$25</td>
+        </tr>
+      </tbody>
+    </Table>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Table} />
