@@ -2,11 +2,11 @@
   "name": "erp-system-monorepo",
   "private": true,
   "scripts": {
-    "dev:frontend": "pnpm --filter frontend dev",
-    "build:frontend": "pnpm --filter frontend build",
-    "test:frontend": "pnpm --filter frontend test",
-    "lint:frontend": "pnpm --filter frontend lint",
-    "build-storybook:frontend": "pnpm --filter frontend build-storybook"
+    "dev:frontend": "pnpm --filter erp_system dev",
+    "build:frontend": "pnpm --filter erp_system build",
+    "test:frontend": "pnpm --filter erp_system exec vitest run",
+    "lint:frontend": "pnpm --filter erp_system lint",
+    "build-storybook:frontend": "pnpm --filter erp_system build-storybook"
   },
   "packageManager": "pnpm@10.11.1+sha512.e519b9f7639869dc8d5c3c5dfef73b3f091094b0a006d7317353c72b124e80e1afd429732e28705ad6bfa1ee879c1fce46c128ccebd3192101f43dd67c667912"
 }
