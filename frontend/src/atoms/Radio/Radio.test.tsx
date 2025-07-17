@@ -40,4 +40,21 @@ describe('Radio', () => {
     const radio = screen.getByRole('radio');
     expect(radio).toBeDisabled();
   });
+
+  it('supports defaultChecked', () => {
+    render(<Radio label="Default" defaultChecked />);
+    const radio = screen.getByRole('radio');
+    expect(radio).toBeChecked();
+  });
+
+  it('respects controlled checked prop', () => {
+    const { rerender } = render(
+      <Radio label="Ctrl" checked={false} onChange={() => {}} />,
+    );
+    const radio = screen.getByRole('radio');
+    expect(radio).not.toBeChecked();
+
+    rerender(<Radio label="Ctrl" checked onChange={() => {}} />);
+    expect(radio).toBeChecked();
+  });
 });

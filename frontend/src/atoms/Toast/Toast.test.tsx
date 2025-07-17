@@ -10,6 +10,22 @@ describe('Toast', () => {
     expect(toast.className).toContain('bg-success');
   });
 
+  it('shows intent icon by default', () => {
+    render(<Toast intent="error">Error!</Toast>);
+    const icon = screen.getByRole('status').querySelector('svg');
+    expect(icon).toBeInTheDocument();
+  });
+
+  it('hides icon when showIcon is false', () => {
+    render(
+      <Toast intent="info" showIcon={false}>
+        Hidden icon
+      </Toast>,
+    );
+    const icon = screen.getByRole('status').querySelector('svg');
+    expect(icon).toBeNull();
+  });
+
   it('calls onDismiss after duration', () => {
     vi.useFakeTimers();
     const onDismiss = vi.fn();

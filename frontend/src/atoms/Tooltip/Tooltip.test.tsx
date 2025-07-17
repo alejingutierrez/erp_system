@@ -39,4 +39,19 @@ describe('Tooltip', () => {
     const arrow = screen.getByRole('tooltip').querySelector('span');
     expect(arrow?.className).toContain('-top-1');
   });
+
+  it('wraps long content', () => {
+    const longText =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam.';
+    render(
+      <Tooltip content={longText}>
+        <button>Trigger</button>
+      </Tooltip>
+    );
+    const trigger = screen.getByRole('button');
+    fireEvent.mouseEnter(trigger);
+    const tooltip = screen.getByRole('tooltip');
+    expect(tooltip.className).toContain('break-words');
+    expect(tooltip.className).toContain('whitespace-pre-line');
+  });
 });

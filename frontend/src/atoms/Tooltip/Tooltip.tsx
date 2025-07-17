@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const tooltipVariants = cva(
-  'pointer-events-none fixed z-50 inline-block rounded-md px-2 py-1 text-xs shadow-md opacity-0 transition-opacity',
+  'pointer-events-none fixed z-50 inline-block rounded-md px-2 py-1 text-xs shadow-md opacity-0 transition-opacity break-words whitespace-pre-line max-w-xs',
   {
     variants: {
       intent: {

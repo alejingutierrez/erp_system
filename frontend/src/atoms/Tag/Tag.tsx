@@ -91,16 +91,36 @@ export interface TagProps
 
 export const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
   (
-    { className, variant, color, closable = false, onRemove, removeLabel, children, ...props },
+    {
+      className,
+      variant,
+      color,
+      closable = false,
+      onRemove,
+      removeLabel,
+      children,
+      ...props
+    },
     ref
   ) => {
+    const [visible, setVisible] = React.useState(true);
+
+    if (!visible) {
+      return null;
+    }
+
+    const handleRemove = () => {
+      onRemove?.();
+      setVisible(false);
+    };
+
     return (
       <span ref={ref} className={cn(tagVariants({ variant, color }), className)} {...props}>
         {children}
         {closable && (
           <button
             type="button"
-            onClick={onRemove}
+            onClick={handleRemove}
             aria-label={removeLabel ?? 'Quitar etiqueta'}
             className="ml-1 flex h-4 w-4 items-center justify-center rounded-full hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2"
           >

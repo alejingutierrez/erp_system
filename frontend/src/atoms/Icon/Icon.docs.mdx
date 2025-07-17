@@ -17,4 +17,27 @@ The `Icon` component renders SVG icons from the design system library. Use the `
   </Story>
 </Canvas>
 
+<Canvas>
+  <Story name="Sizes">
+    <div className="flex gap-4">
+      <Icon name="Search" size="sm" />
+      <Icon name="Search" size="md" />
+      <Icon name="Search" size="lg" />
+    </div>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Colors">
+    <div className="flex gap-4">
+      <Icon name="Heart" color="primary" />
+      <Icon name="Heart" color="secondary" />
+      <Icon name="Heart" color="tertiary" />
+      <Icon name="Heart" color="quaternary" />
+      <Icon name="Heart" color="success" />
+      <Icon name="Heart" color="destructive" />
+    </div>
+  </Story>
+</Canvas>
+
 <ArgsTable of={Icon} />

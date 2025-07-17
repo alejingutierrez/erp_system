@@ -130,11 +130,12 @@
 
 @layer components {
   .slider {
-    @apply appearance-none w-full cursor-pointer rounded-full bg-muted disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply appearance-none w-full cursor-pointer rounded-full bg-muted disabled:opacity-50 disabled:cursor-not-allowed shadow-inner;
     height: var(--slider-track-height, 0.375rem);
     background-image: linear-gradient(hsl(var(--slider-color, var(--primary))), hsl(var(--slider-color, var(--primary))));
     background-repeat: no-repeat;
     background-size: var(--slider-percentage, 0%) 100%;
+    --slider-foreground: var(--primary-foreground);
   }
   .slider::-webkit-slider-thumb {
     @apply appearance-none rounded-full border-none;
@@ -173,18 +174,23 @@
   }
   .slider-primary {
     --slider-color: var(--primary);
+    --slider-foreground: var(--primary-foreground);
   }
   .slider-secondary {
     --slider-color: var(--secondary);
+    --slider-foreground: var(--secondary-foreground);
   }
   .slider-tertiary {
     --slider-color: var(--tertiary);
+    --slider-foreground: var(--tertiary-foreground);
   }
   .slider-quaternary {
     --slider-color: var(--quaternary);
+    --slider-foreground: var(--quaternary-foreground);
   }
   .slider-success {
     --slider-color: var(--success);
+    --slider-foreground: var(--success-foreground);
   }
 }
   @keyframes progress-indeterminate {
@@ -196,4 +202,13 @@
     left: 0;
     width: 50%;
     animation: progress-indeterminate 1s infinite linear;
+  }
+
+  @keyframes spinner-fancy {
+    0% { transform: rotate(0deg); opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { transform: rotate(360deg); opacity: 1; }
+  }
+  .animate-spinner-fancy {
+    animation: spinner-fancy 0.8s linear infinite;
   }

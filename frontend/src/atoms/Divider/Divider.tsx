@@ -7,7 +7,7 @@ const dividerVariants = cva('', {
   variants: {
     orientation: {
       horizontal: 'w-full border-t',
-      vertical: 'h-full border-l self-stretch',
+      vertical: 'self-stretch w-px border-l',
     },
     spacing: {
       none: '',
@@ -16,7 +16,7 @@ const dividerVariants = cva('', {
       lg: '',
     },
     color: {
-      default: 'border-border',
+      default: 'border-neutral-400',
       primary: 'border-primary',
       secondary: 'border-secondary',
       tertiary: 'border-tertiary',
@@ -32,6 +32,7 @@ const dividerVariants = cva('', {
     { orientation: 'vertical', spacing: 'sm', className: 'mx-1' },
     { orientation: 'vertical', spacing: 'md', className: 'mx-3' },
     { orientation: 'vertical', spacing: 'lg', className: 'mx-6' },
+    { color: 'quaternary', className: 'border-2' },
   ],
   defaultVariants: {
     orientation: 'horizontal',
