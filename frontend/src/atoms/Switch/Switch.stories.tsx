@@ -1,95 +1,82 @@
-import { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
-
 import { Switch, SwitchProps } from './Switch';
 
-export default {
+const meta: Meta<SwitchProps> = {
   title: 'Atoms/Switch',
   component: Switch,
+  tags: ['autodocs'],
   argTypes: {
-    checked: {
-      control: 'boolean',
-      description: 'Whether the switch is checked.',
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    intent: {
+      control: 'select',
+      options: ['primary', 'secondary', 'tertiary', 'quaternary', 'success'],
     },
-    onCheckedChange: {
-      action: 'checked changed',
-      description: 'Callback when the switch is toggled.',
-    },
-    size: {
-      control: { type: 'radio' },
-      options: ['sm', 'md', 'lg'],
-      description: 'The size of the switch.',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Whether the switch is disabled.',
-    },
+    checked: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    onCheckedChange: { action: 'changed', table: { category: 'Events' } },
   },
-} as Meta;
+};
+export default meta;
 
-const Template: StoryFn<SwitchProps> = (args) => {
-  const [checked, setChecked] = useState(args.checked);
+type Story = StoryObj<typeof meta>;
 
-  React.useEffect(() => {
-    setChecked(args.checked);
-  }, [args.checked]);
-
-  const handleCheckedChange = (isChecked: boolean) => {
-    setChecked(isChecked);
-    args.onCheckedChange(isChecked);
-  };
-
-  return <Switch {...args} checked={checked} onCheckedChange={handleCheckedChange} />;
+export const Default: Story = {
+  render: (args) => {
+    const [val, setVal] = useState(args.checked ?? false);
+    return <Switch {...args} checked={val} onCheckedChange={setVal} />;
+  },
+  args: {
+    checked: false,
+    size: 'md',
+    intent: 'primary',
+  },
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  checked: false,
-  size: 'md',
-  disabled: false,
-};
-
-export const Sizes: StoryFn<SwitchProps> = (args) => (
-  <div className="flex items-center space-x-4">
-    <Switch {...args} size="sm" />
-    <Switch {...args} size="md" />
-    <Switch {...args} size="lg" />
-  </div>
-);
-Sizes.args = {
-  checked: true,
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  checked: false,
-  disabled: true,
-};
-
-export const WithLabel: StoryFn<SwitchProps> = (args) => {
-  const [checked, setChecked] = useState(args.checked);
-
-  const handleCheckedChange = (isChecked: boolean) => {
-    setChecked(isChecked);
-    args.onCheckedChange(isChecked);
-  };
-
-  return (
-    <div className="flex items-center space-x-2">
-      <label htmlFor="night-mode" className="font-medium text-gray-700">
-        Night Mode
-      </label>
-      <Switch
-        {...args}
-        id="night-mode"
-        checked={checked}
-        onCheckedChange={handleCheckedChange}
-      />
+export const Sizes: Story = {
+  render: (args) => (
+    <div className="flex items-center space-x-4">
+      <Switch {...args} size="sm" />
+      <Switch {...args} size="md" />
+      <Switch {...args} size="lg" />
     </div>
-  );
+  ),
+  args: { checked: true },
 };
-WithLabel.args = {
-  checked: true,
-  size: 'md',
-  disabled: false,
+
+export const Intents: Story = {
+  render: (args) => (
+    <div className="flex items-center space-x-4">
+      <Switch {...args} intent="primary" />
+      <Switch {...args} intent="secondary" />
+      <Switch {...args} intent="tertiary" />
+      <Switch {...args} intent="quaternary" />
+      <Switch {...args} intent="success" />
+    </div>
+  ),
+  args: { checked: true },
+};
+
+export const Disabled: Story = {
+  args: { checked: false, disabled: true },
+};
+
+export const WithLabel: Story = {
+  render: (args) => {
+    const [val, setVal] = useState(args.checked ?? false);
+    return (
+      <div className="flex items-center space-x-2">
+        <label htmlFor="mode" className="font-medium text-gray-700">
+          Night Mode
+        </label>
+        <Switch
+          {...args}
+          id="mode"
+          checked={val}
+          onCheckedChange={setVal}
+        />
+      </div>
+    );
+  },
+  args: { checked: true },
 };
