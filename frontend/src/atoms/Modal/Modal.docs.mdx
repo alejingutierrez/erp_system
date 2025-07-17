@@ -1,0 +1,31 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Modal } from './Modal';
+import { Button } from '../Button/Button';
+
+<Meta title="Atoms/Modal" of={Modal} />
+
+# Modal
+
+The `Modal` component displays content in a layer above the application and blocks interaction until dismissed. Use it for quick forms or confirmations.
+
+<Canvas>
+  <Story name="Example">
+    {() => {
+      const [open, setOpen] = React.useState(true);
+      return (
+        <>
+          <Button onClick={() => setOpen(true)}>Open</Button>
+          <Modal isOpen={open} onClose={() => setOpen(false)} title="Example">
+            <p className="mb-4">This is a modal.</p>
+            <div className="flex justify-end gap-2">
+              <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
+              <Button onClick={() => setOpen(false)}>Accept</Button>
+            </div>
+          </Modal>
+        </>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={Modal} />
