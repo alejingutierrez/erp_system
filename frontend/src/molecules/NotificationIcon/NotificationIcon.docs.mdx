@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { NotificationIcon } from './NotificationIcon';
+
+<Meta title="Molecules/NotificationIcon" of={NotificationIcon} />
+
+# NotificationIcon
+
+The `NotificationIcon` displays a bell (or any chosen icon) with a badge showing the number of unread notifications.
+
+<Canvas>
+  <Story name="Examples">
+    <div className="flex space-x-4">
+      <NotificationIcon count={0} />
+      <NotificationIcon count={5} />
+      <NotificationIcon count={120} />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={NotificationIcon} />
