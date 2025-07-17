@@ -1,0 +1,19 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { FilterTagList } from './FilterTagList';
+
+<Meta title="Molecules/FilterTagList" of={FilterTagList} />
+
+# FilterTagList
+
+Shows the list of active filters as removable tags. Each tag can be removed individually or all at once.
+
+<Canvas>
+  <Story name="Examples">
+    <FilterTagList
+      filters={["Categoría: Camisas", "Talla: M", "Marca: ACME"]}
+      showClearAll
+    />
+  </Story>
+</Canvas>
+
+<ArgsTable of={FilterTagList} />
