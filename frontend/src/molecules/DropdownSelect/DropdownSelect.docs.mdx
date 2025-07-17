@@ -1,0 +1,27 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import React from 'react';
+import { DropdownSelect } from './DropdownSelect';
+
+<Meta title="Molecules/DropdownSelect" of={DropdownSelect} />
+
+# DropdownSelect
+
+The `DropdownSelect` component provides a styled dropdown menu for selecting one or more options. It can include a search field when the option list is long.
+
+<Canvas>
+  <Story name="Example">
+    {() => {
+      const [value, setValue] = React.useState('');
+      return (
+        <DropdownSelect
+          options={["S", "M", "L", "XL"]}
+          selected={value}
+          onChange={setValue}
+          placeholder="Seleccione"
+        />
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={DropdownSelect} />
