@@ -1,0 +1,19 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { EditableField } from './EditableField';
+
+<Meta title="Molecules/EditableField" of={EditableField} />
+
+# EditableField
+
+The `EditableField` component lets users edit text directly in place. Click the pencil icon to switch to edit mode, then confirm or cancel the changes.
+
+<Canvas>
+  <Story name="Examples">
+    <div className="space-y-2">
+      <EditableField initialValue="Producto 1" />
+      <EditableField initialValue="En edición" editable />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={EditableField} />
