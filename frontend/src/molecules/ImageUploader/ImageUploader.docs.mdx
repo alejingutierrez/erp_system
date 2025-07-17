@@ -1,0 +1,16 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { ImageUploader } from './ImageUploader';
+
+<Meta title="Molecules/ImageUploader" of={ImageUploader} />
+
+# ImageUploader
+
+The `ImageUploader` component lets users select image files and immediately preview them. Thumbnails display in a grid with a small remove icon so each image can be deleted before submitting.
+
+<Canvas>
+  <Story name="Examples">
+    <ImageUploader multiple imagenesIniciales={["https://placehold.co/80x80"]} />
+  </Story>
+</Canvas>
+
+<ArgsTable of={ImageUploader} />
