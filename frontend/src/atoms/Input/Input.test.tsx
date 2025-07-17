@@ -52,6 +52,13 @@ describe('Input', () => {
     expect(screen.getByText('Email')).toHaveAttribute('for', 'email');
   });
 
+  it('positions label correctly with left icon', () => {
+    const LeftIcon = () => <svg data-testid="icon" />;
+    render(<Input label="User" LeftIcon={LeftIcon} />);
+    const label = screen.getByText('User');
+    expect(label.className).toContain('left-10');
+  });
+
   it('shows character count', () => {
     render(<Input showCharCount label="Bio" maxLength={10} />);
     const input = screen.getByLabelText('Bio');

@@ -69,12 +69,12 @@ const meta: Meta<InputStoryProps> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = { args: { placeholder: "Enter text" } };
+export const Default: Story = { args: { label: "Name", placeholder: "Enter text" } };
 export const WithError: Story = {
-  args: { placeholder: "Invalid", error: true },
+  args: { label: "Email", placeholder: "Invalid", error: true },
 };
 export const Disabled: Story = {
-  args: { placeholder: "Disabled", disabled: true },
+  args: { label: "Disabled", placeholder: "Disabled", disabled: true },
 };
 export const Small: Story = { args: { size: "sm", placeholder: "Small size" } };
 export const Large: Story = { args: { size: "lg", placeholder: "Large size" } };
@@ -87,6 +87,7 @@ export const WithCounter: Story = {
 
 export const SearchBar: Story = {
   args: {
+    label: "Buscar",
     placeholder: "Buscar...",
     leftIconName: "Search",
     color: "primary",
@@ -95,6 +96,7 @@ export const SearchBar: Story = {
 
 export const WithUploadButton: Story = {
   args: {
+    label: "Documento",
     placeholder: "Subir documento",
     rightButtonName: "Upload",
     color: "secondary",
@@ -103,6 +105,7 @@ export const WithUploadButton: Story = {
 
 export const WithRecordButton: Story = {
   args: {
+    label: "Audio",
     placeholder: "Grabar audio",
     rightButtonName: "Mic",
     color: "secondary",
