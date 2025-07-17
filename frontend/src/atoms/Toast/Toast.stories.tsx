@@ -13,6 +13,7 @@ const meta: Meta<ToastProps> = {
     },
     duration: { control: 'number' },
     showClose: { control: 'boolean' },
+    showIcon: { control: 'boolean' },
   },
 };
 

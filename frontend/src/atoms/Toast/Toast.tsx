@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { X } from 'lucide-react';
+import { X, Info, CheckCircle2, AlertCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const toastVariants = cva(
@@ -32,35 +32,63 @@ export interface ToastProps
   duration?: number;
   onDismiss?: () => void;
   showClose?: boolean;
+  showIcon?: boolean;
 }
 
-export const Toast: React.FC<ToastProps> = ({
-  className,
-  intent,
-  position,
-  duration = 3000,
-  onDismiss,
-  showClose = true,
-  children,
-  ...props
-}) => {
-  React.useEffect(() => {
-    if (!onDismiss) return;
-    const timer = setTimeout(() => onDismiss(), duration);
-    return () => clearTimeout(timer);
-  }, [onDismiss, duration]);
+type ToastIntent = VariantProps<typeof toastVariants>['intent'];
 
-  return (
-    <div className={cn(toastVariants({ intent, position }), className)} role="status" {...props}>
-      <div className="flex-1">{children}</div>
-      {showClose && onDismiss && (
-        <button onClick={onDismiss} aria-label="Close" className="ml-2">
-          <X size={16} />
-        </button>
-      )}
-    </div>
-  );
+const iconMap: Record<ToastIntent, React.ElementType> = {
+  info: Info,
+  success: CheckCircle2,
+  error: AlertCircle,
 };
+
+export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
+  (
+    {
+      className,
+      intent,
+      position,
+      duration = 3000,
+      onDismiss,
+      showClose = true,
+      showIcon = true,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
+    React.useEffect(() => {
+      if (!onDismiss) return;
+      const timer = setTimeout(() => onDismiss(), duration);
+      return () => clearTimeout(timer);
+    }, [onDismiss, duration]);
+
+    const Icon = iconMap[intent ?? 'info'];
+
+    return (
+      <div
+        ref={ref}
+        className={cn(toastVariants({ intent, position }), className)}
+        role="status"
+        {...props}
+      >
+        {showIcon && <Icon size={16} aria-hidden="true" />}
+        <div className="flex-1">{children}</div>
+        {showClose && onDismiss && (
+          <button
+            type="button"
+            onClick={onDismiss}
+            aria-label="Close"
+            className="ml-2"
+          >
+            <X size={16} />
+          </button>
+        )}
+      </div>
+    );
+  },
+);
 
 Toast.displayName = 'Toast';
 

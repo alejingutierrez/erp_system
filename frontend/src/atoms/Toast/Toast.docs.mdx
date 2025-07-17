@@ -6,14 +6,23 @@ import { Toast } from './Toast';
 # Toast
 
 The `Toast` component displays brief non-intrusive messages. Use it to confirm actions or show information that doesn't require a full alert.
+By default an icon indicating the intent is shown. Use `showIcon={false}` to hide it. A close button is also available if `onDismiss` is provided.
 
 <Canvas>
-  <Story name="Examples">
-    <>
-      <Toast>Info message</Toast>
-      <Toast intent="success" className="mt-4">Success message</Toast>
-      <Toast intent="error" className="mt-4">Error message</Toast>
-    </>
+  <Story name="Info">
+    <Toast>Info message</Toast>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Success">
+    <Toast intent="success">Success message</Toast>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Error">
+    <Toast intent="error">Error message</Toast>
   </Story>
 </Canvas>
 
