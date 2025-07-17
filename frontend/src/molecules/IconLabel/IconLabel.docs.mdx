@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { IconLabel } from './IconLabel';
+
+<Meta title="Molecules/IconLabel" of={IconLabel} />
+
+# IconLabel
+
+The `IconLabel` component pairs an icon with a short piece of text. It is useful for displaying contact details or product attributes.
+
+<Canvas>
+  <Story name="Examples">
+    <div className="space-y-2">
+      <IconLabel iconName="Mail" text="cliente@correo.com" />
+      <IconLabel iconName="User" text="John Doe" />
+      <IconLabel iconName="Folder" text="Proyecto" />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={IconLabel} />
