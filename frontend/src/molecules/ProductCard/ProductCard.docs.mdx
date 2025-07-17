@@ -1,0 +1,18 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { ProductCard } from './ProductCard';
+
+<Meta title="Molecules/ProductCard" of={ProductCard} />
+
+# ProductCard
+
+La `ProductCard` muestra de forma resumida la información principal de un producto de inventario. Utiliza los átomos existentes para construir una tarjeta con imagen, nombre, precio y estados.
+
+<Canvas>
+  <Story name="Ejemplo">
+    <div className="w-64">
+      <ProductCard productName="Camisa de Lino" price="$49.99" imageSrc="https://via.placeholder.com/300x200" />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={ProductCard} />
