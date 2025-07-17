@@ -36,4 +36,11 @@ describe('Tabs', () => {
     await user.keyboard('{arrowright}');
     expect(tabs[1]).toHaveFocus();
   });
+
+  it('shows content in accordion variant', () => {
+    render(<Tabs items={items} variant="accordion" />);
+    expect(screen.getByText('First')).toBeVisible();
+    fireEvent.click(screen.getByText('Two'));
+    expect(screen.getByText('Second')).toBeVisible();
+  });
 });

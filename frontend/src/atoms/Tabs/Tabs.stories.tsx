@@ -13,7 +13,7 @@ const meta: Meta<TabsProps> = {
   component: Tabs,
   tags: ['autodocs'],
   argTypes: {
-    variant: { control: 'select', options: ['underline', 'solid'] },
+    variant: { control: 'select', options: ['underline', 'solid', 'accordion'] },
     color: {
       control: 'select',
       options: ['primary', 'secondary', 'tertiary', 'quaternary', 'success'],
@@ -36,4 +36,8 @@ export const Solid: Story = {
 
 export const Vertical: Story = {
   args: { orientation: 'vertical', defaultIndex: 1 },
+};
+
+export const AccordionVariant: Story = {
+  args: { variant: 'accordion', orientation: 'vertical' },
 };
