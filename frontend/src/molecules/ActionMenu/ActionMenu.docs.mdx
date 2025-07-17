@@ -1,0 +1,21 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { ActionMenu } from './ActionMenu';
+import { MoreHorizontal } from 'lucide-react';
+
+<Meta title="Molecules/ActionMenu" of={ActionMenu} />
+
+# ActionMenu
+
+The `ActionMenu` component displays a dropdown menu with quick actions. It is typically triggered by an icon-only button.
+
+<Canvas>
+  <Story name="Example">
+    <ActionMenu
+      options={[{ label: 'Edit', iconName: 'Edit' }, { label: 'Delete', iconName: 'Trash2' }]}
+    >
+      <MoreHorizontal />
+    </ActionMenu>
+  </Story>
+</Canvas>
+
+<ArgsTable of={ActionMenu} />
