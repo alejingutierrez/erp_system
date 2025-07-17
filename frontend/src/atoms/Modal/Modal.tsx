@@ -99,7 +99,10 @@ export const Modal: React.FC<ModalProps> = ({
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         aria-hidden="true"
-        onClick={onClose}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
       />
       <div
         role="dialog"
@@ -117,7 +120,10 @@ export const Modal: React.FC<ModalProps> = ({
         <button
           type="button"
           aria-label="Close"
-          onClick={onClose}
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
           className="absolute top-2 right-2 rounded-md p-1 text-muted hover:bg-muted hover:text-foreground focus:outline-none"
         >
           <X size={18} />
