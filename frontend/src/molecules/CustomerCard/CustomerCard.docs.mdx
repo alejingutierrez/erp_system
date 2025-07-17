@@ -1,0 +1,21 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { CustomerCard } from './CustomerCard';
+
+<Meta title="Molecules/CustomerCard" of={CustomerCard} />
+
+# CustomerCard
+
+La `CustomerCard` muestra de forma concisa la información principal de un cliente.
+Incluye foto o iniciales, nombre y datos secundarios como correo o teléfono.
+Opcionalmente se indica el nivel del cliente y un botón de acción.
+
+<Canvas>
+  <Story name="Ejemplos">
+    <div className="w-72 space-y-2">
+      <CustomerCard nombre="María Gómez" infoSecundaria="maria@gmail.com" nivel="VIP" />
+      <CustomerCard nombre="Pedro Ruiz" infoSecundaria="pedro@example.com" mostrarAccion />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={CustomerCard} />
