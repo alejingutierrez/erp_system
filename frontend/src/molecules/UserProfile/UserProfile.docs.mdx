@@ -1,0 +1,19 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { UserProfile } from './UserProfile';
+
+<Meta title="Molecules/UserProfile" of={UserProfile} />
+
+# UserProfile
+
+The `UserProfile` component shows the currently authenticated user with an avatar and name. It can optionally display a dropdown indicator and a status dot.
+
+<Canvas>
+  <Story name="Examples">
+    <div className="flex items-center gap-4">
+      <UserProfile userName="Juan Perez" avatarSrc="https://placehold.co/40" showDropdownIcon />
+      <UserProfile userName="Maria" status="online" showDropdownIcon />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={UserProfile} />
