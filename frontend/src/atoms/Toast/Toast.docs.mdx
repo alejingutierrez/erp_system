@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Toast } from './Toast';
+
+<Meta title="Atoms/Toast" of={Toast} />
+
+# Toast
+
+The `Toast` component displays brief non-intrusive messages. Use it to confirm actions or show information that doesn't require a full alert.
+
+<Canvas>
+  <Story name="Examples">
+    <>
+      <Toast>Info message</Toast>
+      <Toast intent="success" className="mt-4">Success message</Toast>
+      <Toast intent="error" className="mt-4">Error message</Toast>
+    </>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Toast} />
