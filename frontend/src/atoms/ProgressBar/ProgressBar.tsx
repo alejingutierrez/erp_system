@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const trackVariants = cva(
-  'w-full bg-border rounded-full overflow-hidden relative',
+  'bg-border rounded-full overflow-hidden flex-1',
   {
     variants: {
     size: {
@@ -32,6 +32,21 @@ const indicatorVariants = cva('h-full transition-[width] duration-300', {
   },
 });
 
+const labelVariants = cva('ml-2 px-2 py-0.5 text-xs font-medium rounded-full', {
+  variants: {
+    color: {
+      primary: 'bg-primary text-primary-foreground',
+      secondary: 'bg-secondary text-secondary-foreground',
+      tertiary: 'bg-tertiary text-tertiary-foreground',
+      quaternary: 'bg-quaternary text-quaternary-foreground',
+      success: 'bg-success text-success-foreground',
+    },
+  },
+  defaultVariants: {
+    color: 'primary',
+  },
+});
+
 export interface ProgressBarProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof trackVariants>,
@@ -52,26 +67,26 @@ export const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={isIndeterminate ? undefined : clamped}
-        className={cn(trackVariants({ size }), className)}
+        className={cn('flex items-center', className)}
         {...props}
       >
-        {isIndeterminate ? (
-          <div
-            className={cn(
-              indicatorVariants({ color }),
-              'animate-indeterminate',
-            )}
-          />
-        ) : (
-          <>
+        <div className={trackVariants({ size })}>
+          {isIndeterminate ? (
+            <div
+              className={cn(
+                indicatorVariants({ color }),
+                'animate-indeterminate',
+              )}
+            />
+          ) : (
             <div
               className={indicatorVariants({ color })}
               style={{ width: `${clamped}%` }}
             />
-            <span className="absolute inset-0 flex items-center justify-center text-xs text-muted-foreground font-medium">
-              {clamped}%
-            </span>
-          </>
+          )}
+        </div>
+        {!isIndeterminate && (
+          <span className={labelVariants({ color })}>{clamped}%</span>
         )}
       </div>
     );
