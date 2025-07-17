@@ -76,3 +76,16 @@ export const LoadingWithText: Story = { args: { intent: 'secondary', isLoading: 
 export const WithLeftIcon: Story = { args: { intent: 'primary', children: 'Login', leftIconName: 'Mail' } };
 export const WithRightIcon: Story = { args: { intent: 'secondary', children: 'Learn More', rightIconName: 'ChevronRight' } };
 export const IconOnly: Story = { args: { variant: 'icon', intent: 'primary', leftIconName: 'Heart', 'aria-label': 'Favorite' } };
+
+// == Interactive demonstration ==
+export const Interactive: Story = {
+  args: { intent: 'primary', children: 'Interact with me' },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Hover to see the subtle shadow and color fade. Click to observe a slight scale animation.',
+      },
+    },
+  },
+};
