@@ -49,3 +49,12 @@ export const Placements: Story = {
   ),
   args: { intent: 'primary' },
 };
+
+export const LongContent: Story = {
+  args: {
+    content:
+      'This tooltip demonstrates how long text will automatically wrap onto multiple lines so that it remains readable.',
+    placement: 'top',
+    intent: 'primary',
+  },
+};
