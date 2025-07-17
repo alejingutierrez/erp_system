@@ -1,0 +1,21 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { StepIndicator } from './StepIndicator';
+
+<Meta title="Molecules/StepIndicator" of={StepIndicator} />
+
+# StepIndicator
+
+The `StepIndicator` component displays progress through a multi-step process. Each step shows a numbered circle or a checkmark when completed.
+
+<Canvas>
+  <Story name="Example">
+    <StepIndicator
+      totalSteps={4}
+      currentStep={2}
+      labels={["Detalles", "Imágenes", "Precios", "Confirmación"]}
+      clickable
+    />
+  </Story>
+</Canvas>
+
+<ArgsTable of={StepIndicator} />
