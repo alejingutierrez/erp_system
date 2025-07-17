@@ -1,0 +1,16 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { PaginationControls } from './PaginationControls';
+
+<Meta title="Molecules/PaginationControls" of={PaginationControls} />
+
+# PaginationControls
+
+The `PaginationControls` component provides buttons for navigating between pages of results.
+
+<Canvas>
+  <Story name="Example">
+    <PaginationControls currentPage={3} totalPages={10} onPageChange={(page) => console.log(page)} />
+  </Story>
+</Canvas>
+
+<ArgsTable of={PaginationControls} />
