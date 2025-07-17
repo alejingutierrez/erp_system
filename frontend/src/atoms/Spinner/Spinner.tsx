@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 
@@ -19,10 +20,17 @@ const spinnerVariants = cva('animate-spin rounded-full border-4 border-solid', {
   },
 });
 
-export interface SpinnerProps extends VariantProps<typeof spinnerVariants> {
-  className?: string;
+export interface SpinnerProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof spinnerVariants> {
+  /** Screen reader label for accessibility */
+  label?: string;
 }
 
-export function Spinner({ className, intent, size }: SpinnerProps) {
-  return <div className={cn(spinnerVariants({ intent, size }), className)} />;
+export function Spinner({ className, intent, size, label, ...props }: SpinnerProps) {
+  return (
+    <div role="status" className={cn(spinnerVariants({ intent, size }), className)} {...props}>
+      <span className="sr-only">{label ?? 'Loading...'}</span>
+    </div>
+  );
 }
