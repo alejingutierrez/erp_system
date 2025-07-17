@@ -1,0 +1,22 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { DropdownMenu } from './DropdownMenu';
+
+<Meta title="Molecules/DropdownMenu" of={DropdownMenu} />
+
+# DropdownMenu
+
+The `DropdownMenu` component displays a floating list of actions triggered by a button. Use it for contextual options like user menus or row actions.
+
+<Canvas>
+  <Story name="Example">
+    <DropdownMenu
+      triggerLabel="User"
+      items={[
+        { label: 'View Profile', iconName: 'User' },
+        { label: 'Logout', iconName: 'LogOut' },
+      ]}
+    />
+  </Story>
+</Canvas>
+
+<ArgsTable of={DropdownMenu} />
