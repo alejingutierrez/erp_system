@@ -6,7 +6,8 @@ describe('ProgressBar', () => {
   it('applies width based on value', () => {
     render(<ProgressBar value={40} />);
     const bar = screen.getByRole('progressbar');
-    const indicator = bar.firstChild as HTMLElement;
+    const track = bar.firstChild as HTMLElement;
+    const indicator = track.firstChild as HTMLElement;
     expect(indicator).toHaveStyle('width: 40%');
     expect(screen.getByText('40%')).toBeInTheDocument();
   });
@@ -14,7 +15,8 @@ describe('ProgressBar', () => {
   it('renders indeterminate animation when no value', () => {
     render(<ProgressBar />);
     const bar = screen.getByRole('progressbar');
-    const indicator = bar.firstChild as HTMLElement;
+    const track = bar.firstChild as HTMLElement;
+    const indicator = track.firstChild as HTMLElement;
     expect(indicator.className).toContain('animate-indeterminate');
     expect(bar.textContent).toBe('');
   });
@@ -22,10 +24,11 @@ describe('ProgressBar', () => {
   it('applies size variants', () => {
     const { rerender } = render(<ProgressBar size="sm" value={10} />);
     const bar = screen.getByRole('progressbar');
-    expect(bar).toHaveClass('h-1.5');
+    const track = bar.firstChild as HTMLElement;
+    expect(track).toHaveClass('h-1.5');
 
     rerender(<ProgressBar size="lg" value={10} />);
-    expect(bar).toHaveClass('h-3');
+    expect(track).toHaveClass('h-3');
   });
 
   it('shows clamped value text', () => {
