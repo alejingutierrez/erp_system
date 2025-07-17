@@ -1,0 +1,54 @@
+import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { OrderListItem } from './OrderListItem';
+
+const baseProps = {
+  orderId: '1001',
+  date: '01/09/2025',
+  customerName: 'Juan Perez',
+  total: '$250.00',
+  status: 'Pendiente',
+};
+
+describe('OrderListItem', () => {
+  it('renders order information', () => {
+    render(<OrderListItem {...baseProps} />);
+    expect(screen.getByText('#1001')).toBeInTheDocument();
+    expect(screen.getByText('Juan Perez')).toBeInTheDocument();
+    expect(screen.getByText('$250.00')).toBeInTheDocument();
+  });
+
+  it('shows action button when enabled', () => {
+    render(<OrderListItem {...baseProps} showActions />);
+    expect(screen.getByLabelText('Acciones')).toBeInTheDocument();
+  });
+
+  it('calls onClick handler', () => {
+    const handleClick = vi.fn();
+    render(<OrderListItem {...baseProps} onClick={handleClick} />);
+    fireEvent.click(screen.getByText('#1001'));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onActionSelect when action button clicked', () => {
+    const handleAction = vi.fn();
+    render(
+      <OrderListItem {...baseProps} showActions onActionSelect={handleAction} />,
+    );
+    fireEvent.click(screen.getByLabelText('Acciones'));
+    expect(handleAction).toHaveBeenCalledTimes(1);
+  });
+
+  it('maps status to badge variant', () => {
+    render(<OrderListItem {...baseProps} status="Entregado" />);
+    const badge = screen.getByText('Entregado');
+    expect(badge.className).toContain('bg-success');
+  });
+
+  it('calls onStatusClick when badge clicked', () => {
+    const handleStatus = vi.fn();
+    render(<OrderListItem {...baseProps} onStatusClick={handleStatus} />);
+    fireEvent.click(screen.getByText('Pendiente'));
+    expect(handleStatus).toHaveBeenCalledTimes(1);
+  });
+});

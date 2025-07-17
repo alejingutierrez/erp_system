@@ -1,0 +1,22 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { OrderListItem } from './OrderListItem';
+
+<Meta title="Molecules/OrderListItem" of={OrderListItem} />
+
+# OrderListItem
+
+The `OrderListItem` component represents a single order in a list. It displays the main details and the current status of the order.
+
+<Canvas>
+  <Story name="Examples">
+    <OrderListItem
+      orderId="1001"
+      date="01/09/2025"
+      customerName="Juan Perez"
+      total="$250.00"
+      status="Pendiente"
+    />
+  </Story>
+</Canvas>
+
+<ArgsTable of={OrderListItem} />
