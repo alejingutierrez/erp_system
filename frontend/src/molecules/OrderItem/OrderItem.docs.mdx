@@ -1,0 +1,18 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { OrderItem } from './OrderItem';
+
+<Meta title="Molecules/OrderItem" of={OrderItem} />
+
+# OrderItem
+
+The `OrderItem` component displays a brief summary of an order.
+
+<Canvas>
+  <Story name="Example">
+    <div className="max-w-sm">
+      <OrderItem orderId="#1001" date="12/07/2025" total="$250.00" status="Pendiente" showIcon />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={OrderItem} />
