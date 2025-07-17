@@ -31,9 +31,9 @@ export const Horizontal: Story = {
 };
 
 export const Vertical: Story = {
-  args: { orientation: 'vertical', spacing: 'md' },
+  args: { orientation: 'vertical', spacing: 'md', color: 'quaternary' },
   render: (args) => (
-    <div className="flex items-center">
+    <div className="flex items-center h-10">
       <span>Left</span>
       <Divider {...args} />
       <span>Right</span>
