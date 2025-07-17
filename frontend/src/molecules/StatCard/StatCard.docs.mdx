@@ -1,0 +1,19 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { StatCard } from './StatCard';
+
+<Meta title="Molecules/StatCard" of={StatCard} />
+
+# StatCard
+
+The `StatCard` component highlights a single metric or KPI using the `Card` atom. It can optionally display an icon and be made clickable.
+
+<Canvas>
+  <Story name="Examples">
+    <div className="grid grid-cols-2 gap-4 max-w-sm">
+      <StatCard value="120" label="Nuevos Pedidos" iconName="Folder" />
+      <StatCard value="$5,000" label="Ventas" iconName="File" variant="outline" />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={StatCard} />
