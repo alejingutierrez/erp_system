@@ -1,0 +1,18 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Accordion } from './Accordion';
+
+<Meta title="Atoms/Accordion" of={Accordion} />
+
+# Accordion
+
+The `Accordion` component reveals or hides additional content when its header is clicked. It is useful for FAQs, filter sections or any collapsible information.
+
+<Canvas>
+  <Story name="Example">
+    <Accordion title="Customer Details">
+      Here goes additional information about the customer.
+    </Accordion>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Accordion} />
