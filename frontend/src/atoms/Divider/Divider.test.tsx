@@ -7,6 +7,7 @@ describe('Divider', () => {
     render(<Divider />);
     const separator = screen.getByRole('separator');
     expect(separator.tagName).toBe('HR');
+    expect(separator.className).toContain('border-neutral-400');
   });
 
   it('renders vertical orientation', () => {
@@ -14,6 +15,7 @@ describe('Divider', () => {
     const separator = screen.getByTestId('v');
     expect(separator.tagName).toBe('DIV');
     expect(separator).toHaveAttribute('aria-orientation', 'vertical');
+    expect(separator.className).toContain('w-px');
   });
 
   it('applies spacing variants', () => {
@@ -26,9 +28,12 @@ describe('Divider', () => {
   });
 
   it('applies color variants', () => {
-    render(<Divider color="primary" />);
-    const separator = screen.getByRole('separator');
+    const { rerender } = render(<Divider color="primary" />);
+    let separator = screen.getByRole('separator');
     expect(separator.className).toContain('border-primary');
+    rerender(<Divider color="quaternary" />);
+    separator = screen.getByRole('separator');
+    expect(separator.className).toContain('border-2');
   });
 
   it('accepts custom className', () => {
