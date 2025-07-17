@@ -121,7 +121,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type="text"
           ref={ref}
           aria-invalid={error ? "true" : undefined}
-          placeholder={label ? " " : props.placeholder}
           className={cn(
             inputVariants({
               size,
@@ -135,6 +134,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
           onChange={handleChange}
           {...props}
+          placeholder={label ? " " : props.placeholder}
         />
         {label && (
           <label
