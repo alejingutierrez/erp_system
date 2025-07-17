@@ -45,6 +45,13 @@ describe('Modal', () => {
     expect(screen.getByLabelText(/close/i)).toBeInTheDocument();
   });
 
+  it('calls onClose when close button clicked', () => {
+    const onClose = vi.fn();
+    renderModal(true, onClose);
+    fireEvent.click(screen.getByLabelText(/close/i));
+    expect(onClose).toHaveBeenCalled();
+  });
+
   it('applies variant classes', () => {
     renderModal(true, vi.fn(), { variant: 'primary' });
     expect(screen.getByRole('dialog').className).toContain('bg-primary');
