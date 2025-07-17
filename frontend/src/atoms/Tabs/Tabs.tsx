@@ -100,7 +100,7 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
                     colorClasses[color].accordion,
                     !isActive && 'text-muted-foreground',
                   )}
-                  onClick={() => setActive(index)}
+                  onClick={() => setActive((prev) => (prev === index ? -1 : index))}
                 >
                   <span>{item.label}</span>
                   <ChevronDown
@@ -108,14 +108,16 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
                     className={cn('transition-transform', isActive && 'rotate-180')}
                   />
                 </button>
-                <div
-                  id={panelId}
-                  role="tabpanel"
-                  aria-labelledby={id}
-                  className={cn('pt-1 pb-2 text-sm', !isActive && 'hidden')}
-                >
-                  {item.content}
-                </div>
+                {isActive && (
+                  <div
+                    id={panelId}
+                    role="tabpanel"
+                    aria-labelledby={id}
+                    className="pt-1 pb-2 text-sm"
+                  >
+                    {item.content}
+                  </div>
+                )}
               </div>
             );
           })}

@@ -50,7 +50,7 @@ describe('Button', () => {
     expect(button).toBeDisabled();
 
     // Spinner should be present with an accessible label
-    const spinner = button.querySelector('.animate-spin');
+    const spinner = button.querySelector('.animate-spinner-fancy');
     expect(spinner).toBeInTheDocument();
     expect(screen.getByText('Loading...')).toHaveClass('sr-only');
   });
