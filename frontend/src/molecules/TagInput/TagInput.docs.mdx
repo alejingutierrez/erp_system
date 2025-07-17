@@ -1,0 +1,17 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import React from 'react';
+import { TagInput } from './TagInput';
+
+<Meta title="Molecules/TagInput" of={TagInput} />
+
+# TagInput
+
+The `TagInput` component allows users to enter multiple tags in a single field. Each tag is displayed as a closable chip inside the input.
+
+<Canvas>
+  <Story name="Ejemplo">
+    {() => <TagInput placeholder="Agregar etiquetas..." />}
+  </Story>
+</Canvas>
+
+<ArgsTable of={TagInput} />
