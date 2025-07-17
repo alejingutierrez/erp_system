@@ -1,0 +1,23 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { EmptyState } from './EmptyState';
+
+<Meta title="Molecules/EmptyState" of={EmptyState} />
+
+# EmptyState
+
+The `EmptyState` component communicates that no data is available in a section.
+It can show an illustrative icon, a main message, optional secondary text and an
+optional action button.
+
+<Canvas>
+  <Story name="Example">
+    <EmptyState
+      iconName="Folder"
+      title="No hay registros"
+      message="Agrega un nuevo elemento para comenzar"
+      actionLabel="Crear"
+    />
+  </Story>
+</Canvas>
+
+<ArgsTable of={EmptyState} />
