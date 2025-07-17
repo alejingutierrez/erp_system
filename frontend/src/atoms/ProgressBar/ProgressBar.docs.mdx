@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { ProgressBar } from './ProgressBar';
+
+<Meta title="Atoms/ProgressBar" of={ProgressBar} />
+
+# ProgressBar
+
+Displays the progress of a task. Provide a `value` between 0 and 100 for determinate mode or omit the prop for an indeterminate bar.
+
+<Canvas>
+  <Story name="Examples">
+    <>
+      <ProgressBar value={75} />
+      <div className="h-4" />
+      <ProgressBar />
+    </>
+  </Story>
+</Canvas>
+
+<ArgsTable of={ProgressBar} />
