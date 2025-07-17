@@ -2,8 +2,10 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-const trackVariants = cva('w-full bg-muted rounded-full overflow-hidden relative', {
-  variants: {
+const trackVariants = cva(
+  'w-full bg-border rounded-full overflow-hidden relative',
+  {
+    variants: {
     size: {
       sm: 'h-1.5',
       md: 'h-2',
@@ -54,9 +56,22 @@ export const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
         {...props}
       >
         {isIndeterminate ? (
-          <div className={cn(indicatorVariants({ color }), 'animate-indeterminate')} />
+          <div
+            className={cn(
+              indicatorVariants({ color }),
+              'animate-indeterminate',
+            )}
+          />
         ) : (
-          <div className={indicatorVariants({ color })} style={{ width: `${clamped}%` }} />
+          <>
+            <div
+              className={indicatorVariants({ color })}
+              style={{ width: `${clamped}%` }}
+            />
+            <span className="absolute inset-0 flex items-center justify-center text-xs text-muted-foreground font-medium">
+              {clamped}%
+            </span>
+          </>
         )}
       </div>
     );

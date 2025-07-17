@@ -5,14 +5,18 @@ import { ProgressBar } from './ProgressBar';
 describe('ProgressBar', () => {
   it('applies width based on value', () => {
     render(<ProgressBar value={40} />);
-    const indicator = screen.getByRole('progressbar').firstChild as HTMLElement;
+    const bar = screen.getByRole('progressbar');
+    const indicator = bar.firstChild as HTMLElement;
     expect(indicator).toHaveStyle('width: 40%');
+    expect(screen.getByText('40%')).toBeInTheDocument();
   });
 
   it('renders indeterminate animation when no value', () => {
     render(<ProgressBar />);
-    const indicator = screen.getByRole('progressbar').firstChild as HTMLElement;
+    const bar = screen.getByRole('progressbar');
+    const indicator = bar.firstChild as HTMLElement;
     expect(indicator.className).toContain('animate-indeterminate');
+    expect(bar.textContent).toBe('');
   });
 
   it('applies size variants', () => {
@@ -22,5 +26,10 @@ describe('ProgressBar', () => {
 
     rerender(<ProgressBar size="lg" value={10} />);
     expect(bar).toHaveClass('h-3');
+  });
+
+  it('shows clamped value text', () => {
+    render(<ProgressBar value={150} />);
+    expect(screen.getByText('100%')).toBeInTheDocument();
   });
 });
