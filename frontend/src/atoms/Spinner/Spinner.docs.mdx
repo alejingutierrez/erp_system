@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Spinner } from './Spinner';
+
+<Meta title="Atoms/Spinner" of={Spinner} />
+
+# Spinner
+
+The `Spinner` component displays a rotating indicator to signal that content is loading. Adjust its `size` and `intent` props to match the context.
+
+<Canvas>
+  <Story name="Examples">
+    <div className="flex items-center space-x-4">
+      <Spinner />
+      <Spinner size="sm" />
+      <Spinner size="lg" intent="secondary" />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Spinner} />

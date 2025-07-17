@@ -47,11 +47,10 @@ describe('Button', () => {
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
 
-    // Check that the spinner is rendered
-    // The spinner is a div, so we can't query by a specific role.
-    // We'll check for its presence by observing the button's children.
-    expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
-    expect(button.querySelector('.animate-spin')).toBeInTheDocument();
+    // Spinner should be present with an accessible label
+    const spinner = button.querySelector('.animate-spin');
+    expect(spinner).toBeInTheDocument();
+    expect(screen.getByText('Loading...')).toHaveClass('sr-only');
   });
 
   describe('with icons', () => {
