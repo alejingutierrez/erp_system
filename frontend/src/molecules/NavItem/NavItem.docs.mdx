@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { NavItem } from './NavItem';
+
+<Meta title="Molecules/NavItem" of={NavItem} />
+
+# NavItem
+
+The `NavItem` component represents a menu item used in navigation bars or sidebars. It shows an icon, a label and optionally a notification badge.
+
+<Canvas>
+  <Story name="Examples">
+    <div className="w-48 space-y-2">
+      <NavItem iconName="Home" label="Inicio" active />
+      <NavItem iconName="Folder" label="Proyectos" />
+      <NavItem iconName="Mail" label="Mensajes" showBadge badgeCount={5} />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={NavItem} />
