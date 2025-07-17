@@ -36,8 +36,9 @@ describe('Modal', () => {
     expect(onClose).toHaveBeenCalled();
   });
 
-  it('focuses the modal when opened', () => {
+  it('focuses the modal when opened', async () => {
     renderModal(true);
+    await screen.findByRole('dialog');
     expect(screen.getByRole('dialog')).toHaveFocus();
   });
 });

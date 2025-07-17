@@ -10,7 +10,8 @@ describe('Accordion', () => {
 
   it('hides content when closed', () => {
     render(<Accordion title="Title">Hidden</Accordion>);
-    expect(screen.queryByText('Hidden')).not.toBeInTheDocument();
+    const region = screen.getByRole('region');
+    expect(region).toHaveClass('hidden');
   });
 
   it('shows content when open', () => {
