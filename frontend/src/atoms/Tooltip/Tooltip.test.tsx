@@ -28,7 +28,7 @@ describe('Tooltip', () => {
     expect(screen.getByText('More')).toBeInTheDocument();
   });
 
-  it('applies placement classes', () => {
+  it('respects placement', () => {
     render(
       <Tooltip content="Hi" placement="bottom">
         <button>Hi</button>
@@ -36,7 +36,7 @@ describe('Tooltip', () => {
     );
     const trigger = screen.getByRole('button');
     fireEvent.mouseEnter(trigger);
-    const tip = screen.getByRole('tooltip');
-    expect(tip.className).toContain('top-full');
+    const arrow = screen.getByRole('tooltip').querySelector('span');
+    expect(arrow?.className).toContain('-top-1');
   });
 });
