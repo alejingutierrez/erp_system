@@ -14,6 +14,8 @@ describe('Button', () => {
     // Check for a class that is part of the primary intent and md size
     expect(button.className).toContain('from-primary');
     expect(button.className).toContain('h-10');
+    expect(button.className).toContain('hover:shadow-sm');
+    expect(button.className).toContain('active:scale-105');
   });
 
   it('applies specified variant classes', () => {

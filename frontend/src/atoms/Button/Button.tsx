@@ -6,14 +6,14 @@ import { Spinner } from '@/atoms/Spinner/Spinner';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'group inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium shadow-sm ring-offset-background transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary disabled:pointer-events-none disabled:opacity-50 hover:-translate-y-px hover:shadow-md active:translate-y-0 active:shadow-sm active:scale-[0.98]',
+  'group inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary disabled:pointer-events-none disabled:opacity-50 hover:-translate-y-px hover:shadow-sm active:translate-y-0 active:shadow-md active:scale-105',
   {
     variants: {
       variant: {
         default: 'border-transparent',
         outline: 'border bg-transparent',
         ghost: 'bg-transparent border-transparent',
-        glass: 'bg-surface-glass/80 backdrop-blur-lg border border-white/20 shadow-glass text-foreground',
+        glass: 'bg-surface-glass/80 backdrop-blur-lg border border-white/20 text-foreground hover:bg-surface-glass/90',
         icon: 'p-0 border-transparent',
       },
       intent: {
@@ -31,8 +31,8 @@ const buttonVariants = cva(
     },
     compoundVariants: [
       // Default variant styles
-      { variant: 'default', intent: 'primary', className: 'bg-gradient-to-br from-primary to-primary/90' },
-      { variant: 'default', intent: 'secondary', className: 'bg-gradient-to-br from-secondary to-secondary/80' },
+      { variant: 'default', intent: 'primary', className: 'bg-gradient-to-br from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80' },
+      { variant: 'default', intent: 'secondary', className: 'bg-gradient-to-br from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70' },
       { variant: 'default', intent: 'tertiary', className: 'bg-tertiary hover:bg-tertiary/90' },
       { variant: 'default', intent: 'quaternary', className: 'bg-quaternary hover:bg-quaternary/90' },
       { variant: 'default', intent: 'success', className: 'bg-success hover:bg-success/90' },
@@ -43,17 +43,17 @@ const buttonVariants = cva(
       { variant: 'icon', size: 'sm', className: 'w-9' },
       { variant: 'icon', size: 'md', className: 'w-10' },
       { variant: 'icon', size: 'lg', className: 'w-11' },
-      { variant: 'icon', intent: 'primary', className: 'bg-primary text-primary-foreground' },
-      { variant: 'icon', intent: 'secondary', className: 'bg-secondary text-primary-foreground' },
-      { variant: 'icon', intent: 'tertiary', className: 'bg-tertiary text-primary-foreground' },
-      { variant: 'icon', intent: 'quaternary', className: 'bg-quaternary text-primary-foreground' },
-      { variant: 'icon', intent: 'success', className: 'bg-success text-primary-foreground' },
+      { variant: 'icon', intent: 'primary', className: 'bg-primary text-primary-foreground hover:bg-primary/90' },
+      { variant: 'icon', intent: 'secondary', className: 'bg-secondary text-primary-foreground hover:bg-secondary/90' },
+      { variant: 'icon', intent: 'tertiary', className: 'bg-tertiary text-primary-foreground hover:bg-tertiary/90' },
+      { variant: 'icon', intent: 'quaternary', className: 'bg-quaternary text-primary-foreground hover:bg-quaternary/90' },
+      { variant: 'icon', intent: 'success', className: 'bg-success text-primary-foreground hover:bg-success/90' },
       // Outline variant styles
-      { variant: 'outline', intent: 'primary', className: 'border-primary text-primary hover:bg-primary hover:text-primary-foreground' },
-      { variant: 'outline', intent: 'secondary', className: 'border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground' },
-      { variant: 'outline', intent: 'tertiary', className: 'border-tertiary text-tertiary hover:bg-tertiary hover:text-tertiary-foreground' },
-      { variant: 'outline', intent: 'quaternary', className: 'border-quaternary text-quaternary hover:bg-quaternary hover:text-quaternary-foreground' },
-      { variant: 'outline', intent: 'success', className: 'border-success text-success hover:bg-success hover:text-success-foreground' },
+      { variant: 'outline', intent: 'primary', className: 'border-primary text-primary hover:bg-primary/90 hover:text-primary-foreground' },
+      { variant: 'outline', intent: 'secondary', className: 'border-secondary text-secondary hover:bg-secondary/90 hover:text-secondary-foreground' },
+      { variant: 'outline', intent: 'tertiary', className: 'border-tertiary text-tertiary hover:bg-tertiary/90 hover:text-tertiary-foreground' },
+      { variant: 'outline', intent: 'quaternary', className: 'border-quaternary text-quaternary hover:bg-quaternary/90 hover:text-quaternary-foreground' },
+      { variant: 'outline', intent: 'success', className: 'border-success text-success hover:bg-success/90 hover:text-success-foreground' },
       { variant: 'outline', size: 'sm', className: 'px-4 min-w-[8rem]' },
       { variant: 'outline', size: 'md', className: 'px-6 min-w-[10rem]' },
       { variant: 'outline', size: 'lg', className: 'px-8 min-w-[12rem]' },
