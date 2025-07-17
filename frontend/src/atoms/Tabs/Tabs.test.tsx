@@ -43,4 +43,12 @@ describe('Tabs', () => {
     fireEvent.click(screen.getByText('Two'));
     expect(screen.getByText('Second')).toBeVisible();
   });
+
+  it('toggles accordion item when clicking the active header', () => {
+    render(<Tabs items={items} variant="accordion" />);
+    const firstHeader = screen.getByText('One');
+    // first item is open by default
+    fireEvent.click(firstHeader);
+    expect(screen.queryByText('First')).not.toBeInTheDocument();
+  });
 });
