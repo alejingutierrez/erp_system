@@ -1,0 +1,19 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Card } from './Card';
+
+<Meta title="Atoms/Card" of={Card} />
+
+# Card
+
+The `Card` component is a simple container used to group related content. Use the `variant` prop to adjust its appearance.
+
+<Canvas>
+  <Story name="Example">
+    <Card>
+      <strong>Title</strong>
+      <p className="mt-2 text-sm text-muted-foreground">Some supporting text.</p>
+    </Card>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Card} />
