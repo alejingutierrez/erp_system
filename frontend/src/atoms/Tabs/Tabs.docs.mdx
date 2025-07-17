@@ -7,9 +7,17 @@ import { Tabs } from './Tabs';
 
 Use `Tabs` to switch between related sections of content without reloading the page.
 
+The `accordion` variant combines Tabs with an accordion-like presentation where each tab header toggles the visibility of its content vertically.
+
 <Canvas>
   <Story name="Ejemplo">
     <Tabs items={[{ label: 'Uno', content: <p>Contenido uno</p> }, { label: 'Dos', content: <p>Contenido dos</p> }]} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Accordion">
+    <Tabs variant="accordion" orientation="vertical" items={[{ label: 'Uno', content: <p>Contenido uno</p> }, { label: 'Dos', content: <p>Contenido dos</p> }]} />
   </Story>
 </Canvas>
 
