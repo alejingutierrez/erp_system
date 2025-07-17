@@ -113,8 +113,12 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
         {showTip && (
           <span
             data-testid="slider-indicator"
-            className="pointer-events-none absolute -top-6 -translate-x-1/2 rounded bg-gray-700 px-1 py-0.5 text-xs text-white"
-            style={{ left: `${percentage}%` }}
+            className="pointer-events-none absolute -top-6 -translate-x-1/2 rounded px-1 py-0.5 text-xs"
+            style={{
+              left: `${percentage}%`,
+              backgroundColor: "hsl(var(--slider-color))",
+              color: "hsl(var(--slider-foreground))",
+            }}
           >
             {internal}
           </span>
