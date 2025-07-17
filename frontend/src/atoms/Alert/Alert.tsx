@@ -10,7 +10,7 @@ const alertVariants = cva(
       variant: {
         info: 'bg-secondary/20 text-secondary border-secondary',
         success: 'bg-success/20 text-success border-success',
-        warning: 'bg-quaternary/20 text-quaternary border-quaternary',
+        warning: 'bg-quaternary/20 text-quaternary-foreground border-quaternary',
         error: 'bg-destructive/20 text-destructive border-destructive',
       },
     },
@@ -43,6 +43,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     ref,
   ) => {
     const [visible, setVisible] = React.useState(true);
+    const [hovered, setHovered] = React.useState(false);
     const Icon = iconMap[variant ?? 'info'];
 
     const handleClose = () => {
@@ -50,26 +51,41 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       setVisible(false);
     };
 
+    React.useEffect(() => {
+      const timer = setTimeout(handleClose, 6000);
+      return () => clearTimeout(timer);
+    }, []);
+
     if (!visible) return null;
 
     return (
       <div
         role="alert"
         ref={ref}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         className={cn(alertVariants({ variant, className }))}
         {...props}
       >
-        <Icon className="mt-0.5 flex-shrink-0" size={20} aria-hidden="true" />
+        <Icon
+          className={cn(
+            'mt-0.5 flex-shrink-0',
+            variant === 'warning' && 'text-quaternary'
+          )}
+          size={20}
+          aria-hidden="true"
+        />
         <div className="flex-1">
           {title && <h5 className="font-semibold mb-1">{title}</h5>}
           {children}
         </div>
-        {dismissable && (
+        {(dismissable || hovered) && (
           <button
             type="button"
             onClick={handleClose}
             aria-label="Cerrar alerta"
-            className="absolute top-2 right-2 rounded p-1 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+            className="absolute top-2 right-2 rounded p-1 opacity-0 transition-opacity hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+            style={{ opacity: dismissable || hovered ? 1 : 0 }}
           >
             <X size={14} />
           </button>
