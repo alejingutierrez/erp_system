@@ -5,14 +5,17 @@ import { Heading } from './Heading';
 
 # Heading
 
-The `Heading` component renders semantic heading elements with the design system's typography. Use the `level` prop to choose the heading size.
+The `Heading` component renders semantic heading elements with the design system's typography. Use the `level` prop to choose the heading size. Each level also applies a progressively lighter font weight starting at `600` for level 1 down to `100` for level 6.
 
 <Canvas>
   <Story name="Examples">
     <>
-      <Heading level={1}>Heading 1</Heading>
-      <Heading level={2}>Heading 2</Heading>
-      <Heading level={3}>Heading 3</Heading>
+      <Heading level={1}>Heading 1 (600)</Heading>
+      <Heading level={2}>Heading 2 (500)</Heading>
+      <Heading level={3}>Heading 3 (400)</Heading>
+      <Heading level={4}>Heading 4 (300)</Heading>
+      <Heading level={5}>Heading 5 (200)</Heading>
+      <Heading level={6}>Heading 6 (100)</Heading>
     </>
   </Story>
 </Canvas>
