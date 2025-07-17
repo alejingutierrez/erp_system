@@ -2,9 +2,13 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { Modal } from './Modal';
 
-const renderModal = (isOpen: boolean, onClose = vi.fn()) =>
+const renderModal = (
+  isOpen: boolean,
+  onClose = vi.fn(),
+  extraProps: Partial<React.ComponentProps<typeof Modal>> = {},
+) =>
   render(
-    <Modal isOpen={isOpen} onClose={onClose} title="Test Modal">
+    <Modal isOpen={isOpen} onClose={onClose} title="Test Modal" {...extraProps}>
       <p>content</p>
       <button>ok</button>
     </Modal>,
@@ -34,6 +38,16 @@ describe('Modal', () => {
     renderModal(true, onClose);
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(onClose).toHaveBeenCalled();
+  });
+
+  it('renders a close button', () => {
+    renderModal(true);
+    expect(screen.getByLabelText(/close/i)).toBeInTheDocument();
+  });
+
+  it('applies variant classes', () => {
+    renderModal(true, vi.fn(), { variant: 'primary' });
+    expect(screen.getByRole('dialog').className).toContain('bg-primary');
   });
 
   it('focuses the modal when opened', async () => {

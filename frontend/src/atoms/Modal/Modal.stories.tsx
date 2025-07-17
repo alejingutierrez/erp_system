@@ -8,7 +8,19 @@ const meta: Meta<ModalProps> = {
   component: Modal,
   tags: ['autodocs'],
   argTypes: {
-    variant: { control: 'select', options: ['default', 'glass'] },
+    variant: {
+      control: 'select',
+      options: [
+        'default',
+        'primary',
+        'secondary',
+        'tertiary',
+        'quaternary',
+        'success',
+        'destructive',
+        'glass',
+      ],
+    },
     size: { control: 'select', options: ['sm', 'md', 'lg'] },
     isOpen: { control: 'boolean' },
     onClose: { action: 'close', table: { category: 'Events' } },
@@ -52,4 +64,34 @@ export const WithActions: Story = {
     size: 'md',
     title: 'Confirm',
   },
+};
+
+export const ColorVariants: Story = {
+  render: (args) => {
+    const variants = [
+      'primary',
+      'secondary',
+      'tertiary',
+      'quaternary',
+      'success',
+      'destructive',
+    ] as const;
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {variants.map((v) => (
+          <Modal
+            key={v}
+            {...args}
+            isOpen
+            onClose={() => {}}
+            variant={v}
+            title={v.charAt(0).toUpperCase() + v.slice(1)}
+          >
+            {v} modal
+          </Modal>
+        ))}
+      </div>
+    );
+  },
+  args: {},
 };
