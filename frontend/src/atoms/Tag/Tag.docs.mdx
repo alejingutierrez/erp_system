@@ -9,11 +9,20 @@ The `Tag` component displays small labels used for categorization or selected fi
 
 <Canvas>
   <Story name="Examples">
-    <>
-      <Tag>Etiqueta</Tag>
-      <Tag variant="solid" color="secondary" className="ml-2">VIP</Tag>
-      <Tag closable className="ml-2">Filtro: Azul</Tag>
-    </>
+    {() => {
+      const [visible, setVisible] = React.useState(true);
+      return (
+        <>
+          <Tag>Etiqueta</Tag>
+          <Tag variant="solid" color="secondary" className="ml-2">VIP</Tag>
+          {visible && (
+            <Tag closable onRemove={() => setVisible(false)} className="ml-2">
+              Filtro: Azul
+            </Tag>
+          )}
+        </>
+      );
+    }}
   </Story>
 </Canvas>
 
