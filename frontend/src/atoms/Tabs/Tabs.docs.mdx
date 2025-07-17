@@ -1,0 +1,16 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Tabs } from './Tabs';
+
+<Meta title="Atoms/Tabs" of={Tabs} />
+
+# Tabs
+
+Use `Tabs` to switch between related sections of content without reloading the page.
+
+<Canvas>
+  <Story name="Ejemplo">
+    <Tabs items={[{ label: 'Uno', content: <p>Contenido uno</p> }, { label: 'Dos', content: <p>Contenido dos</p> }]} />
+  </Story>
+</Canvas>
+
+<ArgsTable of={Tabs} />
