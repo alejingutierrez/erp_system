@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { CustomerListItem } from './CustomerListItem';
+
+<Meta title="Molecules/CustomerListItem" of={CustomerListItem} />
+
+# CustomerListItem
+
+The `CustomerListItem` component represents a customer within a list. It displays key information such as name, contact details, purchase count and status, and may offer quick actions.
+
+<Canvas>
+  <Story name="Examples">
+    <div className="max-w-md space-y-2">
+      <CustomerListItem
+        customerName="Juan Perez"
+        email="juan@correo.com"
+        purchasesCount={5}
+        category="VIP"
+        active
+        showActions
+      />
+      <CustomerListItem
+        customerName="Ana Gómez"
+        email="ana@example.com"
+        phone="3001234567"
+        purchasesCount={2}
+        active={false}
+      />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={CustomerListItem} />
