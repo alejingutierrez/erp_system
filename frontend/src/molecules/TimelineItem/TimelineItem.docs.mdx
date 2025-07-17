@@ -1,0 +1,29 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { TimelineItem } from './TimelineItem';
+
+<Meta title="Molecules/TimelineItem" of={TimelineItem} />
+
+# TimelineItem
+
+The `TimelineItem` component represents a single entry inside a vertical timeline. It displays an icon, a short title, optional description and a timestamp so users can follow the sequence of events.
+
+<Canvas>
+  <Story name="Examples">
+    <div className="max-w-sm space-y-4">
+      <TimelineItem
+        iconName="Clock"
+        title="Pedido entregado"
+        description="El pedido #1042 fue entregado al cliente"
+        date="05/07/2025 14:32"
+      />
+      <TimelineItem
+        iconName="User"
+        title="Cliente registrado"
+        color="success"
+        date="01/07/2025 10:00"
+      />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={TimelineItem} />
