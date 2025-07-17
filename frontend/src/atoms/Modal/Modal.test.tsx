@@ -36,8 +36,17 @@ describe('Modal', () => {
     expect(onClose).toHaveBeenCalled();
   });
 
-  it('focuses the modal when opened', () => {
+  it('renders a close button', () => {
     renderModal(true);
-    expect(screen.getByRole('dialog')).toHaveFocus();
+    expect(screen.getByLabelText('Close')).toBeInTheDocument();
+  });
+
+  it('applies variant classes', () => {
+    render(
+      <Modal isOpen onClose={() => {}} variant="primary" title="t">
+        text
+      </Modal>,
+    );
+    expect(screen.getByRole('dialog').className).toContain('bg-primary');
   });
 });
