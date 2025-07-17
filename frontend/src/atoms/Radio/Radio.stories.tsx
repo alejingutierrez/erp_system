@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj, StoryFn } from '@storybook/react';
 import { useState } from 'react';
-import { Radio } from './Radio';
+import { Radio, type RadioProps } from './Radio';
 
 const meta: Meta<typeof Radio> = {
   title: 'Atoms/Radio',
@@ -21,7 +21,21 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const Template: StoryFn<RadioProps> = (args) => {
+  const [checked, setChecked] = useState(
+    args.defaultChecked ?? args.checked ?? false,
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(e.target.checked);
+    args.onChange?.(e);
+  };
+
+  return <Radio {...args} checked={checked} onChange={handleChange} />;
+};
+
 export const Default: Story = {
+  render: Template,
   args: {
     name: 'choice',
     label: 'Option',
@@ -31,6 +45,7 @@ export const Default: Story = {
 };
 
 export const Selected: Story = {
+  render: Template,
   args: {
     name: 'choice',
     label: 'Selected',
@@ -41,6 +56,7 @@ export const Selected: Story = {
 };
 
 export const Disabled: Story = {
+  render: Template,
   args: {
     name: 'choice',
     label: 'Disabled',
@@ -51,6 +67,7 @@ export const Disabled: Story = {
 };
 
 export const Large: Story = {
+  render: Template,
   args: {
     name: 'choice',
     label: 'Large',
@@ -60,6 +77,7 @@ export const Large: Story = {
 };
 
 export const Small: Story = {
+  render: Template,
   args: {
     name: 'choice',
     label: 'Small',

@@ -30,5 +30,10 @@ export const Solid: Story = {
 };
 
 export const Closable: Story = {
+  render: (args) => {
+    const [visible, setVisible] = React.useState(true);
+    if (!visible) return null;
+    return <Tag {...args} onRemove={() => setVisible(false)} />;
+  },
   args: { closable: true, children: 'Filtro: Azul' },
 };

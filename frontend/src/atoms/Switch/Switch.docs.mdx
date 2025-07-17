@@ -1,0 +1,19 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Switch } from './Switch';
+
+<Meta title="Atoms/Switch" of={Switch} />
+
+# Switch
+
+The `Switch` component toggles between on and off states. Use the `intent` prop to control the color when checked.
+
+<Canvas>
+  <Story name="Example">
+    {() => {
+      const [on, setOn] = React.useState(false);
+      return <Switch checked={on} onCheckedChange={setOn} />;
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={Switch} />

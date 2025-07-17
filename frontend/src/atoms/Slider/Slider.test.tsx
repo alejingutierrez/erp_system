@@ -33,7 +33,10 @@ describe('Slider', () => {
     render(<Slider defaultValue={20} />);
     const slider = screen.getByRole('slider');
     fireEvent.pointerDown(slider);
-    expect(screen.getByTestId('slider-indicator')).toBeInTheDocument();
+    const indicator = screen.getByTestId('slider-indicator');
+    expect(indicator).toBeInTheDocument();
+    expect(indicator.style.backgroundColor).toBe('hsl(var(--slider-color))');
+    expect(indicator.style.color).toBe('hsl(var(--slider-foreground))');
     fireEvent.pointerUp(slider);
     expect(screen.queryByTestId('slider-indicator')).not.toBeInTheDocument();
   });

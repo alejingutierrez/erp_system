@@ -15,12 +15,14 @@ describe('Switch', () => {
     render(<Switch checked={true} onCheckedChange={() => {}} />);
     const switchElement = screen.getByRole('switch');
     expect(switchElement).toBeChecked();
+    expect(switchElement.className).toContain('bg-primary');
   });
 
   it('should not be checked when the checked prop is false', () => {
     render(<Switch checked={false} onCheckedChange={() => {}} />);
     const switchElement = screen.getByRole('switch');
     expect(switchElement).not.toBeChecked();
+    expect(switchElement.className).toContain('bg-gray-400');
   });
 
   it('should call onCheckedChange when clicked', async () => {
@@ -29,6 +31,12 @@ describe('Switch', () => {
     const switchElement = screen.getByRole('switch');
     await userEvent.click(switchElement);
     expect(onCheckedChange).toHaveBeenCalledWith(true);
+  });
+
+  it('applies intent color when checked', () => {
+    render(<Switch checked={true} intent="secondary" onCheckedChange={() => {}} />);
+    const switchElement = screen.getByRole('switch');
+    expect(switchElement.className).toContain('bg-secondary');
   });
 
   it('should toggle state when Space key is pressed', async () => {

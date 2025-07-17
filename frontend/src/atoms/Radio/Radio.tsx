@@ -40,19 +40,22 @@ export interface RadioProps
 }
 
 const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
-  ({ className, size, intent = 'primary', label, children, id, checked, onChange, ...props }, ref) => {
+  (
+    {
+      className,
+      size,
+      intent = 'primary',
+      label,
+      children,
+      id,
+      checked,
+      defaultChecked,
+      onChange,
+      ...props
+    },
+    ref,
+  ) => {
     const inputId = id ?? React.useId();
-
-    const handleClick: React.MouseEventHandler<HTMLInputElement> = (e) => {
-      if (checked) {
-        e.preventDefault();
-        const syntheticEvent = {
-          ...e,
-          target: { ...e.target, checked: false },
-        } as unknown as React.ChangeEvent<HTMLInputElement>;
-        onChange?.(syntheticEvent);
-      }
-    };
 
     return (
       <label
@@ -61,36 +64,25 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
           'opacity-50 cursor-not-allowed': props.disabled,
         })}
       >
-        <span
-          className={cn(
-            'relative inline-flex items-center justify-center',
-            'border border-border rounded-full transition-colors',
-            {
-              'h-4 w-4': size === 'sm',
-              'h-5 w-5': size === 'md',
-              'h-6 w-6': size === 'lg',
-              'border-primary': checked && intent === 'primary',
-              'border-secondary': checked && intent === 'secondary',
-              'border-tertiary': checked && intent === 'tertiary',
-              'border-quaternary': checked && intent === 'quaternary',
-              'border-success': checked && intent === 'success',
-            },
-          )}
-        >
+        <div className="relative inline-flex items-center justify-center">
           <input
             ref={ref}
             id={inputId}
             type="radio"
             checked={checked}
+            defaultChecked={defaultChecked}
             onChange={onChange}
-            onClick={handleClick}
-            className={cn('absolute inset-0 w-full h-full cursor-pointer opacity-0', className)}
+            className={cn(
+              radioVariants({ size, intent }),
+              'peer',
+              className,
+            )}
             {...props}
           />
           {/* Inner dot */}
           <span
             className={cn(
-              'rounded-full transition-all',
+              'pointer-events-none absolute rounded-full transition-opacity',
               {
                 'h-2 w-2': size === 'sm', // 8px
                 'h-2.5 w-2.5': size === 'md', // 10px
@@ -101,10 +93,10 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
                 'bg-quaternary': intent === 'quaternary',
                 'bg-success': intent === 'success',
               },
-              checked ? 'opacity-100' : 'opacity-0',
+              'opacity-0 peer-checked:opacity-100',
             )}
           />
-        </span>
+        </div>
         {label && <span className="text-sm">{label}</span>}
         {!label && children}
       </label>

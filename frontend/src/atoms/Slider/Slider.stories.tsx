@@ -75,4 +75,12 @@ export const WithIndicator: Story = {
     );
   },
   args: {},
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The indicator adopts the slider color and automatically uses a contrasting text color.',
+      },
+    },
+  },
 };

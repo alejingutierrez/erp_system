@@ -52,10 +52,17 @@ export interface SwitchProps
     VariantProps<typeof switchVariants> {
   checked: boolean;
   onCheckedChange: (checked: boolean) => void;
+  /**
+   * Color used when the switch is checked.
+   */
+  intent?: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'success';
 }
 
 const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
-  ({ className, size, checked, onCheckedChange, ...props }, ref) => {
+  (
+    { className, size, checked, onCheckedChange, intent = 'primary', ...props },
+    ref,
+  ) => {
     return (
       <button
         type="button"
@@ -85,7 +92,16 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         }}
         className={cn(
           switchVariants({ size }),
-          checked ? 'bg-success-500' : 'bg-gray-200',
+          checked
+            ?
+                {
+                  primary: 'bg-primary',
+                  secondary: 'bg-secondary',
+                  tertiary: 'bg-tertiary',
+                  quaternary: 'bg-quaternary',
+                  success: 'bg-success',
+                }[intent]
+            : 'bg-gray-400',
           'disabled:cursor-not-allowed disabled:opacity-50',
           className,
         )}

@@ -6,12 +6,12 @@ import { cn } from '@/lib/utils';
 const headingVariants = cva('font-heading', {
   variants: {
     level: {
-      '1': 'text-5xl font-bold tracking-tight',
-      '2': 'text-4xl font-semibold tracking-tight',
-      '3': 'text-3xl font-semibold tracking-tight',
-      '4': 'text-2xl font-semibold tracking-tight',
-      '5': 'text-xl font-semibold tracking-tight',
-      '6': 'text-lg font-semibold tracking-tight',
+      '1': 'text-5xl font-semibold tracking-tight',
+      '2': 'text-4xl font-medium tracking-tight',
+      '3': 'text-3xl font-normal tracking-tight',
+      '4': 'text-2xl font-light tracking-tight',
+      '5': 'text-xl font-extralight tracking-tight',
+      '6': 'text-lg font-thin tracking-tight',
     },
     align: {
       left: 'text-left',

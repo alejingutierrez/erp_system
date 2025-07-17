@@ -10,6 +10,12 @@ const modalVariants = cva(
     variants: {
       variant: {
         default: 'bg-white',
+        primary: 'bg-primary text-primary-foreground',
+        secondary: 'bg-secondary text-secondary-foreground',
+        tertiary: 'bg-tertiary text-tertiary-foreground',
+        quaternary: 'bg-quaternary text-quaternary-foreground',
+        success: 'bg-success text-success-foreground',
+        destructive: 'bg-destructive text-destructive-foreground',
         glass: 'bg-surfaceGlass backdrop-blur-lg shadow-glass',
       },
       size: {

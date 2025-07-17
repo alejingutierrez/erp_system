@@ -22,6 +22,27 @@ describe('Heading', () => {
     const heading = screen.getByRole('heading', { level: 4 });
     expect(heading.className).toContain('text-center');
     expect(heading.className).toContain('text-secondary');
+    expect(heading.className).toContain('font-light');
+  });
+
+  it('uses progressively lighter font weights for each level', () => {
+    render(
+      <>
+        <Heading level={1}>One</Heading>
+        <Heading level={2}>Two</Heading>
+        <Heading level={3}>Three</Heading>
+        <Heading level={4}>Four</Heading>
+        <Heading level={5}>Five</Heading>
+        <Heading level={6}>Six</Heading>
+      </>,
+    );
+
+    expect(screen.getByRole('heading', { level: 1 }).className).toContain('font-semibold');
+    expect(screen.getByRole('heading', { level: 2 }).className).toContain('font-medium');
+    expect(screen.getByRole('heading', { level: 3 }).className).toContain('font-normal');
+    expect(screen.getByRole('heading', { level: 4 }).className).toContain('font-light');
+    expect(screen.getByRole('heading', { level: 5 }).className).toContain('font-extralight');
+    expect(screen.getByRole('heading', { level: 6 }).className).toContain('font-thin');
   });
 
   it('merges additional classes', () => {

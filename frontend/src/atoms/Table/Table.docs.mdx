@@ -5,31 +5,19 @@ import { Table } from './Table';
 
 # Table
 
-The `Table` component applies consistent styles to HTML tables. Use the `variant`, `size`, and `color` props to control the appearance.
+The `Table` component applies consistent styles to HTML tables. Use `variant`, `size`, and `color` props to control the appearance. It can also render data automatically via the `columns` and `data` props, support sortable headers, highlight rows on hover and become responsive with horizontal scrolling.
 
 <Canvas>
   <Story name="Example">
-    <Table caption="Sample data">
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Stock</th>
-          <th>Precio</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Camiseta</td>
-          <td>25</td>
-          <td>$12</td>
-        </tr>
-        <tr>
-          <td>Pantalón</td>
-          <td>10</td>
-          <td>$25</td>
-        </tr>
-      </tbody>
-    </Table>
+    <Table caption="Sample data" columns={[
+      { key: 'producto', header: 'Producto', sortable: true },
+      { key: 'stock', header: 'Stock', sortable: true },
+      { key: 'precio', header: 'Precio', sortable: true }
+    ]} data={[
+      { producto: 'Camiseta', stock: 25, precio: 12 },
+      { producto: 'Pantalón', stock: 10, precio: 25 },
+      { producto: 'Zapatos', stock: 5, precio: 50 }
+    ]} hoverable />
   </Story>
 </Canvas>
 

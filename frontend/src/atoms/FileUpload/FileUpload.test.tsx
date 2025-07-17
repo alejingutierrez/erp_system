@@ -12,14 +12,14 @@ describe('FileUpload', () => {
 
   it('displays selected file name', () => {
     render(<FileUpload />);
-    const input = screen.getByLabelText(/seleccionar archivo/i) as HTMLInputElement;
+    const input = document.querySelector('input') as HTMLInputElement;
     fireEvent.change(input, { target: { files: [createFile('test.txt')] } });
     expect(screen.getByText('test.txt')).toBeInTheDocument();
   });
 
   it('shows count when multiple files selected', () => {
     render(<FileUpload multiple />);
-    const input = screen.getByLabelText(/seleccionar archivo/i) as HTMLInputElement;
+    const input = document.querySelector('input') as HTMLInputElement;
     fireEvent.change(input, { target: { files: [createFile('a.txt'), createFile('b.txt')] } });
     expect(screen.getByText('2 archivos seleccionados')).toBeInTheDocument();
   });
@@ -27,7 +27,7 @@ describe('FileUpload', () => {
   it('calls onChange handler', () => {
     const handleChange = vi.fn();
     render(<FileUpload onChange={handleChange} />);
-    const input = screen.getByLabelText(/seleccionar archivo/i) as HTMLInputElement;
+    const input = document.querySelector('input') as HTMLInputElement;
     fireEvent.change(input, { target: { files: [createFile('file.pdf')] } });
     expect(handleChange).toHaveBeenCalled();
   });

@@ -34,4 +34,11 @@ describe('Tag', () => {
     expect(onRemove).toHaveBeenCalled();
     expect(button).toHaveAttribute('aria-label', 'Quitar etiqueta');
   });
+
+  it('removes itself when close button is clicked', () => {
+    render(<Tag closable>Filter</Tag>);
+    const tag = screen.getByText('Filter');
+    fireEvent.click(screen.getByRole('button'));
+    expect(tag).not.toBeInTheDocument();
+  });
 });

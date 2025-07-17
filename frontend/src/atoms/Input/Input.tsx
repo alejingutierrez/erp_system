@@ -103,6 +103,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     };
     const iconFocusColor = color ? iconFocusMap[color] : "";
 
+    const labelLeft = hasLeft ? "left-10" : "left-3";
+
     return (
       <div className="relative group">
         {LeftIcon && (
@@ -138,7 +140,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <label
             htmlFor={inputId}
             className={cn(
-              "pointer-events-none absolute left-3 top-2 text-xs text-muted-foreground transition-all",
+              "pointer-events-none absolute top-2 text-xs text-muted-foreground transition-all",
+              labelLeft,
               "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2",
               "peer-focus:top-0 peer-focus:-translate-y-[1.2rem]",
             )}
