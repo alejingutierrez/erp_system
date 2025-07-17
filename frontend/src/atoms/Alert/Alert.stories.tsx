@@ -59,3 +59,12 @@ export const Dismissable: Story = {
   },
 };
 
+export const AutoDismiss: Story = {
+  args: {
+    variant: 'warning',
+    title: 'Auto ocultable',
+    children: 'Esta alerta desaparece tras 6 segundos o al pasar el mouse.',
+  },
+  parameters: { controls: { disable: true } },
+};
+
