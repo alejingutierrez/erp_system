@@ -64,5 +64,3 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
   },
 );
 FileUpload.displayName = 'FileUpload';
-
-export { FileUpload };

@@ -21,6 +21,12 @@ describe('Icon', () => {
     expect(classes).toContain('text-secondary');
   });
 
+  it('uses default size when none provided', () => {
+    const { container } = render(<Icon name="X" />);
+    const svg = container.querySelector('svg') as SVGSVGElement;
+    expect(svg.getAttribute('class')).toContain('w-5');
+  });
+
   it('uses aria-label when provided', () => {
     const { container } = render(<Icon name="Star" label="favorite" />);
     const svg = container.querySelector('svg') as SVGSVGElement;

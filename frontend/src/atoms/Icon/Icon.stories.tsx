@@ -53,3 +53,7 @@ export const Colors: Story = {
   ),
   args: {},
 };
+
+export const WithLabel: Story = {
+  args: { iconName: 'AlertCircle', label: 'Alerta' },
+};
