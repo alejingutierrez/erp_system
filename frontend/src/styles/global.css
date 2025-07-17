@@ -187,3 +187,13 @@
     --slider-color: var(--success);
   }
 }
+  @keyframes progress-indeterminate {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+  }
+  .animate-indeterminate {
+    position: absolute;
+    left: 0;
+    width: 50%;
+    animation: progress-indeterminate 1s infinite linear;
+  }
