@@ -40,11 +40,14 @@ export const Default: Story = {
     showIcons: true,
     iconName: 'MoreHorizontal',
   },
-  render: ({ iconName, ...args }) => (
-    <ActionMenu {...args}>
-      {iconMap[iconName]({ size: 16 })}
-    </ActionMenu>
-  ),
+  render: ({ iconName, ...args }) => {
+    const Icon = iconMap[iconName];
+    return (
+      <ActionMenu {...args}>
+        <Icon size={16} />
+      </ActionMenu>
+    );
+  },
 };
 
 export const Disabled: Story = {
@@ -53,9 +56,12 @@ export const Disabled: Story = {
     disabled: true,
     iconName: 'MoreHorizontal',
   },
-  render: ({ iconName, ...args }) => (
-    <ActionMenu {...args}>
-      {iconMap[iconName]({ size: 16 })}
-    </ActionMenu>
-  ),
+  render: ({ iconName, ...args }) => {
+    const Icon = iconMap[iconName];
+    return (
+      <ActionMenu {...args}>
+        <Icon size={16} />
+      </ActionMenu>
+    );
+  },
 };
