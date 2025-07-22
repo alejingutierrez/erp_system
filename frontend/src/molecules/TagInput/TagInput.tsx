@@ -135,4 +135,3 @@ export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
 );
 TagInput.displayName = 'TagInput';
 
-export { TagInput };
