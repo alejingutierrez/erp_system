@@ -113,4 +113,3 @@ export const ImageUploader = React.forwardRef<HTMLInputElement, ImageUploaderPro
 );
 ImageUploader.displayName = 'ImageUploader';
 
-export { ImageUploader };
