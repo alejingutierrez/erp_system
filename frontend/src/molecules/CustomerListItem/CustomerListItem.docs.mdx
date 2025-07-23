@@ -1,5 +1,5 @@
-import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
-import { CustomerListItem } from './CustomerListItem';
+import { Meta, Canvas, Story, ArgsTable } from "@storybook/blocks";
+import { CustomerListItem } from "./CustomerListItem";
 
 <Meta title="Molecules/CustomerListItem" of={CustomerListItem} />
 
@@ -17,6 +17,10 @@ The `CustomerListItem` component represents a customer within a list. It display
         category="VIP"
         active
         showActions
+        actionMenuOptions={[
+          { label: "Editar", iconName: "Edit" },
+          { label: "Contactar", iconName: "Mail" },
+        ]}
       />
       <CustomerListItem
         customerName="Ana Gómez"
