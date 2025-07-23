@@ -11,10 +11,12 @@ The `ActionMenu` component displays a dropdown menu with quick actions. It is ty
 <Canvas>
   <Story name="Example">
     <ActionMenu
-      options={[{ label: 'Edit', iconName: 'Edit' }, { label: 'Delete', iconName: 'Trash2' }]}
-    >
-      <MoreHorizontal />
-    </ActionMenu>
+      options={[
+        { label: 'Edit', iconName: 'Edit' },
+        { label: 'Delete', iconName: 'Trash2' }
+      ]}
+      iconName="MoreHorizontal"
+    />
   </Story>
 </Canvas>
 
