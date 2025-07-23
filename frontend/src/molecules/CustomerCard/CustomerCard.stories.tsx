@@ -14,6 +14,12 @@ const meta: Meta<CustomerCardProps> = {
       options: [undefined, 'VIP', 'Frecuente', 'Nuevo'],
     },
     mostrarAccion: { control: 'boolean' },
+    accionIntent: {
+      control: 'select',
+      options: ['primary', 'secondary', 'tertiary', 'quaternary', 'success'],
+    },
+    accionIconName: { control: 'text' },
+    actionOptions: { control: 'object' },
     onSelect: { action: 'selected' },
     onAction: { action: 'actionClicked' },
   },
@@ -38,5 +44,17 @@ export const ConAccion: Story = {
     nombre: 'Pedro Ruiz',
     infoSecundaria: 'pedro@example.com',
     mostrarAccion: true,
+  },
+};
+
+export const ConMenuAccion: Story = {
+  args: {
+    nombre: 'Lucía Pérez',
+    infoSecundaria: 'lucia@example.com',
+    mostrarAccion: true,
+    actionOptions: [
+      { label: 'Editar', iconName: 'Edit' },
+      { label: 'Eliminar', iconName: 'Trash2' },
+    ],
   },
 };

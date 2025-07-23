@@ -14,6 +14,12 @@ Opcionalmente se indica el nivel del cliente y un botón de acción.
     <div className="w-72 space-y-2">
       <CustomerCard nombre="María Gómez" infoSecundaria="maria@gmail.com" nivel="VIP" />
       <CustomerCard nombre="Pedro Ruiz" infoSecundaria="pedro@example.com" mostrarAccion />
+      <CustomerCard
+        nombre="Lucía Pérez"
+        infoSecundaria="lucia@example.com"
+        mostrarAccion
+        actionOptions={[{ label: 'Editar', iconName: 'Edit' }]}
+      />
     </div>
   </Story>
 </Canvas>
