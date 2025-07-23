@@ -22,9 +22,9 @@ export interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   onDelete?: () => void;
 }
 
-// Realistic unsplash photo used as fallback image
+// Fallback image used when no product image is provided
 const placeholderImg =
-  'https://images.unsplash.com/photo-1513708926704-99d6fa04d638?auto=format&fit=crop&w=600&q=60';
+  'https://media.weekday.com/assets/003/cc/b0/ccb0a1481dbae44c573caf38fd53db8ca3e977ad_xl-1.jpg';
 
 export const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
   (
@@ -67,7 +67,7 @@ export const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
         onClick={handleClick}
         role={clickable ? 'button' : undefined}
         tabIndex={clickable ? 0 : undefined}
-        className={cn('w-full space-y-2', className)}
+        className={cn('w-full max-w-xs space-y-2', className)}
         {...props}
       >
         <div className="relative overflow-hidden rounded-md aspect-[3/4]">
@@ -131,15 +131,29 @@ export const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
           )}
         </div>
         <div className="flex items-start justify-between gap-2">
-          <Heading level={4} className="flex-1 text-sm truncate flex items-center gap-2">
-            {productName}
+          <div className="flex-1 min-w-0">
+            <Heading
+              level={4}
+              className="text-sm leading-tight line-clamp-2"
+            >
+              {productName}
+            </Heading>
             {statusBadge && (
-              <Tag variant="solid" color={statusColor} className="text-xs">
+              <Tag
+                variant="solid"
+                color={statusColor}
+                className="mt-1 text-xs w-max"
+              >
                 {statusBadge}
               </Tag>
             )}
-          </Heading>
-          <Text as="span" weight="semibold" color="secondary" className="text-base">
+          </div>
+          <Text
+            as="span"
+            weight="semibold"
+            color="secondary"
+            className="text-base shrink-0"
+          >
             {price}
           </Text>
         </div>

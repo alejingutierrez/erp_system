@@ -74,7 +74,7 @@ interface GridStoryProps extends ProductCardProps {
 export const Grid: StoryObj<GridStoryProps> = {
   args: { numCards: 4, productName: 'Producto', price: '$19.99' },
   argTypes: {
-    numCards: { control: { type: 'number', min: 1, max: 8, step: 1 } },
+    numCards: { control: { type: 'number', min: 1, step: 1 } },
   },
   render: ({ numCards, ...args }) => (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-3xl">
