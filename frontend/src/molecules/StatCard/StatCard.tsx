@@ -34,8 +34,6 @@ export interface StatCardProps
   trendValue?: string | number;
   /** Progress percentage to visualize with a bar */
   progress?: number;
-  /** Data points for a small sparkline graph */
-  sparklineData?: number[];
 }
 
 export const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
@@ -47,7 +45,6 @@ export const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
       trend,
       trendValue,
       progress,
-      sparklineData,
       variant,
       clickable,
       orientation,
@@ -56,30 +53,6 @@ export const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
     },
     ref,
   ) => {
-    const renderSparkline = (data?: number[]) => {
-      if (!data || data.length < 2) return null;
-      const w = 64;
-      const h = 24;
-      const min = Math.min(...data);
-      const max = Math.max(...data);
-      const range = max - min || 1;
-      const points = data
-        .map((d, i) => {
-          const x = (i / (data.length - 1)) * w;
-          const y = h - ((d - min) / range) * h;
-          return `${x},${y}`;
-        })
-        .join(' ');
-      return (
-        <svg
-          viewBox={`0 0 ${w} ${h}`}
-          className="mt-2 h-6 w-full stroke-muted-foreground"
-          fill="none"
-        >
-          <polyline points={points} strokeWidth={1.5} />
-        </svg>
-      );
-    };
 
     return (
       <Card
@@ -119,7 +92,6 @@ export const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
         <Text as="span" className="text-sm text-muted-foreground">
           {label}
         </Text>
-        {renderSparkline(sparklineData)}
         {progress !== undefined && (
           <ProgressBar value={progress} size="sm" className="mt-2" />
         )}
