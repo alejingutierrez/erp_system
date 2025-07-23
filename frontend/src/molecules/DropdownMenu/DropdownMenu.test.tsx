@@ -22,7 +22,7 @@ describe('DropdownMenu', () => {
     );
     fireEvent.click(screen.getByRole('button'));
     fireEvent.click(screen.getByText('Edit'));
-    expect(onSelect).toHaveBeenCalledWith(items[0]);
+    expect(onSelect).toHaveBeenCalledWith({ ...items[0], id: 0 });
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
   });
 

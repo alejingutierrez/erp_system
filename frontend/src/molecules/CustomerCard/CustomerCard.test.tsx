@@ -28,7 +28,7 @@ describe('CustomerCard', () => {
     render(
       <CustomerCard nombre="Ana" mostrarAccion onAction={onAction} />,
     );
-    const btn = screen.getByRole('button', { name: 'Ver detalles' });
+    const btn = screen.getByRole('button', { name: 'Acciones' });
     fireEvent.click(btn);
     expect(onAction).toHaveBeenCalledTimes(1);
   });
