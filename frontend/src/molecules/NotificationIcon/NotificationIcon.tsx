@@ -34,7 +34,7 @@ export const NotificationIcon = React.forwardRef<HTMLButtonElement, Notification
         {showBadge && (
           <Badge
             variant={color}
-            className="absolute -top-1 right-0 translate-x-1/2 rounded-full px-1 py-0 text-[10px] text-black"
+            className="absolute -top-1 right-0 translate-x-1/2 rounded-full px-1 py-0 text-[10px] !text-black"
           >
             {displayCount}
           </Badge>
