@@ -7,16 +7,21 @@ import { Button } from '@/atoms/Button/Button';
 import { Icon } from '@/atoms/Icon';
 
 const orderListItemVariants = cva(
-  'grid grid-cols-[auto_auto_1fr_auto_auto] items-center gap-2 px-3 py-2 text-sm rounded-md',
+  'grid items-center gap-2 px-3 py-2 text-sm rounded-md',
   {
     variants: {
       clickable: {
         true: 'hover:bg-muted cursor-pointer',
         false: '',
       },
+      showActions: {
+        true: 'grid-cols-[auto_auto_1fr_auto_auto_auto]',
+        false: 'grid-cols-[auto_auto_1fr_auto_auto]',
+      },
     },
     defaultVariants: {
       clickable: true,
+      showActions: false,
     },
   },
 );
@@ -74,7 +79,7 @@ export const OrderListItem = React.forwardRef<HTMLDivElement, OrderListItemProps
     return (
       <div
         ref={ref}
-        className={cn(orderListItemVariants({ clickable }), className)}
+        className={cn(orderListItemVariants({ clickable, showActions }), className)}
         onClick={onClick}
         {...props}
       >

@@ -29,7 +29,7 @@ export const Default: Story = {
 export const ManyPages: Story = {
   args: {
     currentPage: 5,
-    totalPages: 20,
+    totalPages: 8,
     siblings: 1,
     showFirstLast: true,
   },

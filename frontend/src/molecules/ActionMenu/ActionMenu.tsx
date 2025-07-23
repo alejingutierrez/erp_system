@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import { Button } from '@/atoms/Button/Button';
-import { Icon, type IconName } from '@/atoms/Icon';
+import { Icon, iconMap, type IconName } from '@/atoms/Icon';
 import { Card } from '@/atoms/Card';
 import { Text } from '@/atoms/Text';
 
@@ -46,6 +46,8 @@ export interface ActionMenuProps
   disabled?: boolean;
   /** Show icons next to options */
   showIcons?: boolean;
+  /** Icon name for the trigger button */
+  iconName?: IconName;
 }
 
 export const ActionMenu = React.forwardRef<HTMLButtonElement, ActionMenuProps>(
@@ -59,7 +61,7 @@ export const ActionMenu = React.forwardRef<HTMLButtonElement, ActionMenuProps>(
       className,
       disabled,
       showIcons = true,
-      children,
+      iconName = 'MoreHorizontal',
       ...props
     },
     ref,
@@ -173,10 +175,9 @@ export const ActionMenu = React.forwardRef<HTMLButtonElement, ActionMenuProps>(
           aria-controls={id}
           onClick={open ? handleClose : handleOpen}
           disabled={disabled}
+          LeftIcon={iconMap[iconName]}
           {...props}
-        >
-          {children}
-        </Button>
+        />
         {open && createPortal(menu, document.body)}
       </>
     );

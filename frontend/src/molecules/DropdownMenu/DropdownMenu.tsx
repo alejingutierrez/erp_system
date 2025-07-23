@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
 import { Icon, type IconName } from '@/atoms/Icon';
-import { Button } from '@/atoms/Button/Button';
+import { Button, type ButtonProps } from '@/atoms/Button/Button';
 import { cn } from '@/lib/utils';
 
 export interface DropdownMenuItem {
@@ -11,7 +11,8 @@ export interface DropdownMenuItem {
   id?: string | number;
 }
 
-export interface DropdownMenuProps {
+export interface DropdownMenuProps
+  extends Pick<ButtonProps, 'variant' | 'intent' | 'size'> {
   /** Content for the trigger button */
   triggerLabel: React.ReactNode;
   /** List of menu items */
@@ -26,6 +27,12 @@ export interface DropdownMenuProps {
   onSelect?: (item: DropdownMenuItem) => void;
   /** Callback when menu opens/closes */
   onOpenChange?: (open: boolean) => void;
+  /** Currently selected item id */
+  selectedId?: DropdownMenuItem['id'];
+  /** Default selected item id for uncontrolled usage */
+  defaultSelectedId?: DropdownMenuItem['id'];
+  /** Callback when selected item changes */
+  onSelectedIdChange?: (id: DropdownMenuItem['id']) => void;
   className?: string;
 }
 
@@ -37,6 +44,12 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   open,
   onSelect,
   onOpenChange,
+  selectedId: controlledSelectedId,
+  defaultSelectedId,
+  onSelectedIdChange,
+  variant = 'outline',
+  intent = 'primary',
+  size = 'md',
   className,
 }) => {
   const triggerRef = React.useRef<HTMLButtonElement>(null);
@@ -44,6 +57,17 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   const isControlled = open !== undefined;
   const isOpen = isControlled ? open : internalOpen;
   const [style, setStyle] = React.useState<React.CSSProperties>();
+  const [internalSelected, setInternalSelected] = React.useState<
+    DropdownMenuItem['id'] | undefined
+  >(defaultSelectedId);
+  const isSelectedControlled = controlledSelectedId !== undefined;
+  const selectedId = isSelectedControlled ? controlledSelectedId : internalSelected;
+
+  React.useEffect(() => {
+    if (!isSelectedControlled) {
+      setInternalSelected(defaultSelectedId);
+    }
+  }, [defaultSelectedId, isSelectedControlled]);
 
   const updatePosition = React.useCallback(() => {
     const rect = triggerRef.current?.getBoundingClientRect();
@@ -117,6 +141,8 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
 
   const handleSelect = (item: DropdownMenuItem) => {
     if (item.disabled) return;
+    if (!isSelectedControlled) setInternalSelected(item.id);
+    onSelectedIdChange?.(item.id);
     onSelect?.(item);
     close();
   };
@@ -148,7 +174,9 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   return (
     <>
       <Button
-        variant="outline"
+        variant={variant}
+        intent={intent}
+        size={size}
         ref={triggerRef}
         onClick={toggleOpen}
         aria-haspopup="menu"
@@ -166,21 +194,28 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
               className,
             )}
           >
-            {items.map((item) => (
-              <button
-                key={item.id ?? item.label}
-                type="button"
-                role="menuitem"
-                disabled={item.disabled}
-                onClick={() => handleSelect(item)}
-                className={cn(
-                  'flex w-full items-center gap-2 px-3 py-2 text-sm text-left hover:bg-muted disabled:opacity-50',
-                )}
-              >
-                {item.iconName && <Icon name={item.iconName} size="sm" aria-hidden="true" />}
-                <span className="flex-1">{item.label}</span>
-              </button>
-            ))}
+            {items.map((item, index) => {
+              const itemId = item.id ?? index;
+              return (
+                <button
+                  key={itemId}
+                  type="button"
+                  role="menuitem"
+                  disabled={item.disabled}
+                  onClick={() => handleSelect({ ...item, id: itemId })}
+                  className={cn(
+                    'flex w-full items-center gap-2 px-3 py-2 text-sm text-left hover:bg-muted disabled:opacity-50',
+                    selectedId !== undefined && selectedId === itemId && 'bg-muted',
+                  )}
+                >
+                  {item.iconName && <Icon name={item.iconName} size="sm" aria-hidden="true" />}
+                  <span className="flex-1">{item.label}</span>
+                  {selectedId !== undefined && selectedId === itemId && (
+                    <Icon name="Check" size="sm" aria-hidden="true" />
+                  )}
+                </button>
+              );
+            })}
           </div>,
           document.body,
         )}

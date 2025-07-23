@@ -22,7 +22,9 @@ export interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   onDelete?: () => void;
 }
 
-const placeholderImg = 'https://via.placeholder.com/300x200?text=Imagen';
+// Realistic unsplash photo used as fallback image
+const placeholderImg =
+  'https://images.unsplash.com/photo-1513708926704-99d6fa04d638?auto=format&fit=crop&w=600&q=60';
 
 export const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
   (
@@ -50,7 +52,7 @@ export const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
       }
     };
 
-    const imageClasses = cn('h-40 w-full object-cover rounded-md', outOfStock && 'opacity-50');
+    const imageClasses = cn('h-full w-full object-cover', outOfStock && 'opacity-50');
 
     const statusColor = statusBadge === 'Agotado'
       ? 'destructive'
@@ -68,7 +70,7 @@ export const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
         className={cn('w-full space-y-2', className)}
         {...props}
       >
-        <div className="relative">
+        <div className="relative overflow-hidden rounded-md aspect-[3/4]">
           <img
             src={imageSrc || placeholderImg}
             alt={productName}
@@ -129,18 +131,18 @@ export const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
           )}
         </div>
         <div className="flex items-start justify-between gap-2">
-          <Heading level={4} className="flex-1 text-sm truncate">
+          <Heading level={4} className="flex-1 text-sm truncate flex items-center gap-2">
             {productName}
+            {statusBadge && (
+              <Tag variant="solid" color={statusColor} className="text-xs">
+                {statusBadge}
+              </Tag>
+            )}
           </Heading>
-          <Text as="span" weight="semibold" color="secondary">
+          <Text as="span" weight="semibold" color="secondary" className="text-base">
             {price}
           </Text>
         </div>
-        {statusBadge && (
-          <Tag variant="solid" color={statusColor} className="text-xs">
-            {statusBadge}
-          </Tag>
-        )}
       </Card>
     );
   },

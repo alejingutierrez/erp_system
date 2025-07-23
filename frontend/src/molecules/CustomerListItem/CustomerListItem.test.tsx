@@ -33,6 +33,26 @@ describe('CustomerListItem', () => {
     expect(handleEdit).toHaveBeenCalledTimes(1);
   });
 
+  it('opens action menu when options provided', () => {
+    const onSelect = vi.fn();
+    const options = [
+      { label: 'Edit', iconName: 'Edit' },
+      { label: 'Contact', iconName: 'Mail' },
+    ];
+    render(
+      <CustomerListItem
+        customerName="Jane"
+        email="jane@example.com"
+        showActions
+        actionMenuOptions={options}
+        onMenuOptionSelect={onSelect}
+      />,
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Más acciones' }));
+    fireEvent.click(screen.getByText('Contact'));
+    expect(onSelect).toHaveBeenCalledWith(options[1], 1);
+  });
+
   it('displays inactive badge when active is false', () => {
     render(
       <CustomerListItem customerName="John Doe" email="john@example.com" active={false} />,

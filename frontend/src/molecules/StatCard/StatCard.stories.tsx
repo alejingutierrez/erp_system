@@ -16,6 +16,10 @@ const meta: Meta<StatCardStoryProps> = {
     value: { control: 'text' },
     label: { control: 'text' },
     iconName: { control: 'select', options: iconOptions },
+    trend: { control: 'select', options: ['up', 'down'] },
+    trendValue: { control: 'text' },
+    progress: { control: 'number' },
+    sparklineData: { control: 'object' },
     variant: { control: 'select', options: ['shadow', 'outline', 'glass'] },
     clickable: { control: 'boolean' },
     onClick: { action: 'clicked', table: { category: 'Events' } },
@@ -33,6 +37,10 @@ export const Default: Story = {
     iconName: 'Folder',
     variant: 'shadow',
     clickable: false,
+    progress: 60,
+    trend: 'up',
+    trendValue: '12%',
+    sparklineData: [10, 20, 15, 30, 25],
   },
 };
 
@@ -42,5 +50,9 @@ export const Clickable: Story = {
     label: 'Ventas',
     iconName: 'File',
     clickable: true,
+    trend: 'down',
+    trendValue: '-8%',
+    progress: 30,
+    sparklineData: [30, 25, 20, 15, 10],
   },
 };

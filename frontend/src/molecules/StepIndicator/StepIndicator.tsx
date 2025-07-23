@@ -46,7 +46,7 @@ export const StepIndicator = React.forwardRef<HTMLDivElement, StepIndicatorProps
     {
       totalSteps,
       currentStep,
-      labels = [],
+      labels,
       clickable = false,
       onStepClick,
       className,
@@ -54,16 +54,22 @@ export const StepIndicator = React.forwardRef<HTMLDivElement, StepIndicatorProps
     },
     ref,
   ) => {
-    const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
+    const safeTotal = Math.min(Math.max(totalSteps, 1), 15);
+    const safeCurrent = Math.min(Math.max(currentStep, 1), safeTotal);
+
+    const steps = Array.from({ length: safeTotal }, (_, i) => i + 1);
+    const safeLabels = Array.isArray(labels) ? labels.slice(0, safeTotal) : [];
     const finalLabels =
-      labels.length === totalSteps ? labels : steps.map((n) => `Paso ${n}`);
+      safeLabels.length === safeTotal
+        ? safeLabels
+        : steps.map((n) => `Paso ${n}`);
 
     return (
       <div ref={ref} className={cn('flex items-center w-full', className)} {...props}>
         {steps.map((step, index) => {
           const state =
-            step < currentStep ? 'completed' : step === currentStep ? 'current' : 'pending';
-          const isClickable = clickable && step < currentStep;
+            step < safeCurrent ? 'completed' : step === safeCurrent ? 'current' : 'pending';
+          const isClickable = clickable && step < safeCurrent;
           const handleClick = () => {
             if (isClickable) onStepClick?.(step);
           };
@@ -90,7 +96,7 @@ export const StepIndicator = React.forwardRef<HTMLDivElement, StepIndicatorProps
                 <div
                   className={cn(
                     'mx-2 flex-1 border-t',
-                    step < currentStep ? 'border-success' : 'border-border',
+                    step < safeCurrent ? 'border-success' : 'border-border',
                   )}
                 />
               )}

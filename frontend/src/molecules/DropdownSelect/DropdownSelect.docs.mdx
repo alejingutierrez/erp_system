@@ -13,12 +13,57 @@ The `DropdownSelect` component provides a styled dropdown menu for selecting one
     {() => {
       const [value, setValue] = React.useState('');
       return (
-        <DropdownSelect
-          options={["S", "M", "L", "XL"]}
-          selected={value}
-          onChange={setValue}
-          placeholder="Seleccione"
-        />
+        <div style={{ minHeight: '6rem' }}>
+          <DropdownSelect
+            options={["S", "M", "L", "XL"]}
+            selected={value}
+            onChange={setValue}
+            placeholder="Seleccione"
+          />
+        </div>
+      );
+    }}
+  </Story>
+</Canvas>
+
+## With search
+
+<Canvas>
+  <Story name="Searchable">
+    {() => {
+      const [category, setCategory] = React.useState('');
+      return (
+        <div style={{ minHeight: '6rem' }}>
+          <DropdownSelect
+            options={["Camisas", "Pantalones", "Zapatos", "Accesorios"]}
+            searchable
+            selected={category}
+            onChange={setCategory}
+            placeholder="Categoría"
+          />
+        </div>
+      );
+    }}
+  </Story>
+</Canvas>
+
+## Multiple selection
+
+<Canvas>
+  <Story name="Multiple">
+    {() => {
+      const [colors, setColors] = React.useState<string[]>([]);
+      return (
+        <div style={{ minHeight: '6rem' }}>
+          <DropdownSelect
+            options={["Rojo", "Azul", "Verde", "Negro"]}
+            multiple
+            searchable
+            selected={colors}
+            onChange={setColors}
+            placeholder="Colores"
+          />
+        </div>
       );
     }}
   </Story>

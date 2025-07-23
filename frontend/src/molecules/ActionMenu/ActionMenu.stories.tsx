@@ -1,15 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ActionMenu, type ActionMenuProps } from './ActionMenu';
-import { MoreHorizontal } from 'lucide-react';
 import { iconMap, type IconName } from '@/atoms/Icon';
-
-interface Props extends ActionMenuProps {
-  iconName: IconName;
-}
 
 const iconOptions = Object.keys(iconMap) as IconName[];
 
-const meta: Meta<Props> = {
+const meta: Meta<ActionMenuProps> = {
   title: 'Molecules/ActionMenu',
   component: ActionMenu,
   tags: ['autodocs'],
@@ -40,14 +35,7 @@ export const Default: Story = {
     showIcons: true,
     iconName: 'MoreHorizontal',
   },
-  render: ({ iconName, ...args }) => {
-    const Icon = iconMap[iconName];
-    return (
-      <ActionMenu {...args}>
-        <Icon size={16} />
-      </ActionMenu>
-    );
-  },
+  render: (args) => <ActionMenu {...args} />,
 };
 
 export const Disabled: Story = {
@@ -56,12 +44,5 @@ export const Disabled: Story = {
     disabled: true,
     iconName: 'MoreHorizontal',
   },
-  render: ({ iconName, ...args }) => {
-    const Icon = iconMap[iconName];
-    return (
-      <ActionMenu {...args}>
-        <Icon size={16} />
-      </ActionMenu>
-    );
-  },
+  render: (args) => <ActionMenu {...args} />,
 };

@@ -6,11 +6,24 @@ import { OrderItem } from './OrderItem';
 # OrderItem
 
 The `OrderItem` component displays a brief summary of an order.
+It can show a customizable icon on the left and an action menu on the right.
 
 <Canvas>
   <Story name="Example">
     <div className="max-w-sm">
-      <OrderItem orderId="#1001" date="12/07/2025" total="$250.00" status="Pendiente" showIcon />
+      <OrderItem
+        orderId="#1001"
+        date="12/07/2025"
+        total="$250.00"
+        status="Pendiente"
+        showIcon
+        iconName="Folder"
+        iconColor="primary"
+        actionOptions={[
+          { label: 'Ver detalles', iconName: 'Search' },
+          { label: 'Cancelar', iconName: 'Trash2' },
+        ]}
+      />
     </div>
   </Story>
 </Canvas>
