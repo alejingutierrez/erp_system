@@ -49,4 +49,10 @@ describe('TagInput', () => {
     fireEvent.keyDown(input, { key: 'Backspace' });
     expect(screen.queryByText('last')).not.toBeInTheDocument();
   });
+
+  it('has spacing between tag items', () => {
+    render(<TagInput tags={['a', 'b']} />);
+    const container = screen.getByRole('textbox').parentElement as HTMLElement;
+    expect(container).toHaveClass('gap-2');
+  });
 });
