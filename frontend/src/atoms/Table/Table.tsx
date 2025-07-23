@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 
 const tableVariants = cva(
-  'w-full caption-bottom text-sm text-left border-collapse text-foreground [&_th]:border-b [&_th]:text-left [&_th]:font-semibold [&_th]:px-3 [&_td]:px-3 [&_td]:py-2 [&_th]:py-2 [&_td]:border-b [&_tr:last-child_>_td]:border-0',
+  'w-full caption-bottom text-sm text-left border-collapse text-foreground bg-white [&_th]:border-b [&_th]:text-left [&_th]:font-semibold [&_th]:px-3 [&_td]:px-3 [&_td]:py-2 [&_th]:py-2 [&_td]:border-b [&_tr:last-child_>_td]:border-0',
   {
     variants: {
       variant: {
