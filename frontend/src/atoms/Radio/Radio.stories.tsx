@@ -13,6 +13,7 @@ const meta: Meta<typeof Radio> = {
     disabled: { control: 'boolean' },
     label: { control: 'text' },
     name: { control: 'text' },
+    allowDeselect: { control: 'boolean' },
     onChange: { action: 'changed', table: { category: 'Events' } },
   },
 };
@@ -41,6 +42,7 @@ export const Default: Story = {
     label: 'Option',
     size: 'md',
     intent: 'primary',
+    allowDeselect: true,
   },
 };
 

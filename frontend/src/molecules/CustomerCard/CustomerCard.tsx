@@ -96,6 +96,7 @@ export const CustomerCard = React.forwardRef<HTMLDivElement, CustomerCardProps>(
             options={actionOptions}
             onOpen={onAction}
             position="bottom-right"
+            aria-label="Acciones"
             {...actionMenuProps}
           >
             <Icon name={accionIconName ?? 'MoreHorizontal'} />
