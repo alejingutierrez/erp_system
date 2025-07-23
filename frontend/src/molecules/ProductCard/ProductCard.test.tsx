@@ -24,6 +24,7 @@ describe('ProductCard', () => {
   it('calls action handlers', () => {
     const onEdit = vi.fn();
     const onDelete = vi.fn();
+    const onAdd = vi.fn();
     render(
       <ProductCard
         productName="Camisa"
@@ -31,6 +32,7 @@ describe('ProductCard', () => {
         showActions
         onEdit={onEdit}
         onDelete={onDelete}
+        onAddToCart={onAdd}
       />,
     );
     const buttons = screen.getAllByRole('button');
@@ -39,5 +41,7 @@ describe('ProductCard', () => {
     expect(onEdit).toHaveBeenCalled();
     fireEvent.click(buttons[2]);
     expect(onDelete).toHaveBeenCalled();
+    fireEvent.click(buttons[3]);
+    expect(onAdd).toHaveBeenCalled();
   });
 });
