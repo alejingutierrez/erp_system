@@ -4,8 +4,11 @@ import { Accordion } from './Accordion';
 
 describe('Accordion', () => {
   it('renders title and children', () => {
-    render(<Accordion title="Title">Content</Accordion>);
+    const { container } = render(
+      <Accordion title="Title">Content</Accordion>,
+    );
     expect(screen.getByText('Title')).toBeInTheDocument();
+    expect(container.firstChild).toHaveClass('bg-white');
   });
 
   it('hides content when closed', () => {
