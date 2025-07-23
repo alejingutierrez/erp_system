@@ -24,10 +24,14 @@ describe('NotificationIcon', () => {
     expect(screen.getByText('99+')).toBeInTheDocument();
   });
 
-  it('badge text is black', () => {
-    render(<NotificationIcon count={3} color="success" />);
-    const badge = screen.getByText('3');
-    expect(badge).toHaveClass('!text-black');
+  it('badge text is black for all variants', () => {
+    const variants = ['neutral', 'success', 'warning', 'destructive', 'info'] as const;
+    variants.forEach((variant) => {
+      const { unmount } = render(<NotificationIcon count={3} color={variant} />);
+      const badge = screen.getByText('3');
+      expect(badge).toHaveClass('!text-black');
+      unmount();
+    });
   });
 
   it('positions badge outside icon for large counts', () => {

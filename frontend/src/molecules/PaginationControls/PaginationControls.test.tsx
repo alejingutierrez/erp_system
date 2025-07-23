@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
+import { useState } from 'react';
 import { PaginationControls } from './PaginationControls';
 
 describe('PaginationControls', () => {
@@ -44,5 +45,23 @@ describe('PaginationControls', () => {
     const btn = screen.getByRole('button', { name: '1' });
     expect(btn.className).toMatch(/w-8/);
     expect(btn.className).toMatch(/h-8/);
+  });
+
+  it('updates page when controlled', () => {
+    const Wrapper = () => {
+      const [page, setPage] = useState(1);
+      return (
+        <PaginationControls
+          currentPage={page}
+          totalPages={3}
+          onPageChange={setPage}
+        />
+      );
+    };
+
+    render(<Wrapper />);
+    const page2 = screen.getByRole('button', { name: '2' });
+    fireEvent.click(page2);
+    expect(page2.getAttribute('aria-current')).toBe('page');
   });
 });

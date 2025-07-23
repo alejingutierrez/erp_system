@@ -51,7 +51,7 @@ export const Many: Story = {
   },
 };
 
-export const Variants: Story = {
+export const ColorVariants: Story = {
   render: (args) => (
     <div className="flex space-x-2">
       <NotificationIcon {...args} color="neutral" count={5} />

@@ -81,9 +81,7 @@ export const CustomerCard = React.forwardRef<HTMLDivElement, CustomerCardProps>(
             className="flex items-center gap-2 font-semibold"
           >
             {nombre}
-            {nivel && (
-              <Badge variant={nivelColorMap[nivel]}>{nivel}</Badge>
-            )}
+            {nivel && <Badge variant={nivelColorMap[nivel]}>{nivel}</Badge>}
           </Heading>
           {infoSecundaria && (
             <Text as="p" size="sm" muted className="truncate">
@@ -91,18 +89,22 @@ export const CustomerCard = React.forwardRef<HTMLDivElement, CustomerCardProps>(
             </Text>
           )}
         </div>
-        {mostrarAccion && Array.isArray(actionOptions) && actionOptions.length > 0 && (
-          <ActionMenu
-            options={actionOptions}
-            onOpen={onAction}
-            position="bottom-right"
-            {...actionMenuProps}
-          >
-            <Icon name={accionIconName ?? 'MoreHorizontal'} />
-          </ActionMenu>
-        )}
+        {mostrarAccion &&
+          Array.isArray(actionOptions) &&
+          actionOptions.length > 0 && (
+            <ActionMenu
+              aria-label="Acciones"
+              options={actionOptions}
+              onOpen={onAction}
+              position="bottom-right"
+              {...actionMenuProps}
+            >
+              <Icon name={accionIconName ?? 'MoreHorizontal'} />
+            </ActionMenu>
+          )}
       </Card>
     );
   },
 );
+
 CustomerCard.displayName = 'CustomerCard';

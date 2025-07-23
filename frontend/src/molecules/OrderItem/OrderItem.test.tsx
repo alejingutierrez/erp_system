@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
 import { OrderItem } from './OrderItem';
 
@@ -29,7 +30,7 @@ describe('OrderItem', () => {
     expect(icon).toBeInTheDocument();
   });
 
-  it('handles select action', () => {
+  it('handles select action', async () => {
     const onSelect = vi.fn();
     render(
       <OrderItem
@@ -40,11 +41,11 @@ describe('OrderItem', () => {
         onSelect={onSelect}
       />,
     );
-    fireEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(onSelect).toHaveBeenCalledTimes(1);
   });
 
-  it('calls action menu handler', () => {
+  it('calls action menu handler', async () => {
     const onActionSelect = vi.fn();
     render(
       <OrderItem
@@ -59,8 +60,8 @@ describe('OrderItem', () => {
         onActionSelect={onActionSelect}
       />,
     );
-    fireEvent.click(screen.getByRole('button', { name: /acciones/i }));
-    fireEvent.click(screen.getByText('Eliminar'));
+    await userEvent.click(screen.getByRole('button', { name: /acciones/i }));
+    await userEvent.click(screen.getByText('Eliminar'));
     expect(onActionSelect).toHaveBeenCalledWith(
       { label: 'Eliminar', iconName: 'Trash2' },
       1,

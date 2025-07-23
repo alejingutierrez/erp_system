@@ -41,6 +41,16 @@ export const ImageUploader = React.forwardRef<HTMLInputElement, ImageUploaderPro
     },
     ref,
   ) => {
+    const inputRef = React.useRef<HTMLInputElement>(null);
+    const mergedRef = React.useCallback(
+      (node: HTMLInputElement) => {
+        if (typeof ref === 'function') ref(node);
+        else if (ref) (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
+        inputRef.current = node;
+      },
+      [ref],
+    );
+
     const [images, setImages] = React.useState<PreviewImage[]>(() =>
       imagenesIniciales.map((src) => ({ src })),
     );
@@ -74,17 +84,23 @@ export const ImageUploader = React.forwardRef<HTMLInputElement, ImageUploaderPro
       onRemoveImage?.(index);
     };
 
+    const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (e.target === e.currentTarget) {
+        inputRef.current?.click();
+      }
+    };
+
     return (
-      <div className={cn('space-y-2', className)}>
+      <div className={cn('space-y-2', className)} onClick={handleContainerClick}>
         <FileUpload
-          ref={ref}
+          ref={mergedRef}
           multiple={multiple}
           buttonText={labelBoton}
           onChange={handleChange}
           {...props}
         />
         {images.length > 0 && (
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2" onClick={handleContainerClick}>
             {images.map((img, idx) => (
               <div
                 key={idx}
@@ -98,7 +114,10 @@ export const ImageUploader = React.forwardRef<HTMLInputElement, ImageUploaderPro
                 <button
                   type="button"
                   aria-label="Eliminar"
-                  onClick={() => removeImage(idx)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeImage(idx);
+                  }}
                   className="absolute right-1 top-1 rounded-full bg-black/60 p-0.5 text-white hover:bg-black/80"
                 >
                   <Icon name="X" size="sm" />
