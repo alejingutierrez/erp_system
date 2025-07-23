@@ -44,4 +44,31 @@ describe('DropdownMenu', () => {
     fireEvent.click(document.body);
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
   });
+
+  it('calls onSelectedIdChange when item selected', () => {
+    const onChange = vi.fn();
+    render(
+      <DropdownMenu
+        triggerLabel="Menu"
+        items={[{ label: 'Edit', id: 'edit' }]}
+        onSelectedIdChange={onChange}
+      />,
+    );
+    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByText('Edit'));
+    expect(onChange).toHaveBeenCalledWith('edit');
+  });
+
+  it('highlights selected item', () => {
+    render(
+      <DropdownMenu
+        triggerLabel="Menu"
+        items={[{ label: 'Edit', id: 'edit' }, { label: 'Delete', id: 'del' }]}
+        selectedId="edit"
+      />,
+    );
+    fireEvent.click(screen.getByRole('button'));
+    const item = screen.getByText('Edit');
+    expect(item.parentElement).toHaveClass('bg-muted');
+  });
 });
