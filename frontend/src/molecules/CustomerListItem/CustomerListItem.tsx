@@ -8,6 +8,11 @@ import { Badge } from '@/atoms/Badge';
 import { Tag } from '@/atoms/Tag';
 import { Button } from '@/atoms/Button/Button';
 import { Icon } from '@/atoms/Icon';
+import { Card } from '@/atoms/Card';
+import {
+  ActionMenu,
+  type ActionMenuOption,
+} from '@/molecules/ActionMenu';
 
 const itemVariants = cva(
   'flex items-center w-full rounded-md px-4 py-2 gap-3 text-sm',
@@ -40,6 +45,10 @@ export interface CustomerListItemProps
   active?: boolean;
   /** Show action buttons */
   showActions?: boolean;
+  /** Options for dropdown menu */
+  actionMenuOptions?: ActionMenuOption[];
+  /** Called when a menu option is selected */
+  onMenuOptionSelect?: (option: ActionMenuOption, index: number) => void;
   /** Click handler for the whole row */
   onClick?: () => void;
   /** Edit action */
@@ -58,6 +67,8 @@ export const CustomerListItem = React.forwardRef<HTMLDivElement, CustomerListIte
       category,
       active = true,
       showActions = false,
+      actionMenuOptions,
+      onMenuOptionSelect,
       className,
       clickable,
       onClick,
@@ -68,12 +79,13 @@ export const CustomerListItem = React.forwardRef<HTMLDivElement, CustomerListIte
     ref,
   ) => {
     return (
-      <div
+      <Card
         ref={ref}
         role={onClick ? 'button' : undefined}
         tabIndex={onClick ? 0 : undefined}
         onClick={onClick}
-        className={cn(itemVariants({ clickable: clickable ?? !!onClick }), className)}
+        clickable={clickable ?? !!onClick}
+        className={cn(itemVariants({ clickable: false }), className)}
         {...props}
       >
         <Avatar name={customerName} size="sm" className={!active ? 'opacity-50' : undefined} />
@@ -106,35 +118,47 @@ export const CustomerListItem = React.forwardRef<HTMLDivElement, CustomerListIte
         )}
         {showActions && (
           <div className="ml-2 flex items-center gap-1">
-            {onContact && (
-              <Button
-                variant="icon"
-                intent="secondary"
-                aria-label="Contactar"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onContact();
-                }}
+            {actionMenuOptions?.length ? (
+              <ActionMenu
+                aria-label="Más acciones"
+                options={actionMenuOptions}
+                onOptionSelect={onMenuOptionSelect}
               >
-                <Icon name="Mail" />
-              </Button>
-            )}
-            {onEdit && (
-              <Button
-                variant="icon"
-                intent="secondary"
-                aria-label="Editar cliente"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onEdit();
-                }}
-              >
-                <Icon name="Edit" />
-              </Button>
+                <Icon name="MoreHorizontal" />
+              </ActionMenu>
+            ) : (
+              <>
+                {onContact && (
+                  <Button
+                    variant="icon"
+                    intent="secondary"
+                    aria-label="Contactar"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onContact();
+                    }}
+                  >
+                    <Icon name="Mail" />
+                  </Button>
+                )}
+                {onEdit && (
+                  <Button
+                    variant="icon"
+                    intent="secondary"
+                    aria-label="Editar cliente"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onEdit();
+                    }}
+                  >
+                    <Icon name="Edit" />
+                  </Button>
+                )}
+              </>
             )}
           </div>
         )}
-      </div>
+      </Card>
     );
   },
 );

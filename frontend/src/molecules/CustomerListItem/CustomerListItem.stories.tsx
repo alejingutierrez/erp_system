@@ -13,6 +13,8 @@ const meta: Meta<CustomerListItemProps> = {
     category: { control: 'text' },
     active: { control: 'boolean' },
     showActions: { control: 'boolean' },
+    actionMenuOptions: { control: 'object' },
+    onMenuOptionSelect: { action: 'option select' },
     onClick: { action: 'click' },
     onEdit: { action: 'edit' },
     onContact: { action: 'contact' },
@@ -31,6 +33,8 @@ export const Default: Story = {
     category: 'VIP',
     active: true,
     showActions: true,
+    onEdit: () => {},
+    onContact: () => {},
   },
 };
 
@@ -39,5 +43,17 @@ export const Inactive: Story = {
     customerName: 'Ana Gómez',
     email: 'ana@example.com',
     active: false,
+  },
+};
+
+export const WithMenu: Story = {
+  args: {
+    customerName: 'Carlos',
+    email: 'carlos@example.com',
+    showActions: true,
+    actionMenuOptions: [
+      { label: 'Editar', iconName: 'Edit' },
+      { label: 'Contactar', iconName: 'Mail' },
+    ],
   },
 };
