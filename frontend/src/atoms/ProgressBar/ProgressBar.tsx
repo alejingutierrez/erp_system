@@ -32,20 +32,23 @@ const indicatorVariants = cva('h-full transition-[width] duration-300', {
   },
 });
 
-const labelVariants = cva('ml-2 px-2 py-0.5 text-xs font-medium rounded-full', {
-  variants: {
-    color: {
-      primary: 'bg-primary text-primary-foreground',
-      secondary: 'bg-secondary text-secondary-foreground',
-      tertiary: 'bg-tertiary text-tertiary-foreground',
-      quaternary: 'bg-quaternary text-quaternary-foreground',
-      success: 'bg-success text-success-foreground',
+const labelVariants = cva(
+  'ml-2 px-2 py-0.5 text-xs font-medium rounded-full text-white',
+  {
+    variants: {
+      color: {
+        primary: 'bg-primary',
+        secondary: 'bg-secondary',
+        tertiary: 'bg-tertiary',
+        quaternary: 'bg-quaternary',
+        success: 'bg-success',
+      },
+    },
+    defaultVariants: {
+      color: 'primary',
     },
   },
-  defaultVariants: {
-    color: 'primary',
-  },
-});
+);
 
 export interface ProgressBarProps
   extends React.HTMLAttributes<HTMLDivElement>,

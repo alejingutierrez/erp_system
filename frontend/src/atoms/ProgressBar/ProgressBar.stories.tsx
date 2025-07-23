@@ -42,4 +42,11 @@ export const Colors: Story = {
     </div>
   ),
   args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'The value label text is always white regardless of the chosen color.',
+      },
+    },
+  },
 };
