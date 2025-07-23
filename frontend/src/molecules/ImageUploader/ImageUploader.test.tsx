@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi, beforeAll } from 'vitest';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { ImageUploader } from './ImageUploader';
 
 const createFile = (name: string) => new File(['hello'], name, { type: 'image/png' });

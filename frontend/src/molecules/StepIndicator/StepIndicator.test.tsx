@@ -34,4 +34,20 @@ describe('StepIndicator', () => {
     fireEvent.click(screen.getAllByRole('button')[1]);
     expect(handle).not.toHaveBeenCalled();
   });
+
+  it('caps totalSteps at 15', () => {
+    render(<StepIndicator totalSteps={20} currentStep={1} />);
+    expect(screen.getAllByRole('button')).toHaveLength(15);
+  });
+
+  it('clamps currentStep to totalSteps', () => {
+    render(<StepIndicator totalSteps={3} currentStep={10} />);
+    const buttons = screen.getAllByRole('button');
+    expect(buttons[buttons.length - 1].textContent).toBe('3');
+  });
+
+  it('handles null labels gracefully', () => {
+    render(<StepIndicator totalSteps={2} currentStep={1} labels={null as any} />);
+    expect(screen.getAllByRole('button')).toHaveLength(2);
+  });
 });
