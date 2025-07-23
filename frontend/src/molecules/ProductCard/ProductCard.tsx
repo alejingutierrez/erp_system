@@ -22,6 +22,10 @@ export interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   onDelete?: () => void;
 }
 
+const defaultOnAddToCart = () => console.log('add to cart');
+const defaultOnEdit = () => console.log('edit product');
+const defaultOnDelete = () => console.log('delete product');
+
 // Fallback image used when no product image is provided
 const placeholderImg =
   'https://media.weekday.com/assets/003/cc/b0/ccb0a1481dbae44c573caf38fd53db8ca3e977ad_xl-1.jpg';
@@ -36,10 +40,10 @@ export const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
       onSale = false,
       clickable = true,
       statusBadge = null,
-      showActions = false,
-      onAddToCart,
-      onEdit,
-      onDelete,
+  showActions = false,
+  onAddToCart,
+  onEdit,
+  onDelete,
       onClick,
       className,
       ...props
@@ -88,45 +92,39 @@ export const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
           )}
           {showActions && (
             <div className="absolute bottom-2 right-2 flex gap-1">
-              {onEdit && (
-                <Button
-                  variant="icon"
-                  size="sm"
-                  intent="secondary"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onEdit();
-                  }}
-                >
-                  <Icon name="Edit" />
-                </Button>
-              )}
-              {onDelete && (
-                <Button
-                  variant="icon"
-                  size="sm"
-                  intent="tertiary"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onDelete();
-                  }}
-                >
-                  <Icon name="Trash2" />
-                </Button>
-              )}
-              {onAddToCart && (
-                <Button
-                  variant="icon"
-                  size="sm"
-                  intent="primary"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onAddToCart();
-                  }}
-                >
-                  <Icon name="Plus" />
-                </Button>
-              )}
+              <Button
+                variant="icon"
+                size="sm"
+                intent="secondary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  (onEdit ?? defaultOnEdit)();
+                }}
+              >
+                <Icon name="Edit" />
+              </Button>
+              <Button
+                variant="icon"
+                size="sm"
+                intent="tertiary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  (onDelete ?? defaultOnDelete)();
+                }}
+              >
+                <Icon name="Trash2" />
+              </Button>
+              <Button
+                variant="icon"
+                size="sm"
+                intent="primary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  (onAddToCart ?? defaultOnAddToCart)();
+                }}
+              >
+                <Icon name="Plus" />
+              </Button>
             </div>
           )}
         </div>

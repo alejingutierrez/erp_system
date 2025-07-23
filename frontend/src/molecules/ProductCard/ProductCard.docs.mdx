@@ -8,9 +8,17 @@ import { ProductCard } from './ProductCard';
 La `ProductCard` muestra de forma resumida la información principal de un producto de inventario. Utiliza los átomos existentes para construir una tarjeta con imagen, nombre, precio y estados.
 La imagen se muestra con una proporción fija 3:4 para mantener consistencia en los listados.
 
+Cuando `showActions` es verdadero se muestran tres acciones predeterminadas: editar, eliminar y agregar al carrito. Estas acciones ejecutan una función de registro en consola si no se proporcionan manejadores personalizados.
+
 <Canvas>
   <Story name="Ejemplo">
     <ProductCard productName="Camisa de Lino" price="$49.99" />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Con acciones">
+    <ProductCard productName="Camisa de Lino" price="$49.99" showActions />
   </Story>
 </Canvas>
 
