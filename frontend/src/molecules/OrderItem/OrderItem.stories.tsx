@@ -33,6 +33,11 @@ export const Default: Story = {
     showIcon: true,
     iconName: 'File',
   },
+  render: (args) => (
+    <div className="max-w-sm">
+      <OrderItem {...args} />
+    </div>
+  ),
 };
 
 export const WithoutIcon: Story = {
@@ -43,6 +48,11 @@ export const WithoutIcon: Story = {
     status: 'Entregado',
     showIcon: false,
   },
+  render: (args) => (
+    <div className="max-w-sm">
+      <OrderItem {...args} />
+    </div>
+  ),
 };
 
 export const WithActions: Story = {
@@ -57,4 +67,9 @@ export const WithActions: Story = {
       { label: 'Cancelar', iconName: 'Trash2' },
     ],
   },
+  render: (args) => (
+    <div className="max-w-sm">
+      <OrderItem {...args} />
+    </div>
+  ),
 };
