@@ -13,6 +13,7 @@ const config = {
   core: { disableTelemetry: true },
   async viteFinal(config) {
     return mergeConfig(config, {
+      root: path.resolve(__dirname, '..'),
       resolve: {
         alias: {
           '@': path.resolve(__dirname, '../src'),
