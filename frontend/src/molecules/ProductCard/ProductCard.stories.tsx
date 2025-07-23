@@ -17,9 +17,6 @@ const meta: Meta<ProductCardProps> = {
       options: [null, 'Nuevo', 'Oferta', 'Agotado'],
     },
     showActions: { control: 'boolean' },
-    onAddToCart: { action: 'addToCart', table: { category: 'Events' } },
-    onEdit: { action: 'editClicked', table: { category: 'Events' } },
-    onDelete: { action: 'deleteClicked', table: { category: 'Events' } },
     onClick: { action: 'clicked', table: { category: 'Events' } },
   },
 };

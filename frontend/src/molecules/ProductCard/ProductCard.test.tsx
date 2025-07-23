@@ -44,4 +44,16 @@ describe('ProductCard', () => {
     fireEvent.click(buttons[3]);
     expect(onAdd).toHaveBeenCalled();
   });
+
+  it('renders default actions when handlers are not provided', () => {
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    render(<ProductCard productName="Camisa" price="$10" showActions />);
+    const buttons = screen.getAllByRole('button');
+    // first button is card itself
+    fireEvent.click(buttons[1]);
+    fireEvent.click(buttons[2]);
+    fireEvent.click(buttons[3]);
+    expect(logSpy).toHaveBeenCalledTimes(3);
+    logSpy.mockRestore();
+  });
 });

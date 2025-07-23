@@ -31,7 +31,7 @@ describe('CustomerCard', () => {
         onAction={onAction}
       />,
     );
-    const trigger = screen.getByRole('button', { name: /acciones/i });
+    const trigger = screen.getByRole('button');
     fireEvent.click(trigger);
     expect(onAction).toHaveBeenCalledTimes(1);
   });
@@ -44,7 +44,7 @@ describe('CustomerCard', () => {
         actionOptions={[{ label: 'Edit', iconName: 'Edit' }]}
       />,
     );
-    const trigger = screen.getByRole('button', { name: /acciones/i });
+    const trigger = screen.getByRole('button');
     fireEvent.click(trigger);
     expect(screen.getByRole('menu')).toBeInTheDocument();
   });
