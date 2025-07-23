@@ -32,4 +32,17 @@ describe('CustomerCard', () => {
     fireEvent.click(btn);
     expect(onAction).toHaveBeenCalledTimes(1);
   });
+
+  it('renders action menu when options provided', () => {
+    render(
+      <CustomerCard
+        nombre="Ana"
+        mostrarAccion
+        actionOptions={[{ label: 'Edit', iconName: 'Edit' }]}
+      />,
+    );
+    const trigger = screen.getByRole('button');
+    fireEvent.click(trigger);
+    expect(screen.getByRole('menu')).toBeInTheDocument();
+  });
 });

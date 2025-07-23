@@ -6,11 +6,22 @@ import { ProductCard } from './ProductCard';
 # ProductCard
 
 La `ProductCard` muestra de forma resumida la información principal de un producto de inventario. Utiliza los átomos existentes para construir una tarjeta con imagen, nombre, precio y estados.
+La imagen se muestra con una proporción fija 3:4 para mantener consistencia en los listados.
 
 <Canvas>
   <Story name="Ejemplo">
     <div className="w-64">
-      <ProductCard productName="Camisa de Lino" price="$49.99" imageSrc="https://via.placeholder.com/300x200" />
+      <ProductCard productName="Camisa de Lino" price="$49.99" />
+    </div>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Grid">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-3xl">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <ProductCard key={i} productName={`Producto ${i + 1}`} price="$19.99" />
+      ))}
     </div>
   </Story>
 </Canvas>

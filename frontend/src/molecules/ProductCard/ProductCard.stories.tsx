@@ -32,7 +32,7 @@ export const Default: Story = {
   args: {
     productName: 'Camisa de Lino',
     price: '$49.99',
-    imageSrc: 'https://via.placeholder.com/300x200',
+    imageSrc: undefined,
     outOfStock: false,
     onSale: false,
     clickable: true,
@@ -65,4 +65,22 @@ export const WithActions: Story = {
     price: '$49.99',
     showActions: true,
   },
+};
+
+interface GridStoryProps extends ProductCardProps {
+  numCards: number;
+}
+
+export const Grid: StoryObj<GridStoryProps> = {
+  args: { numCards: 4, productName: 'Producto', price: '$19.99' },
+  argTypes: {
+    numCards: { control: { type: 'number', min: 1, max: 8, step: 1 } },
+  },
+  render: ({ numCards, ...args }) => (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-3xl">
+      {Array.from({ length: numCards }).map((_, i) => (
+        <ProductCard key={i} {...args} productName={`${args.productName} ${i + 1}`} />
+      ))}
+    </div>
+  ),
 };

@@ -21,6 +21,8 @@ describe('OrderItem', () => {
         total="$20"
         status="Entregado"
         showIcon
+        iconName="Folder"
+        iconColor="primary"
       />,
     );
     const icon = screen.getByTestId('order-icon');
@@ -42,19 +44,26 @@ describe('OrderItem', () => {
     expect(onSelect).toHaveBeenCalledTimes(1);
   });
 
-  it('calls action button handler', () => {
-    const onActionClick = vi.fn();
+  it('calls action menu handler', () => {
+    const onActionSelect = vi.fn();
     render(
       <OrderItem
         orderId="#4"
         date="01/01/2024"
         total="$40"
         status="Cancelado"
-        onActionClick={onActionClick}
+        actionOptions={[
+          { label: 'Detalles', iconName: 'Search' },
+          { label: 'Eliminar', iconName: 'Trash2' },
+        ]}
+        onActionSelect={onActionSelect}
       />,
     );
-    const button = screen.getByRole('button', { name: /acciones/i });
-    fireEvent.click(button);
-    expect(onActionClick).toHaveBeenCalledTimes(1);
+    fireEvent.click(screen.getByRole('button', { name: /acciones/i }));
+    fireEvent.click(screen.getByText('Eliminar'));
+    expect(onActionSelect).toHaveBeenCalledWith(
+      { label: 'Eliminar', iconName: 'Trash2' },
+      1,
+    );
   });
 });

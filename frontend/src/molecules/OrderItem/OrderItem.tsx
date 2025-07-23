@@ -4,9 +4,9 @@ import { cn } from '@/lib/utils';
 import { Card } from '@/atoms/Card';
 import { Text } from '@/atoms/Text';
 import { Badge, type BadgeProps } from '@/atoms/Badge';
-import { Icon } from '@/atoms/Icon';
-import { Button } from '@/atoms/Button/Button';
+import { Icon, type IconName, type IconProps } from '@/atoms/Icon';
 import { MoreHorizontal } from 'lucide-react';
+import { ActionMenu, type ActionMenuOption } from '@/molecules/ActionMenu';
 
 export type OrderStatus = 'Entregado' | 'Pendiente' | 'Cancelado' | 'En ruta';
 
@@ -36,10 +36,16 @@ export interface OrderItemProps extends React.HTMLAttributes<HTMLDivElement> {
   status: OrderStatus;
   /** Show the leading icon */
   showIcon?: boolean;
+  /** Name of the icon to display */
+  iconName?: IconName;
+  /** Color of the icon */
+  iconColor?: IconProps['color'];
   /** Fired when the item is clicked */
   onSelect?: () => void;
-  /** Fired when the action button is clicked */
-  onActionClick?: () => void;
+  /** Options for the action menu */
+  actionOptions?: ActionMenuOption[];
+  /** Fired when an action is selected */
+  onActionSelect?: (option: ActionMenuOption, index: number) => void;
 }
 
 export const OrderItem = React.forwardRef<HTMLDivElement, OrderItemProps>(
@@ -50,8 +56,11 @@ export const OrderItem = React.forwardRef<HTMLDivElement, OrderItemProps>(
       total,
       status,
       showIcon = false,
+      iconName = 'File',
+      iconColor = 'secondary',
       onSelect,
-      onActionClick,
+      actionOptions,
+      onActionSelect,
       className,
       ...props
     },
@@ -68,10 +77,6 @@ export const OrderItem = React.forwardRef<HTMLDivElement, OrderItemProps>(
       }
     };
 
-    const handleAction = (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.stopPropagation();
-      onActionClick?.();
-    };
 
     return (
       <Card
@@ -86,11 +91,11 @@ export const OrderItem = React.forwardRef<HTMLDivElement, OrderItemProps>(
       >
         {showIcon && (
           <Icon
-            name="File"
+            name={iconName}
             size="lg"
+            color={iconColor}
             aria-hidden="true"
             data-testid="order-icon"
-            className="text-secondary"
           />
         )}
         <div className="flex flex-1 flex-col gap-1 sm:flex-row sm:items-center">
@@ -107,17 +112,16 @@ export const OrderItem = React.forwardRef<HTMLDivElement, OrderItemProps>(
         <Badge variant={badgeVariant} className="ml-2 whitespace-nowrap">
           {status}
         </Badge>
-        {onActionClick && (
-          <Button
-            variant="icon"
-            intent="secondary"
-            size="sm"
+        {actionOptions && actionOptions.length > 0 && (
+          <ActionMenu
+            options={actionOptions}
+            onOptionSelect={onActionSelect}
+            position="bottom-right"
             aria-label="Acciones"
-            onClick={handleAction}
             className="ml-2"
           >
             <MoreHorizontal size={16} />
-          </Button>
+          </ActionMenu>
         )}
       </Card>
     );

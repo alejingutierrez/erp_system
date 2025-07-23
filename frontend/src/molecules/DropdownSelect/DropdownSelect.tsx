@@ -48,6 +48,14 @@ export const DropdownSelect = React.forwardRef<HTMLDivElement, DropdownSelectPro
     React.useImperativeHandle(ref, () => containerRef.current as HTMLDivElement);
     const [open, setOpen] = React.useState(false);
     const [search, setSearch] = React.useState('');
+    const isControlled = selected !== undefined;
+    const [internalSelected, setInternalSelected] = React.useState<
+      string | string[] | undefined
+    >(selected);
+
+    React.useEffect(() => {
+      if (isControlled) setInternalSelected(selected);
+    }, [isControlled, selected]);
 
     const toggleOpen = () => {
       setOpen((prev) => {
@@ -79,24 +87,32 @@ export const DropdownSelect = React.forwardRef<HTMLDivElement, DropdownSelectPro
       onSearch?.(e.target.value);
     };
 
+    const current = isControlled ? selected : internalSelected;
+
     const isSelected = (opt: string) =>
       multiple
-        ? Array.isArray(selected) && selected.includes(opt)
-        : selected === opt;
+        ? Array.isArray(current) && current.includes(opt)
+        : current === opt;
 
     const handleSelect = (opt: string) => {
       if (multiple) {
-        const arr = Array.isArray(selected) ? [...selected] : [];
+        const arr = Array.isArray(current) ? [...current] : [];
         const exists = arr.includes(opt);
         const newVal = exists ? arr.filter((o) => o !== opt) : [...arr, opt];
+        if (!isControlled) setInternalSelected(newVal);
         onChange?.(newVal);
       } else {
+        if (!isControlled) setInternalSelected(opt);
         onChange?.(opt);
         close();
       }
     };
 
-    const display = multiple ? (Array.isArray(selected) ? selected.join(', ') : '') : selected ?? '';
+    const display = multiple
+      ? Array.isArray(current)
+        ? current.join(', ')
+        : ''
+      : (current as string) ?? '';
 
     const filtered = options.filter((o) => o.toLowerCase().includes(search.toLowerCase()));
 

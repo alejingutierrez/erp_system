@@ -5,7 +5,12 @@ import { Heading } from '@/atoms/Heading';
 import { Text } from '@/atoms/Text';
 import { Badge } from '@/atoms/Badge';
 import { Button } from '@/atoms/Button/Button';
-import { Icon } from '@/atoms/Icon';
+import { Icon, type IconName } from '@/atoms/Icon';
+import {
+  ActionMenu,
+  type ActionMenuOption,
+  type ActionMenuProps,
+} from '@/molecules/ActionMenu';
 import { cn } from '@/lib/utils';
 
 type Nivel = 'VIP' | 'Frecuente' | 'Nuevo';
@@ -27,6 +32,14 @@ export interface CustomerCardProps extends React.HTMLAttributes<HTMLDivElement> 
   nivel?: Nivel;
   /** Show action icon */
   mostrarAccion?: boolean;
+  /** Intent/color for the action button */
+  accionIntent?: React.ComponentProps<typeof Button>['intent'];
+  /** Icon displayed inside the action button */
+  accionIconName?: IconName;
+  /** Options for an optional action menu */
+  actionOptions?: ActionMenuOption[];
+  /** Additional props for the action menu */
+  actionMenuProps?: Omit<ActionMenuProps, 'options' | 'children'>;
   /** Click handler for the card */
   onSelect?: () => void;
   /** Click handler for the action icon */
@@ -41,6 +54,10 @@ export const CustomerCard = React.forwardRef<HTMLDivElement, CustomerCardProps>(
       infoSecundaria,
       nivel,
       mostrarAccion = false,
+      accionIntent = 'primary',
+      accionIconName,
+      actionOptions,
+      actionMenuProps,
       onSelect,
       onAction,
       className,
@@ -84,15 +101,26 @@ export const CustomerCard = React.forwardRef<HTMLDivElement, CustomerCardProps>(
           )}
         </div>
         {mostrarAccion && (
-          <Button
-            variant="icon"
-            size="sm"
-            intent="primary"
-            aria-label="Ver detalles"
-            onClick={handleAction}
-          >
-            <Icon name="ChevronRight" />
-          </Button>
+          actionOptions ? (
+            <ActionMenu
+              options={actionOptions}
+              onOpen={onAction}
+              position="bottom-right"
+              {...actionMenuProps}
+            >
+              <Icon name={accionIconName ?? 'MoreHorizontal'} />
+            </ActionMenu>
+          ) : (
+            <Button
+              variant="icon"
+              size="sm"
+              intent={accionIntent}
+              aria-label="Acciones"
+              onClick={handleAction}
+            >
+              <Icon name={accionIconName ?? 'ChevronRight'} />
+            </Button>
+          )
         )}
       </Card>
     );

@@ -20,15 +20,18 @@ export interface PaginationControlsProps extends React.HTMLAttributes<HTMLDivEle
 
 type PageItem = number | 'dots';
 
+const MAX_VISIBLE_PAGES = 5;
+
 function getPageRange(total: number, current: number, siblings: number): PageItem[] {
   const range: PageItem[] = [];
-  const totalNumbers = siblings * 2 + 3; // current, siblings on both sides, first and last
-  const totalBlocks = totalNumbers + 2; // with two dots
 
-  if (total <= totalBlocks) {
+  if (total <= MAX_VISIBLE_PAGES) {
     for (let i = 1; i <= total; i++) range.push(i);
     return range;
   }
+
+  const totalNumbers = siblings * 2 + 3; // current, siblings on both sides, first and last
+  const totalBlocks = totalNumbers + 2; // with two dots
 
   const leftSiblingIndex = Math.max(current - siblings, 2);
   const rightSiblingIndex = Math.min(current + siblings, total - 1);
@@ -73,6 +76,7 @@ export const PaginationControls = React.forwardRef<HTMLDivElement, PaginationCon
     );
 
     const buttonVariant = 'ghost';
+    const baseButtonClass = 'w-8 h-8 p-0 !min-w-0 rounded-md';
 
     return (
       <div ref={ref} className={cn('flex items-center justify-center gap-2', className)} {...props}>
@@ -80,6 +84,7 @@ export const PaginationControls = React.forwardRef<HTMLDivElement, PaginationCon
           <Button
             variant={buttonVariant}
             size="sm"
+            className={baseButtonClass + ' border'}
             disabled={disabled || currentPage === 1}
             onClick={() => handleChange(1)}
             aria-label="First page"
@@ -91,6 +96,7 @@ export const PaginationControls = React.forwardRef<HTMLDivElement, PaginationCon
         <Button
           variant={buttonVariant}
           size="sm"
+          className={baseButtonClass + ' border'}
           disabled={disabled || currentPage === 1}
           onClick={() => handleChange(currentPage - 1)}
           aria-label="Previous page"
@@ -108,6 +114,7 @@ export const PaginationControls = React.forwardRef<HTMLDivElement, PaginationCon
               variant={page === currentPage ? 'default' : buttonVariant}
               intent="primary"
               size="sm"
+              className={cn(baseButtonClass, page === currentPage ? '' : 'border border-border')}
               disabled={disabled}
               onClick={() => handleChange(page)}
               aria-current={page === currentPage ? 'page' : undefined}
@@ -119,6 +126,7 @@ export const PaginationControls = React.forwardRef<HTMLDivElement, PaginationCon
         <Button
           variant={buttonVariant}
           size="sm"
+          className={baseButtonClass + ' border'}
           disabled={disabled || currentPage === totalPages}
           onClick={() => handleChange(currentPage + 1)}
           aria-label="Next page"
@@ -129,6 +137,7 @@ export const PaginationControls = React.forwardRef<HTMLDivElement, PaginationCon
           <Button
             variant={buttonVariant}
             size="sm"
+            className={baseButtonClass + ' border'}
             disabled={disabled || currentPage === totalPages}
             onClick={() => handleChange(totalPages)}
             aria-label="Last page"

@@ -3,7 +3,7 @@ import { DropdownSelect, DropdownSelectProps } from './DropdownSelect';
 
 interface DropdownSelectStoryProps extends DropdownSelectProps {
   options: string[];
-  selected?: string;
+  selected?: string | string[];
 }
 
 const meta: Meta<DropdownSelectStoryProps> = {
@@ -27,7 +27,24 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const Template = (args: DropdownSelectStoryProps) => {
+  const [value, setValue] = React.useState<string | string[] | undefined>(
+    args.selected,
+  );
+  return (
+    <DropdownSelect
+      {...args}
+      selected={value}
+      onChange={(val) => {
+        setValue(val);
+        args.onChange?.(val);
+      }}
+    />
+  );
+};
+
 export const Default: Story = {
+  render: Template,
   args: {
     options: ['S', 'M', 'L', 'XL'],
     placeholder: 'Seleccione una talla',
@@ -35,6 +52,7 @@ export const Default: Story = {
 };
 
 export const WithSearch: Story = {
+  render: Template,
   args: {
     options: ['Camisas', 'Pantalones', 'Zapatos', 'Accesorios'],
     searchable: true,
@@ -43,6 +61,7 @@ export const WithSearch: Story = {
 };
 
 export const Multiple: Story = {
+  render: Template,
   args: {
     options: ['Rojo', 'Azul', 'Verde', 'Negro'],
     multiple: true,

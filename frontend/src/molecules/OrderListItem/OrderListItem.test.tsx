@@ -19,8 +19,11 @@ describe('OrderListItem', () => {
   });
 
   it('shows action button when enabled', () => {
-    render(<OrderListItem {...baseProps} showActions />);
+    const { container } = render(<OrderListItem {...baseProps} showActions />);
     expect(screen.getByLabelText('Acciones')).toBeInTheDocument();
+    expect(container.firstChild).toHaveClass(
+      'grid-cols-[auto_auto_1fr_auto_auto_auto]',
+    );
   });
 
   it('calls onClick handler', () => {

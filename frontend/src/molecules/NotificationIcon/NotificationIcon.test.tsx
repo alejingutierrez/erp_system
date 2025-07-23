@@ -24,6 +24,18 @@ describe('NotificationIcon', () => {
     expect(screen.getByText('99+')).toBeInTheDocument();
   });
 
+  it('badge text is black', () => {
+    render(<NotificationIcon count={3} color="success" />);
+    const badge = screen.getByText('3');
+    expect(badge).toHaveClass('text-black');
+  });
+
+  it('positions badge outside icon for large counts', () => {
+    render(<NotificationIcon count={120} />);
+    const badge = screen.getByText('99+');
+    expect(badge.className).toContain('translate-x-1/2');
+  });
+
   it('calls onClick handler', () => {
     const handleClick = vi.fn();
     render(<NotificationIcon count={2} onClick={handleClick} />);

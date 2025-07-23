@@ -28,6 +28,13 @@ describe('DropdownSelect', () => {
     expect(handleChange).toHaveBeenCalledWith('B');
   });
 
+  it('updates display when uncontrolled', () => {
+    render(<DropdownSelect options={options} />);
+    fireEvent.click(screen.getByRole('textbox'));
+    fireEvent.click(screen.getByText('C'));
+    expect(screen.getByDisplayValue('C')).toBeInTheDocument();
+  });
+
   it('shows search input when searchable', () => {
     render(<DropdownSelect options={options} searchable />);
     fireEvent.click(screen.getByRole('textbox'));
