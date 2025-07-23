@@ -23,6 +23,10 @@ The `OrderListItem` component represents a single order in a list. It displays t
       total="$100.00"
       status="Enviado"
       showActions
+      actionOptions={[
+        { label: 'Ver detalles', iconName: 'Search' },
+        { label: 'Cancelar', iconName: 'Trash2' },
+      ]}
     />
   </Story>
 </Canvas>
