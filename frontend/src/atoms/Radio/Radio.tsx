@@ -37,6 +37,12 @@ export interface RadioProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'>,
     VariantProps<typeof radioVariants> {
   label?: string;
+  /**
+   * Allows toggling the radio off when it is clicked while already selected.
+   * Useful when the radio is used on its own and deselection is desired.
+   * Defaults to `false` to preserve native radio behaviour.
+   */
+  allowDeselect?: boolean;
 }
 
 const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
@@ -51,11 +57,47 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
       checked,
       defaultChecked,
       onChange,
+      allowDeselect = false,
       ...props
     },
     ref,
   ) => {
     const inputId = id ?? React.useId();
+
+    const isControlled = checked !== undefined;
+    const useStateInternally = allowDeselect && !isControlled;
+    const [internalChecked, setInternalChecked] = React.useState(
+      defaultChecked ?? false,
+    );
+
+    const currentChecked = isControlled
+      ? checked
+      : useStateInternally
+      ? internalChecked
+      : undefined;
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (useStateInternally) {
+        setInternalChecked(e.target.checked);
+      }
+
+      onChange?.(e);
+    };
+
+    const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
+      if (allowDeselect && currentChecked) {
+        e.preventDefault();
+
+        if (useStateInternally) {
+          setInternalChecked(false);
+        }
+
+        onChange?.({
+          ...e,
+          target: { ...e.currentTarget, checked: false },
+        } as unknown as React.ChangeEvent<HTMLInputElement>);
+      }
+    };
 
     return (
       <label
@@ -69,9 +111,10 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
             ref={ref}
             id={inputId}
             type="radio"
-            checked={checked}
-            defaultChecked={defaultChecked}
-            onChange={onChange}
+            checked={isControlled || useStateInternally ? currentChecked : undefined}
+            defaultChecked={!isControlled && !useStateInternally ? defaultChecked : undefined}
+            onChange={handleChange}
+            onClick={handleClick}
             className={cn(
               radioVariants({ size, intent }),
               'peer',

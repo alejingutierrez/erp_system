@@ -1,0 +1,29 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import React from 'react';
+import { Radio } from './Radio';
+
+<Meta title="Atoms/Radio" of={Radio} />
+
+# Radio
+
+El componente `Radio` permite seleccionar una sola opción de un conjunto.
+Cuando se usa de forma individual se puede activar la opción de deseleccionar
+estableciendo `allowDeselect` en `true`.
+
+<Canvas>
+  <Story name="Ejemplo">
+    {() => {
+      const [checked, setChecked] = React.useState(false);
+      return (
+        <Radio
+          allowDeselect
+          checked={checked}
+          onChange={(e) => setChecked(e.target.checked)}
+          label="Opción"
+        />
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={Radio} />

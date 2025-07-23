@@ -81,9 +81,7 @@ export const CustomerCard = React.forwardRef<HTMLDivElement, CustomerCardProps>(
             className="flex items-center gap-2 font-semibold"
           >
             {nombre}
-            {nivel && (
-              <Badge variant={nivelColorMap[nivel]}>{nivel}</Badge>
-            )}
+            {nivel && <Badge variant={nivelColorMap[nivel]}>{nivel}</Badge>}
           </Heading>
           {infoSecundaria && (
             <Text as="p" size="sm" muted className="truncate">
@@ -108,4 +106,5 @@ export const CustomerCard = React.forwardRef<HTMLDivElement, CustomerCardProps>(
     );
   },
 );
+
 CustomerCard.displayName = 'CustomerCard';
