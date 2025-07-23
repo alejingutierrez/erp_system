@@ -19,7 +19,7 @@ describe('CustomerListItem', () => {
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  it('shows edit button when actions enabled', () => {
+  it('triggers onEdit from the action menu', () => {
     const handleEdit = vi.fn();
     render(
       <CustomerListItem
@@ -29,7 +29,8 @@ describe('CustomerListItem', () => {
         onEdit={handleEdit}
       />,
     );
-    fireEvent.click(screen.getByLabelText('Editar cliente'));
+    fireEvent.click(screen.getByRole('button', { name: 'Más acciones' }));
+    fireEvent.click(screen.getByText('Editar'));
     expect(handleEdit).toHaveBeenCalledTimes(1);
   });
 

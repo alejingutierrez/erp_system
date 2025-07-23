@@ -43,9 +43,9 @@ export interface CustomerListItemProps
   category?: string;
   /** Active state */
   active?: boolean;
-  /** Show action buttons */
+  /** Show action menu */
   showActions?: boolean;
-  /** Options for dropdown menu */
+  /** Custom options for the action menu */
   actionMenuOptions?: ActionMenuOption[];
   /** Called when a menu option is selected */
   onMenuOptionSelect?: (option: ActionMenuOption, index: number) => void;
@@ -118,44 +118,24 @@ export const CustomerListItem = React.forwardRef<HTMLDivElement, CustomerListIte
         )}
         {showActions && (
           <div className="ml-2 flex items-center gap-1">
-            {actionMenuOptions?.length ? (
-              <ActionMenu
-                aria-label="Más acciones"
-                options={actionMenuOptions}
-                onOptionSelect={onMenuOptionSelect}
-              >
-                <Icon name="MoreHorizontal" />
-              </ActionMenu>
-            ) : (
-              <>
-                {onContact && (
-                  <Button
-                    variant="icon"
-                    intent="secondary"
-                    aria-label="Contactar"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onContact();
-                    }}
-                  >
-                    <Icon name="Mail" />
-                  </Button>
-                )}
-                {onEdit && (
-                  <Button
-                    variant="icon"
-                    intent="secondary"
-                    aria-label="Editar cliente"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onEdit();
-                    }}
-                  >
-                    <Icon name="Edit" />
-                  </Button>
-                )}
-              </>
-            )}
+            <ActionMenu
+              aria-label="Más acciones"
+              options={[
+                ...(actionMenuOptions ?? []),
+                ...(onContact ? [{ label: 'Contactar', iconName: 'Mail', value: 'contact' }] : []),
+                ...(onEdit ? [{ label: 'Editar', iconName: 'Edit', value: 'edit' }] : []),
+              ]}
+              onOptionSelect={(option, index) => {
+                if (option.value === 'edit') {
+                  onEdit?.();
+                } else if (option.value === 'contact') {
+                  onContact?.();
+                }
+                onMenuOptionSelect?.(option, index);
+              }}
+            >
+              <Icon name="MoreHorizontal" />
+            </ActionMenu>
           </div>
         )}
       </Card>

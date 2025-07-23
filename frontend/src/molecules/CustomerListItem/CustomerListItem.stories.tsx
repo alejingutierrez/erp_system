@@ -43,6 +43,9 @@ export const Inactive: Story = {
     customerName: 'Ana Gómez',
     email: 'ana@example.com',
     active: false,
+    showActions: true,
+    onEdit: () => {},
+    onContact: () => {},
   },
 };
 
