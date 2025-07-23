@@ -13,8 +13,11 @@ const meta: Meta<OrderItemProps> = {
     total: { control: 'text' },
     status: { control: 'select', options: statusOptions },
     showIcon: { control: 'boolean' },
+    iconName: { control: 'text' },
+    iconColor: { control: 'text' },
+    actionOptions: { control: 'object' },
     onSelect: { action: 'orderSelected' },
-    onActionClick: { action: 'actionClicked' },
+    onActionSelect: { action: 'actionSelected' },
   },
 };
 export default meta;
@@ -28,6 +31,7 @@ export const Default: Story = {
     total: '$250.00',
     status: 'Pendiente',
     showIcon: true,
+    iconName: 'File',
   },
 };
 
@@ -41,13 +45,16 @@ export const WithoutIcon: Story = {
   },
 };
 
-export const WithAction: Story = {
+export const WithActions: Story = {
   args: {
     orderId: '#1003',
     date: '18/07/2025',
     total: '$90.00',
     status: 'En ruta',
     showIcon: true,
-    onActionClick: () => {},
+    actionOptions: [
+      { label: 'Ver detalles', iconName: 'Search' },
+      { label: 'Cancelar', iconName: 'Trash2' },
+    ],
   },
 };
