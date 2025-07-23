@@ -10,13 +10,15 @@ describe('Radio', () => {
     expect(radio).toHaveAttribute('name', 'group');
   });
 
-  it('toggles selection on click and triggers onChange', () => {
+  it('allows deselecting when allowDeselect is true', () => {
     const onChange = vi.fn();
-    render(<Radio name="group" label="Opt" onChange={onChange} />);
+    render(<Radio label="Opt" allowDeselect onChange={onChange} />);
     const radio = screen.getByRole('radio');
     fireEvent.click(radio);
     expect(radio).toBeChecked();
-    expect(onChange).toHaveBeenCalled();
+    fireEvent.click(radio);
+    expect(radio).not.toBeChecked();
+    expect(onChange).toHaveBeenCalledTimes(2);
   });
 
   it('only one radio in group is selected', () => {

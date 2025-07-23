@@ -35,4 +35,16 @@ describe('ProgressBar', () => {
     render(<ProgressBar value={150} />);
     expect(screen.getByText('100%')).toBeInTheDocument();
   });
+
+  it('uses white text for the value label across colors', () => {
+    const { rerender } = render(
+      <ProgressBar color="primary" value={20} />,
+    );
+    let label = screen.getByText('20%');
+    expect(label.className).toContain('text-white');
+
+    rerender(<ProgressBar color="secondary" value={20} />);
+    label = screen.getByText('20%');
+    expect(label.className).toContain('text-white');
+  });
 });

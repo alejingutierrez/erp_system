@@ -34,8 +34,16 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  render: (args) => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open Modal</Button>
+        <Modal {...args} isOpen={open} onClose={() => setOpen(false)} />
+      </>
+    );
+  },
   args: {
-    isOpen: true,
     title: 'Simple Modal',
     children: 'Lorem ipsum dolor sit amet.',
   },
@@ -43,7 +51,7 @@ export const Default: Story = {
 
 export const WithActions: Story = {
   render: (args) => {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     return (
       <>
         <Button onClick={() => setOpen(true)}>Open Modal</Button>
@@ -76,19 +84,22 @@ export const ColorVariants: Story = {
       'success',
       'destructive',
     ] as const;
+    const [open, setOpen] = useState<string | null>(null);
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {variants.map((v) => (
-          <Modal
-            key={v}
-            {...args}
-            isOpen
-            onClose={() => {}}
-            variant={v}
-            title={v.charAt(0).toUpperCase() + v.slice(1)}
-          >
-            {v} modal
-          </Modal>
+          <div key={v} className="flex flex-col items-start gap-2">
+            <Button onClick={() => setOpen(v)}>{`Open ${v}`}</Button>
+            <Modal
+              {...args}
+              isOpen={open === v}
+              onClose={() => setOpen(null)}
+              variant={v}
+              title={v.charAt(0).toUpperCase() + v.slice(1)}
+            >
+              {v} modal
+            </Modal>
+          </div>
         ))}
       </div>
     );

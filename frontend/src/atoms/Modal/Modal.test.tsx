@@ -62,4 +62,35 @@ describe('Modal', () => {
     await screen.findByRole('dialog');
     expect(screen.getByRole('dialog')).toHaveFocus();
   });
+
+  it('restores focus to trigger when closed', () => {
+    const onClose = vi.fn();
+    const { rerender } = render(
+      <>
+        <button data-testid="trigger">open</button>
+        <Modal isOpen={false} onClose={onClose} title="Test Modal">
+          <p>content</p>
+        </Modal>
+      </>,
+    );
+    const trigger = screen.getByTestId('trigger');
+    trigger.focus();
+    rerender(
+      <>
+        <button data-testid="trigger">open</button>
+        <Modal isOpen onClose={onClose} title="Test Modal">
+          <p>content</p>
+        </Modal>
+      </>,
+    );
+    rerender(
+      <>
+        <button data-testid="trigger">open</button>
+        <Modal isOpen={false} onClose={onClose} title="Test Modal">
+          <p>content</p>
+        </Modal>
+      </>,
+    );
+    expect(trigger).toHaveFocus();
+  });
 });

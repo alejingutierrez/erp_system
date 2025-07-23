@@ -82,3 +82,17 @@ export const Responsive: Story = {
     ],
   },
 };
+
+export const OnColoredBackground: Story = {
+  args: {
+    caption: 'Table with white background',
+    columns,
+    data,
+    hoverable: true,
+  },
+  render: (args) => (
+    <div className="bg-muted p-4">
+      <Table {...args} />
+    </div>
+  ),
+};

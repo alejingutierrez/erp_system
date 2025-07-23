@@ -60,3 +60,15 @@ export const Colors: Story = {
     children: '...',
   },
 };
+
+export const DarkBackground: Story = {
+  render: (args) => (
+    <div className="bg-neutral-700 p-4">
+      <Accordion {...args} />
+    </div>
+  ),
+  args: {
+    title: 'Sobre fondo oscuro',
+    children: 'Contenido del acordeón',
+  },
+};
