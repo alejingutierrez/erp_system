@@ -7,13 +7,12 @@ import { CustomerCard } from './CustomerCard';
 
 La `CustomerCard` muestra de forma concisa la información principal de un cliente.
 Incluye foto o iniciales, nombre y datos secundarios como correo o teléfono.
-Opcionalmente se indica el nivel del cliente y un botón de acción.
+Opcionalmente se indica el nivel del cliente y un menú de acciones.
 
 <Canvas>
   <Story name="Ejemplos">
     <div className="w-72 space-y-2">
       <CustomerCard nombre="María Gómez" infoSecundaria="maria@gmail.com" nivel="VIP" />
-      <CustomerCard nombre="Pedro Ruiz" infoSecundaria="pedro@example.com" mostrarAccion />
       <CustomerCard
         nombre="Lucía Pérez"
         infoSecundaria="lucia@example.com"
