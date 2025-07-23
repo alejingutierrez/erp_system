@@ -1,10 +1,14 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { ImageUploader } from './ImageUploader';
 
 const createFile = (name: string) => new File(['hello'], name, { type: 'image/png' });
 
 describe('ImageUploader', () => {
+  beforeAll(() => {
+    (global as any).URL.createObjectURL = vi.fn(() => 'preview');
+    (global as any).URL.revokeObjectURL = vi.fn();
+  });
   it('renders upload button', () => {
     render(<ImageUploader />);
     expect(screen.getByRole('button')).toBeInTheDocument();

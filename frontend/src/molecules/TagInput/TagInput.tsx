@@ -30,7 +30,7 @@ export interface TagInputProps
 export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
   (
     {
-      tags: initialTags = [],
+      tags,
       placeholder,
       separators = ',',
       maxTags,
@@ -47,40 +47,42 @@ export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
     },
     ref,
   ) => {
-    const [tags, setTags] = React.useState<string[]>(initialTags);
+    const [tagList, setTagList] = React.useState<string[]>(tags ?? []);
     const [inputValue, setInputValue] = React.useState('');
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
 
     React.useEffect(() => {
-      setTags(initialTags);
-    }, [initialTags]);
+      if (tags !== undefined) {
+        setTagList(tags);
+      }
+    }, [tags]);
 
     const addTag = React.useCallback(
       (value: string) => {
         const trimmed = value.trim();
         if (!trimmed) return;
-        if (maxTags && tags.length >= maxTags) return;
-        if (tags.includes(trimmed)) return;
-        const newTags = [...tags, trimmed];
-        setTags(newTags);
+        if (maxTags && tagList.length >= maxTags) return;
+        if (tagList.includes(trimmed)) return;
+        const newTags = [...tagList, trimmed];
+        setTagList(newTags);
         onTagAdd?.(trimmed);
         onChange?.(newTags);
         setInputValue('');
       },
-      [tags, maxTags, onTagAdd, onChange],
+      [tagList, maxTags, onTagAdd, onChange],
     );
 
     const removeTag = React.useCallback(
       (index: number) => {
-        const removed = tags[index];
-        const newTags = tags.filter((_, i) => i !== index);
-        setTags(newTags);
+        const removed = tagList[index];
+        const newTags = tagList.filter((_, i) => i !== index);
+        setTagList(newTags);
         onTagRemove?.(removed, index);
         onChange?.(newTags);
       },
-      [tags, onTagRemove, onChange],
+      [tagList, onTagRemove, onChange],
     );
 
     const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -88,7 +90,7 @@ export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
         e.preventDefault();
         addTag(inputValue);
       } else if (e.key === 'Backspace' && inputValue === '') {
-        removeTag(tags.length - 1);
+        removeTag(tagList.length - 1);
       }
     };
 
@@ -107,7 +109,7 @@ export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
         )}
         onClick={() => inputRef.current?.focus()}
       >
-        {tags.map((tag, i) => (
+        {tagList.map((tag, i) => (
           <Tag
             key={`${tag}-${i}`}
             color={tagColor}
@@ -125,7 +127,7 @@ export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
           value={inputValue}
           onKeyDown={handleKeyDown}
           onChange={handleChange}
-          placeholder={tags.length === 0 ? placeholder : undefined}
+          placeholder={tagList.length === 0 ? placeholder : undefined}
           className="m-1 flex-1 bg-transparent focus:outline-none"
           {...props}
         />

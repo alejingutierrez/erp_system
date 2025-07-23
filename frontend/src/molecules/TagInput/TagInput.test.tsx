@@ -17,6 +17,16 @@ describe('TagInput', () => {
     expect(screen.getByText('new')).toBeInTheDocument();
   });
 
+  it('persists added tags after rerender when uncontrolled', () => {
+    const { rerender } = render(<TagInput placeholder="add" />);
+    const input = screen.getByPlaceholderText('add');
+    fireEvent.change(input, { target: { value: 'stay' } });
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(screen.getByText('stay')).toBeInTheDocument();
+    rerender(<TagInput placeholder="add" />);
+    expect(screen.getByText('stay')).toBeInTheDocument();
+  });
+
   it('removes tag when close clicked', () => {
     render(<TagInput tags={['remove']} />);
     fireEvent.click(screen.getByRole('button'));
