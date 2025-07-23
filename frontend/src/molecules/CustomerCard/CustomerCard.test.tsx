@@ -23,13 +23,18 @@ describe('CustomerCard', () => {
     expect(onSelect).toHaveBeenCalledTimes(1);
   });
 
-  it('calls onAction when action button clicked', () => {
+  it('calls onAction when action menu is opened', () => {
     const onAction = vi.fn();
     render(
-      <CustomerCard nombre="Ana" mostrarAccion onAction={onAction} />,
+      <CustomerCard
+        nombre="Ana"
+        mostrarAccion
+        actionOptions={[{ label: 'Edit', iconName: 'Edit' }]}
+        onAction={onAction}
+      />,
     );
-    const btn = screen.getByRole('button', { name: 'Ver detalles' });
-    fireEvent.click(btn);
+    const trigger = screen.getByRole('button');
+    fireEvent.click(trigger);
     expect(onAction).toHaveBeenCalledTimes(1);
   });
 
