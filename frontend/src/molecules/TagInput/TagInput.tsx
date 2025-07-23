@@ -102,7 +102,7 @@ export const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>(
     return (
       <div
         className={cn(
-          'flex flex-wrap items-center gap-1 cursor-text',
+          'flex flex-wrap items-center gap-2 cursor-text',
           inputVariants({ size, color }),
           disabled && 'opacity-50 cursor-not-allowed',
           className,

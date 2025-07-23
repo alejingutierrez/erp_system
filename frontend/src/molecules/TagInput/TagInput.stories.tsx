@@ -6,6 +6,14 @@ const meta: Meta<TagInputProps> = {
   title: 'Molecules/TagInput',
   component: TagInput,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Las etiquetas ahora cuentan con un pequeño espacio entre ellas para mejorar la lectura.',
+      },
+    },
+  },
   argTypes: {
     tags: { control: 'object' },
     placeholder: { control: 'text' },
