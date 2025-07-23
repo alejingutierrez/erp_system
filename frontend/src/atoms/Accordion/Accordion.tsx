@@ -62,7 +62,11 @@ export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
     const headerId = React.useId();
 
     return (
-      <div ref={ref} className={cn("border-b border-border", className)} {...props}>
+      <div
+        ref={ref}
+        className={cn("border-b border-border bg-white", className)}
+        {...props}
+      >
         <button
           type="button"
           id={headerId}
