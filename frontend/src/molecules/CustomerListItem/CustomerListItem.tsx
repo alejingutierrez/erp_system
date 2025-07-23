@@ -6,7 +6,6 @@ import { Avatar } from '@/atoms/Avatar';
 import { Text } from '@/atoms/Text';
 import { Badge } from '@/atoms/Badge';
 import { Tag } from '@/atoms/Tag';
-import { Button } from '@/atoms/Button/Button';
 import { Icon } from '@/atoms/Icon';
 import { Card } from '@/atoms/Card';
 import {
@@ -66,18 +65,41 @@ export const CustomerListItem = React.forwardRef<HTMLDivElement, CustomerListIte
       purchasesCount,
       category,
       active = true,
-      showActions = false,
+      showActions = true,
       actionMenuOptions,
       onMenuOptionSelect,
       className,
       clickable,
-      onClick,
-      onEdit,
-      onContact,
-      ...props
-    },
-    ref,
-  ) => {
+    onClick,
+    onEdit,
+    onContact,
+    ...props
+  },
+  ref,
+) => {
+    const defaultMenuOptions = React.useMemo(() => {
+      const opts: ActionMenuOption[] = [];
+      if (onEdit)
+        opts.push({ label: 'Editar', iconName: 'Edit', value: 'edit' });
+      if (onContact)
+        opts.push({ label: 'Contactar', iconName: 'Mail', value: 'contact' });
+      return opts;
+    }, [onEdit, onContact]);
+
+    const menuOptions = actionMenuOptions?.length
+      ? actionMenuOptions
+      : defaultMenuOptions;
+
+    const handleMenuSelect = React.useCallback(
+      (option: ActionMenuOption, index: number) => {
+        if (!actionMenuOptions?.length) {
+          if (option.value === 'edit') onEdit?.();
+          if (option.value === 'contact') onContact?.();
+        }
+        onMenuOptionSelect?.(option, index);
+      },
+      [actionMenuOptions, onEdit, onContact, onMenuOptionSelect],
+    );
     return (
       <Card
         ref={ref}
@@ -116,46 +138,15 @@ export const CustomerListItem = React.forwardRef<HTMLDivElement, CustomerListIte
             {active ? 'Activo' : 'Inactivo'}
           </Badge>
         )}
-        {showActions && (
+        {showActions && menuOptions.length > 0 && (
           <div className="ml-2 flex items-center gap-1">
-            {actionMenuOptions?.length ? (
-              <ActionMenu
-                aria-label="Más acciones"
-                options={actionMenuOptions}
-                onOptionSelect={onMenuOptionSelect}
-              >
-                <Icon name="MoreHorizontal" />
-              </ActionMenu>
-            ) : (
-              <>
-                {onContact && (
-                  <Button
-                    variant="icon"
-                    intent="secondary"
-                    aria-label="Contactar"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onContact();
-                    }}
-                  >
-                    <Icon name="Mail" />
-                  </Button>
-                )}
-                {onEdit && (
-                  <Button
-                    variant="icon"
-                    intent="secondary"
-                    aria-label="Editar cliente"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onEdit();
-                    }}
-                  >
-                    <Icon name="Edit" />
-                  </Button>
-                )}
-              </>
-            )}
+            <ActionMenu
+              aria-label="Más acciones"
+              options={menuOptions}
+              onOptionSelect={handleMenuSelect}
+            >
+              <Icon name="MoreHorizontal" />
+            </ActionMenu>
           </div>
         )}
       </Card>
