@@ -56,3 +56,13 @@ export const Limited: Story = {
     placeholder: 'Máximo 3',
   },
 };
+
+export const Controlled: Story = {
+  render: (args) => {
+    const [tags, setTags] = React.useState<string[]>(args.tags ?? []);
+    return <TagInput {...args} tags={tags} onChange={setTags} />;
+  },
+  args: {
+    placeholder: 'Controlado',
+  },
+};

@@ -8,9 +8,17 @@ import { TagInput } from './TagInput';
 
 The `TagInput` component allows users to enter multiple tags in a single field. Each tag is displayed as a closable chip inside the input.
 
+`tags` can be provided to set the initial list, but the component manages its own state. For a controlled usage combine `tags` and `onChange`.
+
 <Canvas>
   <Story name="Ejemplo">
     {() => <TagInput placeholder="Agregar etiquetas..." />}
+  </Story>
+  <Story name="Controlado">
+    {() => {
+      const [tags, setTags] = React.useState<string[]>(['react']);
+      return <TagInput tags={tags} onChange={setTags} />;
+    }}
   </Story>
 </Canvas>
 
