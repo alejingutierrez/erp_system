@@ -50,3 +50,19 @@ export const Many: Story = {
     count: 120,
   },
 };
+
+export const Variants: Story = {
+  render: (args) => (
+    <div className="flex space-x-2">
+      <NotificationIcon {...args} color="neutral" count={5} />
+      <NotificationIcon {...args} color="success" count={5} />
+      <NotificationIcon {...args} color="warning" count={5} />
+      <NotificationIcon {...args} color="destructive" count={5} />
+      <NotificationIcon {...args} color="info" count={5} />
+    </div>
+  ),
+  args: {
+    iconName: 'Bell',
+    size: 'md',
+  },
+};
