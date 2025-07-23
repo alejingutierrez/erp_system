@@ -7,6 +7,8 @@ import { StepIndicator } from './StepIndicator';
 
 The `StepIndicator` component displays progress through a multi-step process. Each step shows a numbered circle or a checkmark when completed.
 
+It supports up to **15** steps. If `currentStep` exceeds the total, it will be clamped to the last step.
+
 <Canvas>
   <Story name="Example">
     <StepIndicator

@@ -6,8 +6,8 @@ const meta: Meta<StepIndicatorProps> = {
   component: StepIndicator,
   tags: ['autodocs'],
   argTypes: {
-    totalSteps: { control: { type: 'number', min: 1 } },
-    currentStep: { control: { type: 'number', min: 1 } },
+    totalSteps: { control: { type: 'number', min: 1, max: 15 } },
+    currentStep: { control: { type: 'number', min: 1, max: 15 } },
     labels: { control: 'object' },
     clickable: { control: 'boolean' },
     onStepClick: { action: 'stepClicked' },
