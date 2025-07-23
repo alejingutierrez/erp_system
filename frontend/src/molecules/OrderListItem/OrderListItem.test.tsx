@@ -18,8 +18,14 @@ describe('OrderListItem', () => {
     expect(screen.getByText('$250.00')).toBeInTheDocument();
   });
 
-  it('shows action button when enabled', () => {
-    const { container } = render(<OrderListItem {...baseProps} showActions />);
+  it('shows action menu trigger when enabled', () => {
+    const { container } = render(
+      <OrderListItem
+        {...baseProps}
+        showActions
+        actionOptions={[{ label: 'Editar', iconName: 'Edit' }]}
+      />,
+    );
     expect(screen.getByLabelText('Acciones')).toBeInTheDocument();
     expect(container.firstChild).toHaveClass(
       'grid-cols-[auto_auto_1fr_auto_auto_auto]',
@@ -33,13 +39,25 @@ describe('OrderListItem', () => {
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  it('calls onActionSelect when action button clicked', () => {
+  it('calls onActionSelect when menu option selected', () => {
     const handleAction = vi.fn();
     render(
-      <OrderListItem {...baseProps} showActions onActionSelect={handleAction} />,
+      <OrderListItem
+        {...baseProps}
+        showActions
+        actionOptions={[
+          { label: 'Editar', iconName: 'Edit' },
+          { label: 'Eliminar', iconName: 'Trash2' },
+        ]}
+        onActionSelect={handleAction}
+      />,
     );
     fireEvent.click(screen.getByLabelText('Acciones'));
-    expect(handleAction).toHaveBeenCalledTimes(1);
+    fireEvent.click(screen.getByText('Eliminar'));
+    expect(handleAction).toHaveBeenCalledWith(
+      { label: 'Eliminar', iconName: 'Trash2' },
+      1,
+    );
   });
 
   it('maps status to badge variant', () => {

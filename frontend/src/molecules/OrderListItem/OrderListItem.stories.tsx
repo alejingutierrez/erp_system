@@ -15,6 +15,7 @@ const meta: Meta<OrderListItemProps> = {
     customerName: { control: 'text' },
     total: { control: 'text' },
     showActions: { control: 'boolean' },
+    actionOptions: { control: 'object' },
     onClick: { action: 'clicked' },
     onActionSelect: { action: 'action selected' },
     onStatusClick: { action: 'status clicked' },
@@ -44,5 +45,9 @@ export const WithActions: Story = {
     total: '$250.00',
     status: 'Pendiente',
     showActions: true,
+    actionOptions: [
+      { label: 'Ver detalles', iconName: 'Search' },
+      { label: 'Cancelar', iconName: 'Trash2' },
+    ],
   },
 };

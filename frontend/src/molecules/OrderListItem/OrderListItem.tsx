@@ -3,8 +3,8 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import { Text } from '@/atoms/Text';
 import { Badge, type BadgeProps } from '@/atoms/Badge';
-import { Button } from '@/atoms/Button/Button';
 import { Icon } from '@/atoms/Icon';
+import { ActionMenu, type ActionMenuOption } from '@/molecules/ActionMenu';
 
 const orderListItemVariants = cva(
   'grid items-center gap-2 px-3 py-2 text-sm rounded-md',
@@ -42,7 +42,10 @@ export interface OrderListItemProps
   total: string;
   status: string;
   showActions?: boolean;
-  onActionSelect?: () => void;
+  /** Options for the action menu */
+  actionOptions?: ActionMenuOption[];
+  /** Called when a menu option is selected */
+  onActionSelect?: (option: ActionMenuOption, index: number) => void;
   onStatusClick?: () => void;
 }
 
@@ -60,15 +63,15 @@ export const OrderListItem = React.forwardRef<HTMLDivElement, OrderListItemProps
       onClick,
       onActionSelect,
       onStatusClick,
+      actionOptions,
       ...props
     },
     ref,
   ) => {
     const statusVariant = statusColorMap[status] ?? 'neutral';
 
-    const handleActionClick = (e: React.MouseEvent) => {
-      e.stopPropagation();
-      onActionSelect?.();
+    const handleMenuSelect = (option: ActionMenuOption, index: number) => {
+      onActionSelect?.(option, index);
     };
 
     const handleStatusClick = (e: React.MouseEvent) => {
@@ -102,17 +105,16 @@ export const OrderListItem = React.forwardRef<HTMLDivElement, OrderListItemProps
         >
           {status}
         </Badge>
-        {showActions && (
-          <Button
-            variant="icon"
-            intent="secondary"
-            size="sm"
+        {showActions && actionOptions && actionOptions.length > 0 && (
+          <ActionMenu
             aria-label="Acciones"
-            onClick={handleActionClick}
+            options={actionOptions}
+            onOptionSelect={handleMenuSelect}
+            position="bottom-right"
             className="ml-1"
           >
             <Icon name="MoreHorizontal" />
-          </Button>
+          </ActionMenu>
         )}
       </div>
     );
