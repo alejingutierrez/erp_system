@@ -23,6 +23,12 @@ describe('Table', () => {
     expect(screen.getByRole('table')).toBeInTheDocument();
   });
 
+  it('has a white background', () => {
+    render(basicTable);
+    const table = screen.getByRole('table');
+    expect(table.className).toContain('bg-white');
+  });
+
   it('applies striped variant classes', () => {
     render(
       <Table variant="striped">
