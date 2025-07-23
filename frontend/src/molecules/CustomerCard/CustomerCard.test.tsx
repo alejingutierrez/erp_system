@@ -4,9 +4,7 @@ import { CustomerCard } from './CustomerCard';
 
 describe('CustomerCard', () => {
   it('renders name and secondary info', () => {
-    render(
-      <CustomerCard nombre="Juan" infoSecundaria="juan@example.com" />,
-    );
+    render(<CustomerCard nombre="Juan" infoSecundaria="juan@example.com" />);
     expect(screen.getByText('Juan')).toBeInTheDocument();
     expect(screen.getByText('juan@example.com')).toBeInTheDocument();
   });
@@ -23,13 +21,18 @@ describe('CustomerCard', () => {
     expect(onSelect).toHaveBeenCalledTimes(1);
   });
 
-  it('calls onAction when action button clicked', () => {
+  it('calls onAction when action menu is opened', () => {
     const onAction = vi.fn();
     render(
-      <CustomerCard nombre="Ana" mostrarAccion onAction={onAction} />,
+      <CustomerCard
+        nombre="Ana"
+        mostrarAccion
+        actionOptions={[{ label: 'Edit', iconName: 'Edit' }]}
+        onAction={onAction}
+      />,
     );
-    const btn = screen.getByRole('button', { name: 'Acciones' });
-    fireEvent.click(btn);
+    const trigger = screen.getByRole('button', { name: /acciones/i });
+    fireEvent.click(trigger);
     expect(onAction).toHaveBeenCalledTimes(1);
   });
 
@@ -41,7 +44,7 @@ describe('CustomerCard', () => {
         actionOptions={[{ label: 'Edit', iconName: 'Edit' }]}
       />,
     );
-    const trigger = screen.getByRole('button');
+    const trigger = screen.getByRole('button', { name: /acciones/i });
     fireEvent.click(trigger);
     expect(screen.getByRole('menu')).toBeInTheDocument();
   });

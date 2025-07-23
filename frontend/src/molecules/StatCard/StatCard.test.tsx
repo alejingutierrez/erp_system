@@ -42,8 +42,8 @@ describe('StatCard', () => {
     expect(icon).toBeInTheDocument();
   });
 
-  it('renders sparkline when data supplied', () => {
-    const { container } = render(<StatCard value="5" label="Spark" sparklineData={[1,2,3]} />);
-    expect(container.querySelector('polyline')).toBeInTheDocument();
+  it('does not render a sparkline', () => {
+    const { container } = render(<StatCard value="5" label="Spark" />);
+    expect(container.querySelector('polyline')).not.toBeInTheDocument();
   });
 });

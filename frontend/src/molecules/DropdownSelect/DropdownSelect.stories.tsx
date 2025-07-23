@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 import { DropdownSelect, DropdownSelectProps } from './DropdownSelect';
 
 interface DropdownSelectStoryProps extends DropdownSelectProps {

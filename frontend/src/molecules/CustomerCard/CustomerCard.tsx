@@ -4,7 +4,6 @@ import { Avatar } from '@/atoms/Avatar';
 import { Heading } from '@/atoms/Heading';
 import { Text } from '@/atoms/Text';
 import { Badge } from '@/atoms/Badge';
-import { Button } from '@/atoms/Button/Button';
 import { Icon, type IconName } from '@/atoms/Icon';
 import {
   ActionMenu,
@@ -32,8 +31,6 @@ export interface CustomerCardProps extends React.HTMLAttributes<HTMLDivElement> 
   nivel?: Nivel;
   /** Show action icon */
   mostrarAccion?: boolean;
-  /** Intent/color for the action button */
-  accionIntent?: React.ComponentProps<typeof Button>['intent'];
   /** Icon displayed inside the action button */
   accionIconName?: IconName;
   /** Options for an optional action menu */
@@ -54,7 +51,6 @@ export const CustomerCard = React.forwardRef<HTMLDivElement, CustomerCardProps>(
       infoSecundaria,
       nivel,
       mostrarAccion = false,
-      accionIntent = 'primary',
       accionIconName,
       actionOptions,
       actionMenuProps,
@@ -65,11 +61,6 @@ export const CustomerCard = React.forwardRef<HTMLDivElement, CustomerCardProps>(
     },
     ref,
   ) => {
-    const handleAction = (e: React.MouseEvent) => {
-      e.stopPropagation();
-      onAction?.();
-    };
-
     const clickable = typeof onSelect === 'function';
 
     return (
@@ -100,27 +91,15 @@ export const CustomerCard = React.forwardRef<HTMLDivElement, CustomerCardProps>(
             </Text>
           )}
         </div>
-        {mostrarAccion && (
-          actionOptions ? (
-            <ActionMenu
-              options={actionOptions}
-              onOpen={onAction}
-              position="bottom-right"
-              {...actionMenuProps}
-            >
-              <Icon name={accionIconName ?? 'MoreHorizontal'} />
-            </ActionMenu>
-          ) : (
-            <Button
-              variant="icon"
-              size="sm"
-              intent={accionIntent}
-              aria-label="Acciones"
-              onClick={handleAction}
-            >
-              <Icon name={accionIconName ?? 'ChevronRight'} />
-            </Button>
-          )
+        {mostrarAccion && Array.isArray(actionOptions) && actionOptions.length > 0 && (
+          <ActionMenu
+            options={actionOptions}
+            onOpen={onAction}
+            position="bottom-right"
+            {...actionMenuProps}
+          >
+            <Icon name={accionIconName ?? 'MoreHorizontal'} />
+          </ActionMenu>
         )}
       </Card>
     );

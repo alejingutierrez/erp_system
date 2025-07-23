@@ -14,10 +14,6 @@ const meta: Meta<CustomerCardProps> = {
       options: [undefined, 'VIP', 'Frecuente', 'Nuevo'],
     },
     mostrarAccion: { control: 'boolean' },
-    accionIntent: {
-      control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'quaternary', 'success'],
-    },
     accionIconName: { control: 'text' },
     actionOptions: { control: 'object' },
     onSelect: { action: 'selected' },
@@ -36,14 +32,6 @@ export const Default: Story = {
     infoSecundaria: 'maria@gmail.com',
     nivel: 'VIP',
     mostrarAccion: false,
-  },
-};
-
-export const ConAccion: Story = {
-  args: {
-    nombre: 'Pedro Ruiz',
-    infoSecundaria: 'pedro@example.com',
-    mostrarAccion: true,
   },
 };
 
