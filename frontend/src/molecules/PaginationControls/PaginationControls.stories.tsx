@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { PaginationControls, PaginationControlsProps } from './PaginationControls';
 
 const meta: Meta<PaginationControlsProps> = {
@@ -24,6 +25,16 @@ export const Default: Story = {
     currentPage: 1,
     totalPages: 5,
   },
+  render: (args) => {
+    const [page, setPage] = useState(args.currentPage ?? 1);
+    return (
+      <PaginationControls
+        {...args}
+        currentPage={page}
+        onPageChange={setPage}
+      />
+    );
+  },
 };
 
 export const ManyPages: Story = {
@@ -32,5 +43,15 @@ export const ManyPages: Story = {
     totalPages: 8,
     siblings: 1,
     showFirstLast: true,
+  },
+  render: (args) => {
+    const [page, setPage] = useState(args.currentPage ?? 1);
+    return (
+      <PaginationControls
+        {...args}
+        currentPage={page}
+        onPageChange={setPage}
+      />
+    );
   },
 };

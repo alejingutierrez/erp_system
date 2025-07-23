@@ -1,4 +1,5 @@
 import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { useState } from 'react';
 import { PaginationControls } from './PaginationControls';
 
 <Meta title="Molecules/PaginationControls" of={PaginationControls} />
@@ -10,7 +11,16 @@ When the total number of pages exceeds five, intermediate pages collapse into an
 
 <Canvas>
   <Story name="Example">
-    <PaginationControls currentPage={3} totalPages={8} onPageChange={(page) => console.log(page)} />
+    {function ExampleStory() {
+      const [page, setPage] = useState(3);
+      return (
+        <PaginationControls
+          currentPage={page}
+          totalPages={8}
+          onPageChange={setPage}
+        />
+      );
+    }}
   </Story>
 </Canvas>
 
