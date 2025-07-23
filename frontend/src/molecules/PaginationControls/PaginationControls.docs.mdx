@@ -6,10 +6,11 @@ import { PaginationControls } from './PaginationControls';
 # PaginationControls
 
 The `PaginationControls` component provides buttons for navigating between pages of results.
+When the total number of pages exceeds five, intermediate pages collapse into an ellipsis.
 
 <Canvas>
   <Story name="Example">
-    <PaginationControls currentPage={3} totalPages={10} onPageChange={(page) => console.log(page)} />
+    <PaginationControls currentPage={3} totalPages={8} onPageChange={(page) => console.log(page)} />
   </Story>
 </Canvas>
 

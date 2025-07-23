@@ -33,4 +33,16 @@ describe('PaginationControls', () => {
     );
     expect(screen.getAllByText('...').length).toBeGreaterThan(0);
   });
+
+  it('shows dots when pages exceed five', () => {
+    render(<PaginationControls currentPage={3} totalPages={6} />);
+    expect(screen.getAllByText('...').length).toBeGreaterThan(0);
+  });
+
+  it('uses square buttons', () => {
+    render(<PaginationControls currentPage={1} totalPages={3} />);
+    const btn = screen.getByRole('button', { name: '1' });
+    expect(btn.className).toMatch(/w-8/);
+    expect(btn.className).toMatch(/h-8/);
+  });
 });
