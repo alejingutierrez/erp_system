@@ -91,16 +91,19 @@ export const CustomerCard = React.forwardRef<HTMLDivElement, CustomerCardProps>(
             </Text>
           )}
         </div>
-        {mostrarAccion && Array.isArray(actionOptions) && actionOptions.length > 0 && (
-          <ActionMenu
-            options={actionOptions}
-            onOpen={onAction}
-            position="bottom-right"
-            {...actionMenuProps}
-          >
-            <Icon name={accionIconName ?? 'MoreHorizontal'} />
-          </ActionMenu>
-        )}
+        {mostrarAccion &&
+          Array.isArray(actionOptions) &&
+          actionOptions.length > 0 && (
+            <ActionMenu
+              aria-label="Acciones"
+              options={actionOptions}
+              onOpen={onAction}
+              position="bottom-right"
+              {...actionMenuProps}
+            >
+              <Icon name={accionIconName ?? 'MoreHorizontal'} />
+            </ActionMenu>
+          )}
       </Card>
     );
   },
