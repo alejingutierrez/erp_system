@@ -5,13 +5,30 @@ import { StatCard } from './StatCard';
 
 # StatCard
 
-The `StatCard` component highlights a single metric or KPI using the `Card` atom. It can optionally display an icon and be made clickable.
+The `StatCard` component highlights a single metric or KPI using the `Card` atom. It can optionally display an icon and be made clickable. The component also supports trend indicators, progress bars and a simple sparkline to visualise data.
 
 <Canvas>
   <Story name="Examples">
     <div className="grid grid-cols-2 gap-4 max-w-sm">
-      <StatCard value="120" label="Nuevos Pedidos" iconName="Folder" />
-      <StatCard value="$5,000" label="Ventas" iconName="File" variant="outline" />
+      <StatCard
+        value="120"
+        label="Nuevos Pedidos"
+        iconName="Folder"
+        progress={60}
+        trend="up"
+        trendValue="12%"
+        sparklineData={[10, 20, 15, 30, 25]}
+      />
+      <StatCard
+        value="$5,000"
+        label="Ventas"
+        iconName="File"
+        variant="outline"
+        trend="down"
+        trendValue="-8%"
+        progress={30}
+        sparklineData={[30, 25, 20, 15, 10]}
+      />
     </div>
   </Story>
 </Canvas>
