@@ -5,6 +5,14 @@ const meta: Meta<ImageUploaderProps> = {
   title: 'Molecules/ImageUploader',
   component: ImageUploader,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Click the preview grid to open the file dialog again and add more images.',
+      },
+    },
+  },
   argTypes: {
     multiple: { control: 'boolean' },
     imagenesIniciales: { control: 'text' },

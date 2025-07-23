@@ -22,6 +22,14 @@ describe('ImageUploader', () => {
     expect(screen.getByRole('img')).toBeInTheDocument();
   });
 
+  it('opens file dialog when container clicked', () => {
+    const { container } = render(<ImageUploader />);
+    const input = container.querySelector('input[type="file"]') as HTMLInputElement;
+    const spy = vi.spyOn(input, 'click');
+    fireEvent.click(container.firstChild as HTMLElement);
+    expect(spy).toHaveBeenCalled();
+  });
+
   it('removes image when clicking delete', () => {
     render(<ImageUploader />);
     const input = document.querySelector('input[type="file"]') as HTMLInputElement;
