@@ -27,7 +27,7 @@ describe('NotificationIcon', () => {
   it('badge text is black', () => {
     render(<NotificationIcon count={3} color="success" />);
     const badge = screen.getByText('3');
-    expect(badge).toHaveClass('text-black');
+    expect(badge).toHaveClass('!text-black');
   });
 
   it('positions badge outside icon for large counts', () => {
