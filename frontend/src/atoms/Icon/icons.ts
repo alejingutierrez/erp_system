@@ -26,6 +26,8 @@ import {
   User,
   Heart,
   Star,
+  TrendingUp,
+  TrendingDown,
   X,
 } from 'lucide-react';
 
@@ -57,6 +59,8 @@ export const iconMap = {
   User,
   Heart,
   Star,
+  TrendingUp,
+  TrendingDown,
   X,
 };
 

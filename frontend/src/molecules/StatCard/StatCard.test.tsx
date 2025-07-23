@@ -30,4 +30,20 @@ describe('StatCard', () => {
     const card = screen.getByText('5').closest('div');
     expect(card?.className).toContain('cursor-pointer');
   });
+
+  it('renders progress bar when progress prop is set', () => {
+    const { container } = render(<StatCard value="5" label="Progress" progress={50} />);
+    expect(container.querySelector('div[role="progressbar"]')).toBeInTheDocument();
+  });
+
+  it('shows trend icon when trend is provided', () => {
+    const { container } = render(<StatCard value="5" label="Trend" trend="up" />);
+    const icon = container.querySelector('svg');
+    expect(icon).toBeInTheDocument();
+  });
+
+  it('renders sparkline when data supplied', () => {
+    const { container } = render(<StatCard value="5" label="Spark" sparklineData={[1,2,3]} />);
+    expect(container.querySelector('polyline')).toBeInTheDocument();
+  });
 });
