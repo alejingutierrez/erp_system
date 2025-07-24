@@ -1,0 +1,86 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import React from 'react';
+import { ConfirmationDialog } from './ConfirmationDialog';
+import { Button } from '@/atoms/Button/Button';
+
+<Meta title="Molecules/ConfirmationDialog" of={ConfirmationDialog} />
+
+# ConfirmationDialog
+
+El `ConfirmationDialog` muestra un mensaje de confirmación dentro de un modal con acciones para confirmar o cancelar.
+
+## Ejemplo básico
+
+<Canvas>
+  <Story name="Ejemplo">
+    {() => {
+      const [open, setOpen] = React.useState(false);
+      return (
+        <>
+          <Button onClick={() => setOpen(true)}>Eliminar</Button>
+          <ConfirmationDialog
+            isOpen={open}
+            title="Eliminar elemento"
+            message="¿Seguro que deseas continuar?"
+            onConfirm={() => setOpen(false)}
+            onCancel={() => setOpen(false)}
+          />
+        </>
+      );
+    }}
+  </Story>
+</Canvas>
+
+## Estado danger
+
+<Canvas>
+  <Story name="Danger">
+    {() => {
+      const [open, setOpen] = React.useState(false);
+      return (
+        <>
+          <Button intent="tertiary" onClick={() => setOpen(true)}>
+            Eliminar
+          </Button>
+          <ConfirmationDialog
+            isOpen={open}
+            title="Eliminar registro"
+            message="Esta acción no se puede deshacer."
+            danger
+            onConfirm={() => setOpen(false)}
+            onCancel={() => setOpen(false)}
+          />
+        </>
+      );
+    }}
+  </Story>
+</Canvas>
+
+## Uso programático
+
+<Canvas>
+  <Story name="Programático">
+    {function Example() {
+      const [open, setOpen] = React.useState(false);
+      const handleDelete = () => setOpen(true);
+      const handleConfirm = () => {
+        setOpen(false);
+        // Realizar acción
+      };
+      return (
+        <>
+          <Button onClick={handleDelete}>Borrar</Button>
+          <ConfirmationDialog
+            isOpen={open}
+            title="Confirmar"
+            message="¿Desea continuar?"
+            onConfirm={handleConfirm}
+            onCancel={() => setOpen(false)}
+          />
+        </>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={ConfirmationDialog} />
