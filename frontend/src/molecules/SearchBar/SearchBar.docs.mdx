@@ -1,0 +1,33 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import React from 'react';
+import { SearchBar } from './SearchBar';
+
+<Meta title="Molecules/SearchBar" of={SearchBar} />
+
+# SearchBar
+
+Compact search field with optional button. Supports debounce when typing.
+
+<Canvas>
+  <Story name="Ejemplo controlado">
+    {() => {
+      const [term, setTerm] = React.useState('');
+      return (
+        <SearchBar
+          value={term}
+          onSearch={setTerm}
+          showButton
+          placeholder="Buscar..."
+        />
+      );
+    }}
+  </Story>
+  <Story name="Sin botón">
+    {() => <SearchBar placeholder="Buscar..." onSearch={() => {}} />}
+  </Story>
+  <Story name="Debounce live">
+    {() => <SearchBar placeholder="Buscar..." debounce={500} onSearch={() => {}} />}
+  </Story>
+</Canvas>
+
+<ArgsTable of={SearchBar} />
