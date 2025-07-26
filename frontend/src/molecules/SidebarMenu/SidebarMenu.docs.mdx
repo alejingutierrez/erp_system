@@ -1,0 +1,37 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { SidebarMenu, NavLink } from './SidebarMenu';
+
+<Meta title="Molecules/SidebarMenu" of={SidebarMenu} />
+
+# SidebarMenu
+
+The `SidebarMenu` component renders a collapsible vertical navigation. It supports simple links and nested sections. When collapsed, only icons are displayed and each item shows a tooltip with its label.
+
+const demoItems: NavLink[] = [
+  { label: 'Inicio', icon: 'Home', path: '/' },
+  {
+    label: 'Proyectos',
+    icon: 'Folder',
+    children: [
+      { label: 'Activos', path: '/proyectos/activos' },
+      { label: 'Archivados', path: '/proyectos/archivados' },
+    ],
+  },
+  { label: 'Reportes', icon: 'BarChart2', path: '/reportes' },
+];
+
+<Canvas>
+  <Story name="Expanded">
+    <SidebarMenu items={demoItems} onNavigate={(p) => alert(p)} />
+  </Story>
+  <Story name="Collapsed">
+    <SidebarMenu items={demoItems} collapsed onNavigate={(p) => alert(p)} />
+  </Story>
+  <Story name="Dark theme">
+    <div className="dark bg-neutral-900 p-4">
+      <SidebarMenu items={demoItems} onNavigate={(p) => alert(p)} />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={SidebarMenu} />
