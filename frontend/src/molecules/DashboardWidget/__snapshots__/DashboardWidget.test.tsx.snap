@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DashboardWidget > matches snapshot with chart 1`] = `
+<div>
+  <div
+    aria-describedby=":r1:"
+    class="rounded-md border bg-white p-4 text-foreground shadow-none flex flex-col items-start gap-1 hover:shadow-md dashboard-widget transition-shadow border-border"
+    role="figure"
+  >
+    <h3
+      class="font-heading text-lg tracking-tight text-left text-primary font-semibold"
+    >
+      Ventas
+    </h3>
+    <span
+      class="font-sans text-3xl font-semibold"
+      id=":r1:"
+    >
+      100
+    </span>
+    <div
+      class="w-full"
+      data-testid="chart"
+    >
+      <svg>
+        <circle
+          cx="5"
+          cy="5"
+          r="5"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;

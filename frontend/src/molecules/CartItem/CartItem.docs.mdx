@@ -1,0 +1,49 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import React from 'react';
+import { CartItem } from './CartItem';
+
+<Meta title="Molecules/CartItem" of={CartItem} />
+
+# CartItem
+
+La `CartItem` muestra una línea del carrito con miniatura, nombre, control de cantidad y subtotal. Incluye además un botón para eliminar el artículo.
+
+<Canvas>
+  <Story name="Con stock limitado">
+    {() => {
+      const [qty, setQty] = React.useState(1);
+      return (
+        <CartItem
+          id="1"
+          img="https://picsum.photos/seed/cart/100/100"
+          name="Producto de ejemplo"
+          price={19.99}
+          quantity={qty}
+          stock={3}
+          onQtyChange={setQty}
+          onRemove={() => {}}
+        />
+      );
+    }}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Sin imagen">
+    {() => {
+      const [qty, setQty] = React.useState(2);
+      return (
+        <CartItem
+          id="2"
+          name="Producto sin imagen"
+          price={9.5}
+          quantity={qty}
+          onQtyChange={setQty}
+          onRemove={() => {}}
+        />
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={CartItem} />

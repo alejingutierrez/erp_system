@@ -1,0 +1,21 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { FileGallery } from './FileGallery';
+
+<Meta title="Molecules/FileGallery" of={FileGallery} />
+
+# FileGallery
+
+Displays a collection of uploaded files as thumbnails. Images show a preview while other files display a generic icon. Each item includes a delete button that prompts for confirmation.
+
+<Canvas>
+  <Story name="Example">
+    <FileGallery
+      items={[
+        { id: '1', name: 'photo.png', url: 'https://placehold.co/80x80', type: 'image' },
+        { id: '2', name: 'report.pdf', url: '#', type: 'doc' },
+      ]}
+    />
+  </Story>
+</Canvas>
+
+<ArgsTable of={FileGallery} />

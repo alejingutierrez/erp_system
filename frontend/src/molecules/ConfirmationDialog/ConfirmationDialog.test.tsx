@@ -21,17 +21,18 @@ describe('ConfirmationDialog', () => {
     const onConfirm = vi.fn();
     const onCancel = vi.fn();
     renderDialog({ onConfirm, onCancel });
-    fireEvent.click(screen.getByText('Cancelar'));
+
+    fireEvent.click(screen.getByRole('button', { name: /Cancelar/i }));
     expect(onCancel).toHaveBeenCalled();
-    fireEvent.click(
-      screen.getByRole('button', { name: 'Confirmar' }),
-    );
+
+    fireEvent.click(screen.getByRole('button', { name: /Confirmar/i }));
     expect(onConfirm).toHaveBeenCalled();
   });
 
   it('backdrop click closes', () => {
     const onCancel = vi.fn();
     renderDialog({ onCancel });
+
     const backdrop = screen.getByRole('alertdialog').previousSibling as Element;
     fireEvent.click(backdrop);
     expect(onCancel).toHaveBeenCalled();
@@ -39,17 +40,19 @@ describe('ConfirmationDialog', () => {
 
   it('cycles focus within the dialog', () => {
     renderDialog();
-    const cancelButton = screen.getByText('Cancelar');
-    const confirmButton = screen.getByRole('button', { name: 'Confirmar' });
-    cancelButton.focus();
-    fireEvent.keyDown(cancelButton, { key: 'Tab' });
+
+    const cancelButton = screen.getByRole('button', { name: /Cancelar/i });
+    const confirmButton = screen.getByRole('button', { name: /Confirmar/i });
+
+    // Último elemento → Tab → primero
     confirmButton.focus();
     expect(document.activeElement).toBe(confirmButton);
-    fireEvent.keyDown(confirmButton, { key: 'Tab' });
-    cancelButton.focus();
+
+    fireEvent.keyDown(document, { key: 'Tab' });
     expect(document.activeElement).toBe(cancelButton);
-    fireEvent.keyDown(cancelButton, { key: 'Tab', shiftKey: true });
-    confirmButton.focus();
+
+    // Primero → Shift‑Tab → último
+    fireEvent.keyDown(document, { key: 'Tab', shiftKey: true });
     expect(document.activeElement).toBe(confirmButton);
   });
 });

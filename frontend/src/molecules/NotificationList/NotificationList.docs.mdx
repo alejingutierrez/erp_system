@@ -1,0 +1,37 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { NotificationList } from './NotificationList';
+
+<Meta title="Molecules/NotificationList" of={NotificationList} />
+
+# NotificationList
+
+The `NotificationList` component displays a list of user notifications. Items are ordered by date and clicking an item marks it as read.
+
+<Canvas>
+  <Story name="Examples">
+    {() => (
+      <NotificationList
+        notifications={[
+          {
+            id: '1',
+            title: 'Nuevo pedido',
+            message: 'Se ha creado el pedido #101',
+            date: new Date('2025-06-01T12:00:00'),
+            read: false,
+            type: 'info',
+          },
+          {
+            id: '2',
+            title: 'Envío completado',
+            message: 'El pedido #100 fue entregado',
+            date: new Date('2025-05-30T08:30:00'),
+            read: true,
+            type: 'success',
+          },
+        ]}
+      />
+    )}
+  </Story>
+</Canvas>
+
+<ArgsTable of={NotificationList} />

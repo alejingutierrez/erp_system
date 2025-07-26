@@ -1,0 +1,29 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import React from 'react';
+import { RatingStars } from './RatingStars';
+
+<Meta title="Molecules/RatingStars" of={RatingStars} />
+
+# RatingStars
+
+The `RatingStars` component displays a row of clickable stars for rating content. It supports keyboard navigation and a read-only mode.
+
+<Canvas>
+  <Story name="Editable">
+    {() => {
+      const [val, setVal] = React.useState(3);
+      return <RatingStars value={val} onChange={setVal} />;
+    }}
+  </Story>
+  <Story name="ReadOnly">
+    {() => <RatingStars value={4} readOnly />}
+  </Story>
+  <Story name="Ten Stars">
+    {() => {
+      const [val, setVal] = React.useState(7);
+      return <RatingStars max={10} value={val} onChange={setVal} />;
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={RatingStars} />

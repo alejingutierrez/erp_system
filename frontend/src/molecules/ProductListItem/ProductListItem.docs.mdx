@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { ProductListItem } from './ProductListItem';
+
+<Meta title="Molecules/ProductListItem" of={ProductListItem} />
+
+# ProductListItem
+
+Compact row to display a product with image, name and price. Actions appear on hover.
+
+<Canvas>
+  <Story name="Examples">
+    <ul className="space-y-1 max-w-xs">
+      <ProductListItem id="1" img="https://placehold.co/40" name="Camiseta" price={9.99} />
+      <ProductListItem id="2" img="https://placehold.co/40" name="Producto con nombre muy largo que se trunca" price={29.99} />
+      <ProductListItem id="3" img="https://placehold.co/40" name="Sin acciones" price={14.5} showActions={false} />
+    </ul>
+  </Story>
+</Canvas>
+
+<ArgsTable of={ProductListItem} />

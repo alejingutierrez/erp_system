@@ -1,0 +1,27 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { DashboardWidget } from './DashboardWidget';
+
+<Meta title="Molecules/DashboardWidget" of={DashboardWidget} />
+
+# DashboardWidget
+
+A small card for dashboards showing a value, label and optional mini chart or icon. The border color can change with the `variant` prop.
+
+<Canvas>
+  <Story name="With sparkline">
+    <DashboardWidget
+      title="Ingresos"
+      value="$12k"
+      subLabel="Últimos 7 días"
+      chart={<svg width="80" height="24" viewBox="0 0 80 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="0,20 10,10 20,14 30,6 40,12 50,4 60,16 70,8 80,10" /></svg>}
+    />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="With icon">
+    <DashboardWidget title="Errores" value="5" iconName="AlertTriangle" subLabel="Hoy" variant="danger" />
+  </Story>
+</Canvas>
+
+<ArgsTable of={DashboardWidget} />
