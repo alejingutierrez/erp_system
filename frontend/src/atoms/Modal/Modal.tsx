@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const modalVariants = cva(
+export const modalVariants = cva(
   'relative w-full rounded-md p-6 shadow-lg focus:outline-none',
   {
     variants: {
