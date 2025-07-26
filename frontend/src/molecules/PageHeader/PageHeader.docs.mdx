@@ -1,0 +1,41 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { PageHeader } from './PageHeader';
+import { Button } from '@/atoms/Button';
+
+<Meta title="Molecules/PageHeader" of={PageHeader} />
+
+# PageHeader
+
+The `PageHeader` component displays breadcrumbs, a main title and
+an area for secondary actions. It adjusts actions below the title on
+small screens and can optionally show a divider.
+
+<Canvas>
+  <Story name="Structure">
+    <PageHeader
+      title="Products"
+      breadcrumbs={[{ label: 'Home', href: '#' }, { label: 'Catalog', href: '#' }, { label: 'Products' }]}
+      actions={<Button intent="secondary">New</Button>}
+      icon="Folder"
+      divider
+    />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Many actions">
+    <PageHeader
+      title="Orders"
+      breadcrumbs={[{ label: 'Home', href: '#' }, { label: 'Orders' }]}
+      actions={
+        <div className="flex gap-2 flex-wrap">
+          <Button intent="secondary">Export</Button>
+          <Button intent="secondary">Filter</Button>
+          <Button intent="secondary">New</Button>
+        </div>
+      }
+    />
+  </Story>
+</Canvas>
+
+<ArgsTable of={PageHeader} />
