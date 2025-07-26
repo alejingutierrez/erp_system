@@ -1,0 +1,16 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Input } from './Input';
+
+<Meta title="Atoms/Input" of={Input} />
+
+# Input
+
+The `Input` component captures a single line of text. It supports labels, icons and error states for building accessible forms.
+
+<Canvas>
+  <Story name="Example">
+    <Input label="Name" placeholder="John Doe" />
+  </Story>
+</Canvas>
+
+<ArgsTable of={Input} />

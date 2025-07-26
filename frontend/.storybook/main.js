@@ -8,7 +8,10 @@ const __dirname = path.dirname(__filename);
 
 const config = {
   framework: "@storybook/react-vite",
-  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
+  stories: [
+    "../src/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../src/**/*.docs.mdx",
+  ],
   addons: ["@storybook/addon-essentials"],
   core: { disableTelemetry: true },
   async viteFinal(config) {

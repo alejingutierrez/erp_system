@@ -1,0 +1,20 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Button } from './Button';
+
+<Meta title="Atoms/Button" of={Button} />
+
+# Button
+
+The `Button` component triggers an action or event. Use the `variant`, `intent` and `size` props to adjust its style and importance.
+
+<Canvas>
+  <Story name="Examples">
+    <div className="flex items-center gap-4">
+      <Button>Primary</Button>
+      <Button intent="secondary">Secondary</Button>
+      <Button variant="outline" intent="tertiary">Outline</Button>
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Button} />

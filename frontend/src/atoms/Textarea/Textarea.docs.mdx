@@ -1,0 +1,16 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { Textarea } from './Textarea';
+
+<Meta title="Atoms/Textarea" of={Textarea} />
+
+# Textarea
+
+The `Textarea` component allows users to enter multi-line text. It can auto-resize and show a character counter.
+
+<Canvas>
+  <Story name="Example">
+    <Textarea label="Message" placeholder="Type your message..." />
+  </Story>
+</Canvas>
+
+<ArgsTable of={Textarea} />
