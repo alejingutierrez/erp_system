@@ -1,0 +1,89 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import React from 'react';
+import { StepForm } from './StepForm';
+import { FormField } from '@/molecules/FormField';
+import { Input } from '@/atoms/Input';
+
+<Meta title="Molecules/StepForm" of={StepForm} />
+
+# StepForm
+
+The `StepForm` component provides a wizard style form with a step indicator,
+dynamic step content and navigation buttons. It validates the active step
+before allowing progress.
+
+<Canvas>
+  <Story name="MultiStepExample">
+    {function Example() {
+      const [current, setCurrent] = React.useState(0);
+      const [values, setValues] = React.useState({ name: '', age: '' });
+
+      const steps = [
+        {
+          id: 'name',
+          label: 'Nombre',
+          content: (
+            <FormField id="name" label="Nombre" required>
+              <Input
+                name="name"
+                value={values.name}
+                onChange={(e) =>
+                  setValues((v) => ({ ...v, name: e.target.value }))
+                }
+              />
+            </FormField>
+          ),
+        },
+        {
+          id: 'age',
+          label: 'Edad',
+          content: (
+            <FormField id="age" label="Edad" required>
+              <Input
+                name="age"
+                type="number"
+                value={values.age}
+                onChange={(e) =>
+                  setValues((v) => ({ ...v, age: e.target.value }))
+                }
+              />
+            </FormField>
+          ),
+        },
+        {
+          id: 'summary',
+          label: 'Resumen',
+          content: (
+            <div className="space-y-1">
+              <p className="text-sm">Nombre: {values.name}</p>
+              <p className="text-sm">Edad: {values.age}</p>
+            </div>
+          ),
+        },
+      ];
+
+      const validateStep = (idx) => {
+        if (idx === 0) return values.name.trim().length > 0;
+        if (idx === 1) return values.age.trim().length > 0;
+        return true;
+      };
+
+      const handleSubmit = () => {
+        // eslint-disable-next-line no-alert
+        alert(JSON.stringify(values));
+      };
+
+      return (
+        <StepForm
+          steps={steps}
+          current={current}
+          validateStep={validateStep}
+          onChangeStep={setCurrent}
+          onSubmit={handleSubmit}
+        />
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={StepForm} />
