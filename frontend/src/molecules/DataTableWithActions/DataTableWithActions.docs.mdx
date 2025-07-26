@@ -1,0 +1,30 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import React from 'react';
+import { DataTableWithActions } from './DataTableWithActions';
+
+<Meta title="Molecules/DataTableWithActions" of={DataTableWithActions} />
+
+# DataTableWithActions
+
+Tabla paginada con selección de filas y acciones masivas. Incluye botones de edición y eliminación por fila.
+
+<Canvas>
+  <Story name="Ejemplo editable">
+    {() => {
+      const rows = Array.from({ length: 12 }, (_, i) => ({ id: i + 1, name: `Item ${i + 1}`, stock: i }));
+      const columns = [
+        { id: 'name', header: 'Producto', accessor: (r) => r.name, sortable: true },
+        { id: 'stock', header: 'Stock', accessor: (r) => r.stock, sortable: true },
+      ];
+      return (
+        <DataTableWithActions
+          data={rows}
+          columns={columns}
+          pageSize={5}
+        />
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={DataTableWithActions} />
