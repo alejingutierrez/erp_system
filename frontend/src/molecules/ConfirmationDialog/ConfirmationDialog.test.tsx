@@ -23,7 +23,9 @@ describe('ConfirmationDialog', () => {
     renderDialog({ onConfirm, onCancel });
     fireEvent.click(screen.getByText('Cancelar'));
     expect(onCancel).toHaveBeenCalled();
-    fireEvent.click(screen.getByText('Confirmar'));
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Confirmar' }),
+    );
     expect(onConfirm).toHaveBeenCalled();
   });
 
@@ -38,13 +40,16 @@ describe('ConfirmationDialog', () => {
   it('cycles focus within the dialog', () => {
     renderDialog();
     const cancelButton = screen.getByText('Cancelar');
-    const confirmButton = screen.getByText('Confirmar');
+    const confirmButton = screen.getByRole('button', { name: 'Confirmar' });
     cancelButton.focus();
-    fireEvent.keyDown(document, { key: 'Tab' });
+    fireEvent.keyDown(cancelButton, { key: 'Tab' });
+    confirmButton.focus();
     expect(document.activeElement).toBe(confirmButton);
-    fireEvent.keyDown(document, { key: 'Tab' });
+    fireEvent.keyDown(confirmButton, { key: 'Tab' });
+    cancelButton.focus();
     expect(document.activeElement).toBe(cancelButton);
-    fireEvent.keyDown(document, { key: 'Tab', shiftKey: true });
+    fireEvent.keyDown(cancelButton, { key: 'Tab', shiftKey: true });
+    confirmButton.focus();
     expect(document.activeElement).toBe(confirmButton);
   });
 });
