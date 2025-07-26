@@ -44,14 +44,14 @@ describe('ConfirmationDialog', () => {
     const cancelButton = screen.getByRole('button', { name: /Cancelar/i });
     const confirmButton = screen.getByRole('button', { name: /Confirmar/i });
 
-    // Tab desde el último elemento debería volver al primero
+    // Desde el último elemento → Tab → primero
     confirmButton.focus();
     expect(document.activeElement).toBe(confirmButton);
 
     fireEvent.keyDown(document, { key: 'Tab' });
     expect(document.activeElement).toBe(cancelButton);
 
-    // Shift‑Tab desde el primero debería volver al último
+    // Desde el primero → Shift‑Tab → último
     fireEvent.keyDown(document, { key: 'Tab', shiftKey: true });
     expect(document.activeElement).toBe(confirmButton);
   });
