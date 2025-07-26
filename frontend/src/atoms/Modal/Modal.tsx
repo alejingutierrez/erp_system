@@ -134,3 +134,7 @@ export const Modal: React.FC<ModalProps> = ({
     document.body,
   );
 };
+
+Modal.displayName = 'Modal';
+
+export { modalVariants };
