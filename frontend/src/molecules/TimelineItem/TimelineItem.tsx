@@ -26,7 +26,7 @@ export interface TimelineItemProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof indicatorVariants> {
   /** Short title describing the event */
-  title: string;
+  title: React.ReactNode;
   /** Additional detail about the event */
   description?: string;
   /** Date or time string associated with the event */

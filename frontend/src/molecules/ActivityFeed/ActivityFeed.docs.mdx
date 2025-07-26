@@ -1,0 +1,22 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { ActivityFeed } from './ActivityFeed';
+
+<Meta title="Molecules/ActivityFeed" of={ActivityFeed} />
+
+# ActivityFeed
+
+The `ActivityFeed` component displays recent activity grouped by day in a reverse chronological timeline.
+
+<Canvas>
+  <Story name="Ejemplo">
+    <ActivityFeed
+      items={[
+        { id: '1', date: new Date('2025-07-05T14:32:00'), content: 'Pedido #1042 entregado', icon: 'Check' },
+        { id: '2', date: new Date('2025-07-05T10:15:00'), content: 'Pedido #1042 enviado', icon: 'Truck' },
+        { id: '3', date: new Date('2025-07-04T09:00:00'), content: 'Pedido #1042 creado', icon: 'Plus' },
+      ]}
+    />
+  </Story>
+</Canvas>
+
+<ArgsTable of={ActivityFeed} />
