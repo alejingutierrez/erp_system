@@ -1,0 +1,35 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import React from 'react';
+import { AddressForm } from './AddressForm';
+
+<Meta title="Molecules/AddressForm" of={AddressForm} />
+
+# AddressForm
+
+El `AddressForm` agrupa campos comunes de dirección para envíos o facturación. 
+Permite validar el código postal según el país seleccionado y opcionalmente mostrar un campo de teléfono.
+
+<Canvas>
+  <Story name="Ejemplo">
+    {() => {
+      const [addr, setAddr] = React.useState({
+        line1: '',
+        line2: '',
+        city: '',
+        state: '',
+        country: 'ES',
+        postalCode: '',
+        phone: '',
+      });
+      const countries = [
+        { label: 'España', value: 'ES', postalPattern: '^\\d{5}$', postalMask: '28013' },
+        { label: 'Estados Unidos', value: 'US', postalPattern: '^\\d{5}(?:-\\d{4})?$', postalMask: '90210' },
+      ];
+      return (
+        <AddressForm value={addr} onChange={(v) => setAddr({ ...addr, ...v })} countries={countries} showPhone />
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={AddressForm} />

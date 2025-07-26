@@ -1,0 +1,30 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import React from 'react';
+import { PriceRangeFilter } from './PriceRangeFilter';
+
+<Meta title="Molecules/PriceRangeFilter" of={PriceRangeFilter} />
+
+# PriceRangeFilter
+
+Control para filtrar precios entre un mínimo y un máximo. Combina dos campos de
+entrada numérica sincronizados con un control deslizante de doble manija.
+
+<Canvas>
+  <Story name="Ejemplo">
+    {() => {
+      const [range, setRange] = React.useState<[number, number]>([100, 400]);
+      return (
+        <PriceRangeFilter
+          min={0}
+          max={500}
+          step={50}
+          value={range}
+          onChange={setRange}
+          currency="ARS"
+        />
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={PriceRangeFilter} />

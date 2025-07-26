@@ -1,0 +1,42 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { StatsGroup } from './StatsGroup';
+
+<Meta title="Molecules/StatsGroup" of={StatsGroup} />
+
+# StatsGroup
+
+The `StatsGroup` molecule displays multiple `StatCard` components in a responsive grid. Use it to showcase key performance indicators together.
+
+<Canvas>
+  <Story name="Example">
+    <StatsGroup
+      stats={[
+        { value: '120', label: 'Pedidos', iconName: 'Folder', progress: 60 },
+        { value: '$5k', label: 'Ventas', iconName: 'File', progress: 30 },
+        { value: '24', label: 'Clientes', iconName: 'Users' },
+      ]}
+      withDividers
+    />
+  </Story>
+</Canvas>
+
+## Layout options
+
+<Canvas>
+  <Story name="Row vs Column">
+    <div className="space-y-4">
+      <StatsGroup
+        direction="row"
+        stats={[{ value: '1', label: 'Uno' }, { value: '2', label: 'Dos' }]}
+        withDividers
+      />
+      <StatsGroup
+        direction="column"
+        stats={[{ value: '1', label: 'Uno' }, { value: '2', label: 'Dos' }]}
+        withDividers
+      />
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={StatsGroup} />
