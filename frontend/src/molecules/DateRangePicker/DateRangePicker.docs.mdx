@@ -1,0 +1,35 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import React from 'react';
+import { DateRangePicker } from './DateRangePicker';
+
+<Meta title="Molecules/DateRangePicker" of={DateRangePicker} />
+
+# DateRangePicker
+
+El `DateRangePicker` permite seleccionar un rango de fechas mediante dos campos y un calendario emergente.
+
+## Ejemplo básico
+
+<Canvas>
+  <Story name="Ejemplo">
+    {() => {
+      const [range, setRange] = React.useState({ start: null, end: null });
+      return <DateRangePicker value={range} onChange={setRange} />;
+    }}
+  </Story>
+</Canvas>
+
+## Deshabilitar fechas pasadas
+
+<Canvas>
+  <Story name="Sin pasado">
+    {() => {
+      const [range, setRange] = React.useState({ start: null, end: null });
+      return (
+        <DateRangePicker disabledPast value={range} onChange={setRange} />
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable of={DateRangePicker} />

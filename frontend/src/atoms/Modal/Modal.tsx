@@ -58,10 +58,10 @@ export const Modal: React.FC<ModalProps> = ({
     if (isOpen) {
       lastFocused.current = document.activeElement;
       const container = containerRef.current;
-      if (container) {
-        // delay focus to allow portal mount
-        setTimeout(() => container.focus(), 0);
-      }
+
+      // deja que el portal monte antes de enfocar
+      container && setTimeout(() => container.focus(), 0);
+
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
           e.preventDefault();
@@ -70,20 +70,18 @@ export const Modal: React.FC<ModalProps> = ({
           const focusable = container?.querySelectorAll<HTMLElement>(
             'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])',
           );
-          if (!focusable || focusable.length === 0) return;
+          if (!focusable?.length) return;
+
           const first = focusable[0];
           const last = focusable[focusable.length - 1];
-          if (e.shiftKey) {
-            if (document.activeElement === first) {
-              e.preventDefault();
-              last.focus();
-            }
-          } else if (document.activeElement === last) {
+
+          if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
             e.preventDefault();
-            first.focus();
+            (e.shiftKey ? last : first).focus();
           }
         }
       };
+
       document.addEventListener('keydown', handleKeyDown);
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
@@ -113,10 +111,11 @@ export const Modal: React.FC<ModalProps> = ({
         tabIndex={-1}
       >
         {title && (
-          <h2 id="modal-title" className="text-lg font-semibold mb-4">
+          <h2 id="modal-title" className="mb-4 text-lg font-semibold">
             {title}
           </h2>
         )}
+
         <button
           type="button"
           aria-label="Close"
@@ -128,9 +127,14 @@ export const Modal: React.FC<ModalProps> = ({
         >
           <X size={18} />
         </button>
+
         {children}
       </div>
     </div>,
     document.body,
   );
 };
+
+Modal.displayName = 'Modal';
+
+export { modalVariants };
