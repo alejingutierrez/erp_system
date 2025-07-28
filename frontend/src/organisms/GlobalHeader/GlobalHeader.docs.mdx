@@ -1,0 +1,43 @@
+import { Meta, Canvas, Story, ArgsTable } from '@storybook/blocks';
+import { GlobalHeader } from './GlobalHeader';
+
+<Meta title="Organisms/GlobalHeader" of={GlobalHeader} />
+
+# GlobalHeader
+
+The `GlobalHeader` organizes primary navigation, search and user actions in a single top bar. It collapses the navigation items into a menu button on narrow screens.
+
+<Canvas>
+  <Story name="Desktop">
+    <GlobalHeader
+      logo="Fashion"
+      title="ERP"
+      navItems={[{ label: 'Dashboard', iconName: 'Home' }]}
+      userName="Jane Doe"
+      userMenuItems={[{ label: 'Logout' }]}
+      notificationsCount={2}
+      actionLabel="New"
+      divider
+    />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Mobile">
+    <GlobalHeader
+      logo="Fashion"
+      title="ERP"
+      navItems={[{ label: 'Dashboard', iconName: 'Home' }]}
+      userName="Jane Doe"
+      userMenuItems={[{ label: 'Logout' }]}
+      notificationsCount={2}
+      actionLabel="New"
+    />
+  </Story>
+</Canvas>
+
+<ArgsTable of={GlobalHeader} />
+
+## Responsive behavior
+
+Below the desktop breakpoint (`1024px`) the navigation items collapse behind a menu button. The search bar moves inside the drawer. Use the `onNavigate`, `onSearch` and `onNotificationsOpen` callbacks to capture user actions.
