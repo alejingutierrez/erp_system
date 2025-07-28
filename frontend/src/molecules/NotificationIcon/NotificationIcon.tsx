@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
-import { Icon, type IconName } from '@/atoms/Icon';
+import { Icon, type IconName, iconVariants } from '@/atoms/Icon';
+import type { VariantProps } from 'class-variance-authority';
 import { Badge, type BadgeProps } from '@/atoms/Badge';
 
 export interface NotificationIconProps
@@ -13,11 +14,13 @@ export interface NotificationIconProps
   color?: BadgeProps['variant'];
   /** Size of the icon */
   size?: 'sm' | 'md' | 'lg';
+  /** Color of the icon */
+  iconColor?: VariantProps<typeof iconVariants>['color'];
 }
 
 export const NotificationIcon = React.forwardRef<HTMLButtonElement, NotificationIconProps>(
   (
-    { count = 0, iconName = 'Bell', color = 'destructive', size = 'md', className, ...props },
+    { count = 0, iconName = 'Bell', color = 'destructive', size = 'md', iconColor = 'primary', className, ...props },
     ref,
   ) => {
     const showBadge = count > 0;
@@ -30,7 +33,7 @@ export const NotificationIcon = React.forwardRef<HTMLButtonElement, Notification
         className={cn('relative inline-flex', className)}
         {...props}
       >
-        <Icon name={iconName} size={size} aria-hidden="true" />
+        <Icon name={iconName} size={size} color={iconColor} aria-hidden="true" />
         {showBadge && (
           <Badge
             variant={color}
