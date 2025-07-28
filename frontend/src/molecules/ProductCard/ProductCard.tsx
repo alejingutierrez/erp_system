@@ -96,6 +96,7 @@ export const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
                 variant="icon"
                 size="sm"
                 intent="secondary"
+                aria-label="Editar producto"
                 onClick={(e) => {
                   e.stopPropagation();
                   (onEdit ?? defaultOnEdit)();
@@ -107,6 +108,7 @@ export const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
                 variant="icon"
                 size="sm"
                 intent="tertiary"
+                aria-label="Eliminar producto"
                 onClick={(e) => {
                   e.stopPropagation();
                   (onDelete ?? defaultOnDelete)();
@@ -118,12 +120,13 @@ export const ProductCard = React.forwardRef<HTMLDivElement, ProductCardProps>(
                 variant="icon"
                 size="sm"
                 intent="primary"
+                aria-label="Agregar al carrito"
                 onClick={(e) => {
                   e.stopPropagation();
                   (onAddToCart ?? defaultOnAddToCart)();
                 }}
               >
-                <Icon name="Plus" />
+                <Icon name="ShoppingCart" />
               </Button>
             </div>
           )}

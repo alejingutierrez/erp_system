@@ -1,3 +1,4 @@
+/** @type { import('@storybook/react-vite').StorybookConfig } */
 const { mergeConfig } = require('vite');
 const path = require('path');
 

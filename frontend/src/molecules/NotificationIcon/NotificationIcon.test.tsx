@@ -24,6 +24,12 @@ describe('NotificationIcon', () => {
     expect(screen.getByText('99+')).toBeInTheDocument();
   });
 
+  it('icon is black by default', () => {
+    render(<NotificationIcon count={1} />);
+    const icon = screen.getByRole('button').querySelector('svg');
+    expect(icon).toHaveClass('text-primary');
+  });
+
   it('badge text is black for all variants', () => {
     const variants = ['neutral', 'success', 'warning', 'destructive', 'info'] as const;
     variants.forEach((variant) => {
