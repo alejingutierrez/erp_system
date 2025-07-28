@@ -15,3 +15,5 @@ pnpm test         # Vitest + RTL
 ```
 
 Para más detalles sobre nuestra filosofía y convenciones de diseño consulta [frontend/docs/agents.md](frontend/docs/agents.md).
+
+Nuevos componentes se añaden continuamente al Design System. Desde esta versión se incluye el organismo **GlobalHeader** ubicado en `frontend/src/organisms/GlobalHeader` para crear barras de navegación superiores responsivas.
