@@ -13,7 +13,7 @@ export interface NavLink {
 }
 
 const sidebarVariants = cva(
-  'sidebar-menu flex flex-col h-full border-r border-border bg-background',
+  'sidebar-menu flex flex-col h-full border-r border-border bg-background glass shadow-glass',
   {
     variants: {
       collapsed: {
@@ -37,11 +37,11 @@ const sidebarVariants = cva(
 );
 
 const itemVariants = cva(
-  'flex items-center gap-2 w-full rounded-md px-3 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary hover:bg-muted',
+  'flex items-center gap-3 w-full rounded-md px-4 py-2.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary hover:bg-muted',
   {
     variants: {
       collapsed: {
-        true: 'justify-center p-3',
+        true: 'justify-center p-3.5',
         false: '',
       },
     },
@@ -88,7 +88,7 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
   return (
     <SidebarMenuContext.Provider value={ctx}>
       <aside className={cn(sidebarVariants({ collapsed: isCollapsed, color }), className)}>
-        <nav aria-label="Main" className="flex-1 space-y-1 py-2">
+        <nav aria-label="Main" className="flex-1 space-y-2 py-3">
           {items.map((item) => (
             <SidebarItem key={item.label} item={item} onNavigate={onNavigate} depth={0} />
           ))}
@@ -118,7 +118,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ item, depth, onNavigate }) =>
   if (!ctx) return null;
   const { collapsed, open, toggle } = ctx;
   const hasChildren = item.children && item.children.length > 0;
-  const paddingLeft = collapsed ? undefined : depth * 16;
+  const paddingLeft = collapsed ? undefined : depth * 20;
 
   if (hasChildren) {
     const isOpen = open.includes(item.label);
@@ -148,7 +148,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ item, depth, onNavigate }) =>
           open={isOpen}
           onToggle={() => toggle(item.label)}
         >
-          <div className="space-y-1">
+          <div className="space-y-2">
             {item.children!.map((child) => (
               <SidebarItem key={child.label} item={child} depth={depth + 1} onNavigate={onNavigate} />
             ))}
