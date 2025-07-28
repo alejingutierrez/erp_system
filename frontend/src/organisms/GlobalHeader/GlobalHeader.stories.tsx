@@ -36,6 +36,17 @@ const baseItems = [
   { label: 'Customers', iconName: 'Users', path: '/customers' },
 ];
 
+const submenuItems = [
+  {
+    label: 'Reports',
+    iconName: 'BarChart2',
+    children: [
+      { label: 'Sales', path: '/reports/sales' },
+      { label: 'Inventory', path: '/reports/inventory' },
+    ],
+  },
+];
+
 export const Default: Story = {
   args: {
     logo: 'Fashion',
@@ -69,5 +80,12 @@ export const CustomColors: Story = {
     ...Default.args,
     color: 'primary',
     variant: 'glass',
+  },
+};
+
+export const WithSubmenus: Story = {
+  args: {
+    ...Default.args,
+    navItems: [...baseItems, ...submenuItems],
   },
 };

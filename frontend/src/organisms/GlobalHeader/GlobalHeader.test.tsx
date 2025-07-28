@@ -7,6 +7,14 @@ const items = [
   { label: 'Users', iconName: 'Users', path: '/users' },
 ];
 
+const submenu = [
+  {
+    label: 'Reports',
+    iconName: 'BarChart2' as const,
+    children: [{ label: 'Sales', path: '/reports/sales' }],
+  },
+];
+
 const resize = (w: number) => {
   act(() => {
     window.innerWidth = w;
@@ -30,6 +38,7 @@ describe('GlobalHeader', () => {
     expect(screen.getByText('Logo')).toBeInTheDocument();
     expect(screen.getByRole('search')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Notifications' })).toBeInTheDocument();
+    expect(screen.getByText('Ana')).toBeInTheDocument();
   });
 
   it('calls callbacks', () => {
@@ -65,5 +74,14 @@ describe('GlobalHeader', () => {
     resize(1100);
     expect(screen.queryByLabelText('Menu')).not.toBeInTheDocument();
     expect(screen.getByText('Home')).toBeInTheDocument();
+  });
+
+  it('navigates via submenu', () => {
+    const onNav = vi.fn();
+    resize(1280);
+    render(<GlobalHeader navItems={submenu} onNavigate={onNav} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Reports' }));
+    fireEvent.click(screen.getByText('Sales'));
+    expect(onNav).toHaveBeenCalledWith('/reports/sales');
   });
 });

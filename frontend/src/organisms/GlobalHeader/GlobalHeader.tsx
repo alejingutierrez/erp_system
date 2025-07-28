@@ -10,9 +10,16 @@ import { Avatar } from '@/atoms/Avatar';
 import { Button } from '@/atoms/Button';
 import { Divider } from '@/atoms/Divider';
 import { Icon } from '@/atoms/Icon';
+import { ThemeSwitcher } from '@/atoms/ThemeSwitcher';
+import { Modal } from '@/atoms/Modal';
+
+interface NavChild extends DropdownMenuItem {
+  path?: string;
+}
 
 interface NavLink extends Omit<NavItemProps, 'active'> {
   path?: string;
+  children?: NavChild[];
 }
 
 const headerVariants = cva(
@@ -31,7 +38,7 @@ const headerVariants = cva(
       },
     },
     defaultVariants: {
-      variant: 'solid',
+      variant: 'glass',
       color: 'default',
     },
   },
@@ -76,6 +83,7 @@ export interface GlobalHeaderProps
   userAvatarSrc?: string;
   userMenuItems?: DropdownMenuItem[];
   divider?: boolean;
+  activePath?: string;
   onNavigate?: (path: string) => void;
   onSearch?: (term: string) => void;
   onNotificationsOpen?: () => void;
@@ -97,6 +105,7 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
       onNavigate,
       onSearch,
       onNotificationsOpen,
+      activePath,
       variant,
       color,
       className,
@@ -107,30 +116,59 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
     const isDesktop = useIsDesktop();
     const isLarge = useIsLarge();
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [searchOpen, setSearchOpen] = React.useState(false);
 
     React.useEffect(() => {
       if (isDesktop) setMobileOpen(false);
     }, [isDesktop]);
 
-    const navContent = (
-      <>
-        {navItems.map((item) => (
-          <NavItem
+    const renderNavItem = (item: NavLink) => {
+      const base = (
+        <NavItem
+          iconName={item.iconName}
+          label={item.label}
+          active={activePath === item.path}
+          onClick={() => {
+            if (item.path) onNavigate?.(item.path);
+            else onNavigate?.(item.label);
+            setMobileOpen(false);
+          }}
+        />
+      );
+
+      if (item.children && item.children.length > 0) {
+        return (
+          <DropdownMenu
             key={item.label}
-            iconName={item.iconName}
-            label={item.label}
-            onClick={() => {
-              if (item.path) onNavigate?.(item.path);
-              else onNavigate?.(item.label);
+            triggerLabel={
+              <span className="flex items-center gap-2">
+                <Icon name={item.iconName} aria-hidden="true" />
+                <span>{item.label}</span>
+              </span>
+            }
+            variant="ghost"
+            items={item.children}
+            onSelect={(child) => {
+              const c = child as NavChild;
+              if (c.path) onNavigate?.(c.path);
+              else onNavigate?.(c.label);
               setMobileOpen(false);
             }}
           />
-        ))}
-      </>
-    );
+        );
+      }
+      return React.cloneElement(base, { key: item.label });
+    };
+
+    const navContent = <>{navItems.map(renderNavItem)}</>;
 
     const userTrigger = (
-      <Avatar src={userAvatarSrc} name={userName} size="sm" />
+      <div className="flex items-center gap-2">
+        <Avatar src={userAvatarSrc} name={userName} size="sm" />
+        {isDesktop && userName && (
+          <span className="text-sm font-medium">{userName}</span>
+        )}
+      </div>
     );
 
     return (
@@ -167,6 +205,16 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
               className="mx-auto max-w-xs flex-1"
             />
           )}
+          {!isLarge && (
+            <Button
+              variant="icon"
+              size="sm"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Buscar"
+            >
+              <Icon name="Search" aria-hidden="true" />
+            </Button>
+          )}
           <div className="flex items-center gap-2">
             {actionLabel && <Button onClick={onAction}>{actionLabel}</Button>}
             <NotificationIcon
@@ -174,10 +222,12 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
               onClick={onNotificationsOpen}
               aria-label="Notifications"
             />
+            <ThemeSwitcher />
             {userMenuItems && userMenuItems.length > 0 ? (
               <DropdownMenu
                 items={userMenuItems}
                 triggerLabel={userTrigger}
+                variant="ghost"
                 align="end"
               />
             ) : (
@@ -185,10 +235,13 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
             )}
           </div>
         </header>
-        {!isDesktop && mobileOpen && (
+        {!isDesktop && (
           <nav
             aria-label="Mobile"
-            className="space-y-1 border-b border-t border-border bg-background p-2 sm:hidden"
+            className={cn(
+              'overflow-hidden transition-all duration-300 space-y-1 border-b border-t border-border bg-background p-2 sm:hidden',
+              mobileOpen ? 'max-h-96' : 'max-h-0',
+            )}
           >
             <SearchBar
               onSearch={onSearch ?? (() => {})}
@@ -198,6 +251,9 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
           </nav>
         )}
         {divider && <Divider className="mt-2" />}
+        <Modal isOpen={searchOpen} onClose={() => setSearchOpen(false)} title="Buscar">
+          <SearchBar onSearch={onSearch ?? (() => {})} className="w-full" />
+        </Modal>
       </>
     );
   },

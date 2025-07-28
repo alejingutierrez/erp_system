@@ -36,6 +36,8 @@ import {
   Megaphone,
   Database,
   BarChart2,
+  Sun,
+  Moon,
 } from 'lucide-react';
 
 export const iconMap = {
@@ -76,6 +78,8 @@ export const iconMap = {
   Megaphone,
   Database,
   BarChart2,
+  Sun,
+  Moon,
 };
 
 export type IconName = keyof typeof iconMap;
