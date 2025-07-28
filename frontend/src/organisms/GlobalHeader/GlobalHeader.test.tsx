@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { GlobalHeader } from './GlobalHeader';
 
@@ -8,12 +8,15 @@ const items = [
 ];
 
 const resize = (w: number) => {
-  window.innerWidth = w;
-  window.dispatchEvent(new Event('resize'));
+  act(() => {
+    window.innerWidth = w;
+    window.dispatchEvent(new Event('resize'));
+  });
 };
 
 describe('GlobalHeader', () => {
   it('renders logo and actions', () => {
+    resize(1280); // Asegura modo desktop
     render(
       <GlobalHeader
         logo={<span>Logo</span>}
@@ -57,7 +60,9 @@ describe('GlobalHeader', () => {
     expect(screen.queryByText('Home')).not.toBeInTheDocument();
     fireEvent.click(screen.getByLabelText('Menu'));
     expect(screen.getByText('Home')).toBeInTheDocument();
-    resize(800);
+    expect(screen.getByRole('search')).toBeInTheDocument();
+
+    resize(1100);
     expect(screen.queryByLabelText('Menu')).not.toBeInTheDocument();
     expect(screen.getByText('Home')).toBeInTheDocument();
   });
