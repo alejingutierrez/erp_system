@@ -1,7 +1,7 @@
+/** @type { import('@storybook/react-vite').StorybookConfig } */
 const { mergeConfig } = require('vite');
 const path = require('path');
 
-/** @type { import('@storybook/react-vite').StorybookConfig } */
 module.exports = {
   framework: '@storybook/react-vite',
   stories: [
