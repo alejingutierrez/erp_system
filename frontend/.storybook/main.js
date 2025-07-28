@@ -1,5 +1,6 @@
 /** @type { import('@storybook/react-vite').StorybookConfig } */
 import { mergeConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -16,6 +17,7 @@ const config = {
   core: { disableTelemetry: true },
   async viteFinal(config) {
     return mergeConfig(config, {
+      plugins: [react()],
       root: path.resolve(__dirname, '..'),
       resolve: {
         alias: {
