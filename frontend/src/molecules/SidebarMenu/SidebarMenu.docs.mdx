@@ -8,16 +8,33 @@ import { SidebarMenu, NavLink } from './SidebarMenu';
 The `SidebarMenu` component renders a collapsible vertical navigation. It supports simple links and nested sections. When collapsed, only icons are displayed and each item shows a tooltip with its label.
 
 const demoItems: NavLink[] = [
-  { label: 'Inicio', icon: 'Home', path: '/' },
+  { label: 'Dashboard', icon: 'LayoutDashboard', path: '/' },
   {
-    label: 'Proyectos',
-    icon: 'Folder',
+    label: 'Ventas',
+    icon: 'ShoppingCart',
     children: [
-      { label: 'Activos', path: '/proyectos/activos' },
-      { label: 'Archivados', path: '/proyectos/archivados' },
+      { label: 'Pedidos', path: '/ventas/pedidos' },
+      { label: 'Facturas', path: '/ventas/facturas' },
+    ],
+  },
+  {
+    label: 'Clientes',
+    icon: 'Users',
+    children: [
+      { label: 'Lista', path: '/clientes' },
+      { label: 'Segmentos', path: '/clientes/segmentos' },
+    ],
+  },
+  {
+    label: 'Marketing',
+    icon: 'Megaphone',
+    children: [
+      { label: 'Campañas', path: '/marketing/campanas' },
+      { label: 'CDP', path: '/marketing/cdp' },
     ],
   },
   { label: 'Reportes', icon: 'BarChart2', path: '/reportes' },
+  { label: 'Ajustes', icon: 'Settings', path: '/ajustes' },
 ];
 
 <Canvas>

@@ -30,6 +30,12 @@ import {
   TrendingUp,
   TrendingDown,
   X,
+  LayoutDashboard,
+  ShoppingCart,
+  Users,
+  Megaphone,
+  Database,
+  BarChart2,
 } from 'lucide-react';
 
 export const iconMap = {
@@ -64,6 +70,12 @@ export const iconMap = {
   TrendingUp,
   TrendingDown,
   X,
+  LayoutDashboard,
+  ShoppingCart,
+  Users,
+  Megaphone,
+  Database,
+  BarChart2,
 };
 
 export type IconName = keyof typeof iconMap;
