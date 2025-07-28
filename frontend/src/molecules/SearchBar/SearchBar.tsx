@@ -74,7 +74,10 @@ export const SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
         aria-label={ariaLabel}
         ref={ref}
         onSubmit={handleSubmit}
-        className={cn('search-bar flex items-center gap-2', className)}
+        className={cn(
+          'search-bar flex items-center gap-2 w-80',
+          className,
+        )}
         {...props}
       >
         <Input
@@ -82,12 +85,17 @@ export const SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
           placeholder={placeholder}
           value={term}
           onChange={handleChange}
-          LeftIcon={SearchIcon}
+          className="flex-1"
+          LeftIcon={showButton ? undefined : SearchIcon}
         />
         {showButton && (
-          <Button type="submit" size="sm">
-            Buscar
-          </Button>
+          <Button
+            type="submit"
+            variant="icon"
+            size="md"
+            aria-label="Buscar"
+            LeftIcon={SearchIcon}
+          />
         )}
       </form>
     );
