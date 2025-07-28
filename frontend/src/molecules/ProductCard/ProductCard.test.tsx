@@ -45,6 +45,13 @@ describe('ProductCard', () => {
     expect(onAdd).toHaveBeenCalled();
   });
 
+  it('renders action buttons with accessible labels', () => {
+    render(<ProductCard productName="Camisa" price="$10" showActions />);
+    expect(screen.getByLabelText('Editar producto')).toBeInTheDocument();
+    expect(screen.getByLabelText('Eliminar producto')).toBeInTheDocument();
+    expect(screen.getByLabelText('Agregar al carrito')).toBeInTheDocument();
+  });
+
   it('renders default actions when handlers are not provided', () => {
     const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     render(<ProductCard productName="Camisa" price="$10" showActions />);
