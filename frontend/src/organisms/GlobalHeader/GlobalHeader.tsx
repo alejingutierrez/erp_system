@@ -18,23 +18,24 @@ interface NavLink extends Omit<NavItemProps, 'active'> {
 const headerVariants = cva(
   'global-header flex items-center gap-4 px-4 shadow-sm border-b border-border h-14 sm:h-16',
   {
-  variants: {
-    variant: {
-      solid: '',
-      glass: 'glass backdrop-blur-md',
+    variants: {
+      variant: {
+        solid: '',
+        glass: 'glass backdrop-blur-md',
+      },
+      color: {
+        default: 'bg-background text-foreground',
+        primary: 'bg-primary text-primary-foreground',
+        secondary: 'bg-secondary text-secondary-foreground',
+        tertiary: 'bg-tertiary text-tertiary-foreground',
+      },
     },
-    color: {
-      default: 'bg-background text-foreground',
-      primary: 'bg-primary text-primary-foreground',
-      secondary: 'bg-secondary text-secondary-foreground',
-      tertiary: 'bg-tertiary text-tertiary-foreground',
+    defaultVariants: {
+      variant: 'solid',
+      color: 'default',
     },
   },
-  defaultVariants: {
-    variant: 'solid',
-    color: 'default',
-  },
-});
+);
 
 function useIsDesktop(breakpoint = 1024) {
   const [isDesktop, setIsDesktop] = React.useState(() =>
@@ -141,7 +142,9 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
         >
           <div className="flex items-center gap-2">
             {logo}
-            {title && <span className="font-heading text-lg font-medium">{title}</span>}
+            {title && (
+              <span className="font-heading text-lg font-medium">{title}</span>
+            )}
           </div>
           {isDesktop ? (
             <nav aria-label="Main" className="flex items-center gap-2">
@@ -187,7 +190,10 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
             aria-label="Mobile"
             className="space-y-1 border-b border-t border-border bg-background p-2 sm:hidden"
           >
-            <SearchBar onSearch={onSearch ?? (() => {})} className="mb-2" />
+            <SearchBar
+              onSearch={onSearch ?? (() => {})}
+              className="mb-2"
+            />
             {navContent}
           </nav>
         )}
@@ -196,6 +202,6 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
     );
   },
 );
-GlobalHeader.displayName = 'GlobalHeader';
 
+GlobalHeader.displayName = 'GlobalHeader';
 export { headerVariants as globalHeaderVariants };

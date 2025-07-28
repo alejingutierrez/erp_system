@@ -16,7 +16,7 @@ const resize = (w: number) => {
 
 describe('GlobalHeader', () => {
   it('renders logo and actions', () => {
-    resize(1280);
+    resize(1280); // Asegura modo desktop
     render(
       <GlobalHeader
         logo={<span>Logo</span>}
@@ -61,6 +61,7 @@ describe('GlobalHeader', () => {
     fireEvent.click(screen.getByLabelText('Menu'));
     expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByRole('search')).toBeInTheDocument();
+
     resize(1100);
     expect(screen.queryByLabelText('Menu')).not.toBeInTheDocument();
     expect(screen.getByText('Home')).toBeInTheDocument();
