@@ -96,6 +96,7 @@ export const OrderItem = React.forwardRef<HTMLDivElement, OrderItemProps>(
             color={iconColor}
             aria-hidden="true"
             data-testid="order-icon"
+            className="shrink-0"
           />
         )}
         <div className="flex flex-1 flex-col gap-1 sm:flex-row sm:items-center">
@@ -109,7 +110,7 @@ export const OrderItem = React.forwardRef<HTMLDivElement, OrderItemProps>(
             {total}
           </Text>
         </div>
-        <Badge variant={badgeVariant} className="ml-2 whitespace-nowrap">
+        <Badge variant={badgeVariant} className="ml-2 whitespace-nowrap shrink-0">
           {status}
         </Badge>
         {actionOptions && actionOptions.length > 0 && (
@@ -118,7 +119,7 @@ export const OrderItem = React.forwardRef<HTMLDivElement, OrderItemProps>(
             onOptionSelect={onActionSelect}
             position="bottom-right"
             aria-label="Acciones"
-            className="ml-2"
+            className="ml-2 shrink-0"
           >
             <MoreHorizontal size={16} />
           </ActionMenu>
