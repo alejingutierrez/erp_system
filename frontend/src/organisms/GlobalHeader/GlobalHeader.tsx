@@ -6,6 +6,8 @@ import { NavItem, type NavItemProps } from '@/molecules/NavItem';
 import { SearchBar } from '@/molecules/SearchBar';
 import { NotificationIcon } from '@/molecules/NotificationIcon';
 import { DropdownMenu, type DropdownMenuItem } from '@/molecules/DropdownMenu';
+import { DropdownSelect } from '@/molecules/DropdownSelect';
+import { SidebarMenu, type NavLink as SidebarNavLink } from '@/molecules/SidebarMenu';
 import { Avatar } from '@/atoms/Avatar';
 import { Button } from '@/atoms/Button';
 import { Divider } from '@/atoms/Divider';
@@ -76,12 +78,17 @@ export interface GlobalHeaderProps
   logo?: React.ReactNode;
   title?: React.ReactNode;
   navItems?: NavLink[];
+  sidebarItems?: SidebarNavLink[];
   actionLabel?: string;
   onAction?: () => void;
   notificationsCount?: number;
   userName?: string;
   userAvatarSrc?: string;
   userMenuItems?: DropdownMenuItem[];
+  stores?: string[];
+  selectedStore?: string;
+  onStoreChange?: (store: string) => void;
+  helpItems?: DropdownMenuItem[];
   divider?: boolean;
   activePath?: string;
   onNavigate?: (path: string) => void;
@@ -95,12 +102,17 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
       logo,
       title,
       navItems = [],
+      sidebarItems,
       actionLabel,
       onAction,
       notificationsCount = 0,
       userName,
       userAvatarSrc,
       userMenuItems,
+      stores = [],
+      selectedStore,
+      onStoreChange,
+      helpItems,
       divider = false,
       onNavigate,
       onSearch,
@@ -117,6 +129,22 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
     const isLarge = useIsLarge();
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [searchOpen, setSearchOpen] = React.useState(false);
+
+    React.useEffect(() => {
+      const handler = (e: KeyboardEvent) => {
+        const meta = e.metaKey || e.ctrlKey;
+        if (meta && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          setSearchOpen(true);
+        }
+        if (meta && e.shiftKey && e.key.toLowerCase() === 'n') {
+          e.preventDefault();
+          onAction?.();
+        }
+      };
+      window.addEventListener('keydown', handler);
+      return () => window.removeEventListener('keydown', handler);
+    }, [onAction]);
 
     React.useEffect(() => {
       if (isDesktop) setMobileOpen(false);
@@ -160,7 +188,8 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
       return React.cloneElement(base, { key: item.label });
     };
 
-    const navContent = <>{navItems.map(renderNavItem)}</>;
+    const menuItems = sidebarItems ?? navItems;
+    const navContent = <>{menuItems.map(renderNavItem)}</>;
 
     const userTrigger = (
       <div className="flex items-center gap-2">
@@ -172,23 +201,23 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
     );
 
     return (
-      <>
-        <header
-          ref={ref}
-          className={cn(headerVariants({ variant, color }), className)}
-          {...props}
-        >
+      <div className="flex">
+        {isDesktop && menuItems.length > 0 && (
+          <SidebarMenu items={menuItems} onNavigate={onNavigate ?? (() => {})} />
+        )}
+        <div className="flex-1">
+          <header
+            ref={ref}
+            className={cn(headerVariants({ variant, color }), className)}
+            {...props}
+          >
           <div className="flex items-center gap-2">
             {logo}
             {title && (
               <span className="font-heading text-lg font-medium">{title}</span>
             )}
           </div>
-          {isDesktop ? (
-            <nav aria-label="Main" className="flex items-center gap-2">
-              {navContent}
-            </nav>
-          ) : (
+          {!isDesktop && (
             <button
               type="button"
               onClick={() => setMobileOpen((o) => !o)}
@@ -215,6 +244,14 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
               <Icon name="Search" aria-hidden="true" />
             </Button>
           )}
+          {stores.length > 0 && (
+            <DropdownSelect
+              options={stores}
+              selected={selectedStore}
+              onChange={(v) => onStoreChange?.(v as string)}
+              className="w-32"
+            />
+          )}
           <div className="flex items-center gap-2">
             {actionLabel && <Button onClick={onAction}>{actionLabel}</Button>}
             <NotificationIcon
@@ -222,6 +259,13 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
               onClick={onNotificationsOpen}
               aria-label="Notifications"
             />
+            {helpItems && (
+              <DropdownMenu
+                items={helpItems}
+                triggerLabel={<Icon name="HelpCircle" aria-hidden="true" />}
+                variant="ghost"
+              />
+            )}
             <ThemeSwitcher />
             {userMenuItems && userMenuItems.length > 0 ? (
               <DropdownMenu
@@ -251,10 +295,11 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
           </nav>
         )}
         {divider && <Divider className="mt-2" />}
+        </div>
         <Modal isOpen={searchOpen} onClose={() => setSearchOpen(false)} title="Buscar">
           <SearchBar onSearch={onSearch ?? (() => {})} className="w-full" />
         </Modal>
-      </>
+      </div>
     );
   },
 );

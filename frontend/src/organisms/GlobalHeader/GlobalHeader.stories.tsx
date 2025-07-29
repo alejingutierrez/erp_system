@@ -89,3 +89,12 @@ export const WithSubmenus: Story = {
     navItems: [...baseItems, ...submenuItems],
   },
 };
+
+export const WithSidebar: Story = {
+  args: {
+    ...Default.args,
+    stores: ['A', 'B'],
+    selectedStore: 'A',
+    helpItems: [{ label: 'Ayuda' }],
+  },
+};
