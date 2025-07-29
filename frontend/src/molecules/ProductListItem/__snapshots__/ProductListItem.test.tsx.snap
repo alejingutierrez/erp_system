@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ProductListItem > matches snapshot 1`] = `
+<div>
+  <ul>
+    <li
+      class="flex items-center gap-3 px-3 py-2 rounded-md group justify-between hover:bg-muted"
+    >
+      <div
+        class="relative inline-flex items-center justify-center overflow-hidden rounded-full select-none shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 h-6 w-6 text-xs bg-muted text-muted-foreground shrink-0"
+      >
+        <img
+          alt="Prod"
+          class="h-full w-full object-cover"
+          src="img.png"
+        />
+      </div>
+      <div
+        class="flex-1 overflow-hidden"
+      >
+        <span
+          class="font-sans text-lg font-medium block truncate"
+        >
+          Prod
+        </span>
+        <span
+          class="font-sans text-lg font-semibold text-secondary"
+        >
+          <data
+            value="1"
+          >
+            1,00 US$
+          </data>
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>
+`;
