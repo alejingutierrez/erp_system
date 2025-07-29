@@ -33,37 +33,56 @@ type Story = StoryObj<typeof meta>;
 const navItems = [
     { label: 'Panel', iconName: 'LayoutDashboard', path: '/panel' },
     {
-        label: 'Gestión de Productos',
+        label: 'Operaciones',
         iconName: 'Package',
         children: [
-            { label: 'Productos & Catálogo', path: '/productos' },
-            { label: 'Inventario', path: '/inventario' },
+            {
+                label: 'Gestión de Productos',
+                children: [
+                    { label: 'Productos & Catálogo', path: '/productos' },
+                    { label: 'Inventario', path: '/inventario' },
+                ]
+            },
+            {
+                label: 'Operaciones de Venta',
+                children: [
+                    { label: 'Compras & Abastecimiento', path: '/compras' },
+                    { label: 'Ventas & Pedidos', path: '/ventas' },
+                ]
+            },
+            {
+                label: 'Clientes',
+                children: [
+                    { label: 'CRM & Atención', path: '/crm' },
+                    { label: 'CDP & Audiencias', path: '/cdp' },
+                ]
+            },
+            {
+                label: 'Marketing',
+                children: [
+                    { label: 'Marketing & Campañas', path: '/marketing' },
+                ]
+            },
+            {
+                label: 'Operaciones Físicas',
+                children: [
+                    { label: 'Logística & Fulfillment', path: '/logistica' },
+                ]
+            }
         ]
     },
     {
-        label: 'Operaciones de Venta',
-        iconName: 'ShoppingCart',
+        label: 'Análisis',
+        iconName: 'BarChart2',
         children: [
-            { label: 'Compras & Abastecimiento', path: '/compras' },
-            { label: 'Ventas & Pedidos', path: '/ventas' },
+            { label: 'Analytics & BI', path: '/analytics' },
         ]
     },
-    {
-        label: 'Clientes',
-        iconName: 'Users',
-        children: [
-            { label: 'CRM & Atención', path: '/crm' },
-            { label: 'CDP & Audiencias', path: '/cdp' },
-        ]
-    },
-    { label: 'Marketing & Campañas', iconName: 'Megaphone', path: '/marketing' },
-    { label: 'Logística & Fulfillment', iconName: 'Truck', path: '/logistica' },
     {
         label: 'Administración',
         iconName: 'Settings',
         children: [
             { label: 'Finanzas & Contabilidad', path: '/finanzas' },
-            { label: 'Analytics & BI', path: '/analytics' },
             { label: 'Integraciones', path: '/integraciones' },
             { label: 'Configuración', path: '/configuracion' },
         ]
