@@ -11,6 +11,11 @@ const meta: Meta<GlobalHeaderProps> = {
     navItems: { control: 'object' },
     actionLabel: { control: 'text' },
     notificationsCount: { control: 'number' },
+    variant: { control: 'select', options: ['solid', 'glass'] },
+    color: {
+      control: 'select',
+      options: ['default', 'primary', 'secondary', 'tertiary'],
+    },
     divider: { control: 'boolean' },
     onNavigate: { action: 'navigate', table: { category: 'Events' } },
     onSearch: { action: 'search', table: { category: 'Events' } },
@@ -27,51 +32,68 @@ type Story = StoryObj<typeof meta>;
 
 const navItems = [
     { label: 'Panel', iconName: 'LayoutDashboard', path: '/panel' },
-    { label: 'Productos & Catálogo', iconName: 'Package', path: '/productos' },
-    { label: 'Inventario', iconName: 'Warehouse', path: '/inventario' },
-    { label: 'Compras & Abastecimiento', iconName: 'ShoppingCart', path: '/compras' },
-    { label: 'Ventas & Pedidos', iconName: 'ShoppingBag', path: '/ventas' },
-    { label: 'CRM & Atención', iconName: 'Users', path: '/crm' },
+    {
+        label: 'Gestión de Productos',
+        iconName: 'Package',
+        children: [
+            { label: 'Productos & Catálogo', path: '/productos' },
+            { label: 'Inventario', path: '/inventario' },
+        ]
+    },
+    {
+        label: 'Operaciones de Venta',
+        iconName: 'ShoppingCart',
+        children: [
+            { label: 'Compras & Abastecimiento', path: '/compras' },
+            { label: 'Ventas & Pedidos', path: '/ventas' },
+        ]
+    },
+    {
+        label: 'Clientes',
+        iconName: 'Users',
+        children: [
+            { label: 'CRM & Atención', path: '/crm' },
+            { label: 'CDP & Audiencias', path: '/cdp' },
+        ]
+    },
     { label: 'Marketing & Campañas', iconName: 'Megaphone', path: '/marketing' },
-    { label: 'CDP & Audiencias', iconName: 'Target', path: '/cdp' },
     { label: 'Logística & Fulfillment', iconName: 'Truck', path: '/logistica' },
-    { label: 'Finanzas & Contabilidad', iconName: 'Landmark', path: '/finanzas' },
-    { label: 'Analytics & BI', iconName: 'AreaChart', path: '/analytics' },
-    { label: 'Integraciones', iconName: 'Plug', path: '/integraciones' },
-    { label: 'Configuración', iconName: 'Settings', path: '/configuracion' },
-    { label: 'Ayuda & Soporte', iconName: 'HelpCircle', path: '/ayuda' },
-];
-
-const storeMenuItems = [
-    { label: 'Tienda Principal' },
-    { label: 'Tienda Secundaria' },
+    {
+        label: 'Administración',
+        iconName: 'Settings',
+        children: [
+            { label: 'Finanzas & Contabilidad', path: '/finanzas' },
+            { label: 'Analytics & BI', path: '/analytics' },
+            { label: 'Integraciones', path: '/integraciones' },
+            { label: 'Configuración', path: '/configuracion' },
+        ]
+    },
+    {
+        label: 'Soporte',
+        iconName: 'HelpCircle',
+        children: [
+            { label: 'Ayuda & Soporte', path: '/ayuda' },
+        ]
+    }
 ];
 
 export const Default: Story = {
   args: {
+    logo: 'Fashion',
+    title: 'ERP',
     navItems: navItems,
+    actionLabel: 'New order',
     notificationsCount: 3,
     userName: 'Jane Doe',
     userMenuItems: [
       { label: 'Profile' },
       { label: 'Logout' },
     ],
-    storeMenuItems,
-    activeStore: 'Tienda Principal',
-    children: 'Contenido principal de la aplicación'
+    divider: true,
   },
 };
 
-export const WithLevel2Panel: Story = {
-    args: {
-        ...Default.args,
-        activePath: '/productos',
-        level2Title: 'Productos & Catálogo',
-        level2Actions: [
-            { label: 'Crear', onClick: () => alert('Crear') },
-            { label: 'Importar', onClick: () => alert('Importar') },
-            { label: 'Exportar', onClick: () => alert('Exportar') },
-        ],
-        children: 'Aquí iría el contenido del panel de nivel 2, como una tabla de productos.'
-    }
-}
+export const MobileCollapsed: Story = {
+  ...Default,
+  parameters: { viewport: { defaultViewport: 'mobile1' } },
+};
