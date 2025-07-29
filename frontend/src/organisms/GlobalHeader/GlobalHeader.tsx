@@ -161,7 +161,65 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
       if (isDesktop) setMobileOpen(false);
     }, [isDesktop]);
 
-    const navContent = <>{navItems.map((item) => <NavLink key={item.label} item={item} onNavigate={onNavigate} activePath={activePath} setMobileOpen={setMobileOpen} />)}</>;
+    const [visibleItems, setVisibleItems] = React.useState<NavLink[]>([]);
+    const [hiddenItems, setHiddenItems] = React.useState<NavLink[]>([]);
+    const navRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+      const calculateVisibleItems = () => {
+        if (!navRef.current) return;
+        const navWidth = navRef.current.offsetWidth;
+        let totalWidth = 0;
+        let visibleCount = 0;
+        for (const item of navItems) {
+          const itemWidth = 120;
+          totalWidth += itemWidth;
+          if (totalWidth < navWidth - 150) {
+            visibleCount++;
+          } else {
+            break;
+          }
+        }
+        setVisibleItems(navItems.slice(0, visibleCount));
+        setHiddenItems(navItems.slice(visibleCount));
+      };
+
+      calculateVisibleItems();
+      window.addEventListener('resize', calculateVisibleItems);
+      return () => window.removeEventListener('resize', calculateVisibleItems);
+    }, [navItems]);
+
+    const navContent = (
+      <>
+        {visibleItems.map((item) => (
+          <NavLink
+            key={item.label}
+            item={item}
+            onNavigate={onNavigate}
+            activePath={activePath}
+            setMobileOpen={setMobileOpen}
+          />
+        ))}
+        {hiddenItems.length > 0 && (
+          <DropdownMenu
+            triggerLabel={
+              <span className="flex items-center gap-2">
+                <Icon name="MoreHorizontal" aria-hidden="true" />
+                <span>More</span>
+              </span>
+            }
+            variant="ghost"
+            items={hiddenItems.map(item => ({
+              label: item.label,
+              children: item.children,
+              onClick: () => {
+                if (item.path) onNavigate?.(item.path);
+              }
+            }))}
+          />
+        )}
+      </>
+    );
 
     const userTrigger = (
       <div className="flex items-center gap-2">
@@ -186,7 +244,7 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
             )}
           </div>
           {isDesktop ? (
-            <nav aria-label="Main" className="flex items-center gap-2">
+            <nav ref={navRef} aria-label="Main" className="flex items-center gap-2 flex-1 min-w-0">
               {navContent}
             </nav>
           ) : (
