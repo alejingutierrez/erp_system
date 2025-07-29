@@ -30,28 +30,67 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const baseItems = [
-  { label: 'Dashboard', iconName: 'Home', path: '/dashboard' },
-  { label: 'Orders', iconName: 'Package', path: '/orders' },
-  { label: 'Customers', iconName: 'Users', path: '/customers' },
-];
-
-const submenuItems = [
-  {
-    label: 'Reports',
-    iconName: 'BarChart2',
-    children: [
-      { label: 'Sales', path: '/reports/sales' },
-      { label: 'Inventory', path: '/reports/inventory' },
-    ],
-  },
+const navItems = [
+    { label: 'Panel', iconName: 'LayoutDashboard', path: '/panel' },
+    {
+        label: 'Operaciones',
+        iconName: 'Package',
+        children: [
+            {
+                label: 'Gestión de Productos',
+                children: [
+                    { label: 'Productos & Catálogo', path: '/productos' },
+                    { label: 'Inventario', path: '/inventario' },
+                ]
+            },
+            {
+                label: 'Operaciones de Venta',
+                children: [
+                    { label: 'Compras & Abastecimiento', path: '/compras' },
+                    { label: 'Ventas & Pedidos', path: '/ventas' },
+                ]
+            },
+            {
+                label: 'Clientes',
+                children: [
+                    { label: 'CRM & Atención', path: '/crm' },
+                    { label: 'CDP & Audiencias', path: '/cdp' },
+                ]
+            },
+            { label: 'Marketing & Campañas', path: '/marketing' },
+            { label: 'Logística & Fulfillment', path: '/logistica' },
+        ]
+    },
+    {
+        label: 'Análisis',
+        iconName: 'AreaChart',
+        children: [
+            { label: 'Analytics & BI', path: '/analytics' },
+        ]
+    },
+    {
+        label: 'Administración',
+        iconName: 'Settings',
+        children: [
+            { label: 'Finanzas & Contabilidad', path: '/finanzas' },
+            { label: 'Integraciones', path: '/integraciones' },
+            { label: 'Configuración', path: '/configuracion' },
+        ]
+    },
+    {
+        label: 'Soporte',
+        iconName: 'HelpCircle',
+        children: [
+            { label: 'Ayuda & Soporte', path: '/ayuda' },
+        ]
+    }
 ];
 
 export const Default: Story = {
   args: {
     logo: 'Fashion',
     title: 'ERP',
-    navItems: baseItems,
+    navItems: navItems,
     actionLabel: 'New order',
     notificationsCount: 3,
     userName: 'Jane Doe',
@@ -66,26 +105,4 @@ export const Default: Story = {
 export const MobileCollapsed: Story = {
   ...Default,
   parameters: { viewport: { defaultViewport: 'mobile1' } },
-};
-
-export const WithNotifications: Story = {
-  args: {
-    ...Default.args,
-    notificationsCount: 8,
-  },
-};
-
-export const CustomColors: Story = {
-  args: {
-    ...Default.args,
-    color: 'primary',
-    variant: 'glass',
-  },
-};
-
-export const WithSubmenus: Story = {
-  args: {
-    ...Default.args,
-    navItems: [...baseItems, ...submenuItems],
-  },
 };

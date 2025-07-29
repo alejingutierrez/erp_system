@@ -122,42 +122,36 @@ export const GlobalHeader = React.forwardRef<HTMLElement, GlobalHeaderProps>(
       if (isDesktop) setMobileOpen(false);
     }, [isDesktop]);
 
-    const renderNavItem = (item: NavLink) => {
-      const base = (
-        <NavItem
-          iconName={item.iconName}
-          label={item.label}
-          active={activePath === item.path}
-          onClick={() => {
-            if (item.path) onNavigate?.(item.path);
-            else onNavigate?.(item.label);
-            setMobileOpen(false);
-          }}
-        />
-      );
+    const renderNavItem = (item: NavLink): React.ReactNode => {
+        if (item.children && item.children.length > 0) {
+            return (
+                <DropdownMenu
+                    key={item.label}
+                    triggerLabel={
+                        <span className="flex items-center gap-2">
+                            {item.iconName && <Icon name={item.iconName} aria-hidden="true" />}
+                            <span>{item.label}</span>
+                        </span>
+                    }
+                    variant="ghost"
+                >
+                    {item.children.map(renderNavItem)}
+                </DropdownMenu>
+            );
+        }
 
-      if (item.children && item.children.length > 0) {
         return (
-          <DropdownMenu
-            key={item.label}
-            triggerLabel={
-              <span className="flex items-center gap-2">
-                <Icon name={item.iconName} aria-hidden="true" />
-                <span>{item.label}</span>
-              </span>
-            }
-            variant="ghost"
-            items={item.children}
-            onSelect={(child) => {
-              const c = child as NavChild;
-              if (c.path) onNavigate?.(c.path);
-              else onNavigate?.(c.label);
-              setMobileOpen(false);
-            }}
-          />
+            <NavItem
+                key={item.label}
+                iconName={item.iconName}
+                label={item.label}
+                active={activePath === item.path}
+                onClick={() => {
+                    if (item.path) onNavigate?.(item.path);
+                    setMobileOpen(false);
+                }}
+            />
         );
-      }
-      return React.cloneElement(base, { key: item.label });
     };
 
     const navContent = <>{navItems.map(renderNavItem)}</>;
