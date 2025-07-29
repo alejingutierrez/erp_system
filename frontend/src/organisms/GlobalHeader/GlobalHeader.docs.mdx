@@ -5,7 +5,7 @@ import { GlobalHeader } from './GlobalHeader';
 
 # GlobalHeader
 
-The `GlobalHeader` combines a fixed top bar with a collapsible sidebar. It holds universal search, multi‑store selector, notifications, help menu and profile. Keyboard shortcuts (`⌘/Ctrl+K` and `⌘/Ctrl+Shift+N`) are available by default.
+The `GlobalHeader` organizes primary navigation, search and user actions in a single top bar. It collapses the navigation items into a menu button on narrow screens.
 
 <Canvas>
   <Story name="Desktop">
@@ -18,21 +18,6 @@ The `GlobalHeader` combines a fixed top bar with a collapsible sidebar. It holds
       notificationsCount={2}
       actionLabel="New"
       divider
-    />
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="With sidebar">
-    <GlobalHeader
-      logo="Fashion"
-      title="ERP"
-      navItems={[{ label: 'Panel', iconName: 'LayoutDashboard', path: '/panel' }]}
-      stores={["A", "B"]}
-      selectedStore="A"
-      helpItems={[{ label: 'Ayuda' }]}
-      userName="Jane"
-      notificationsCount={3}
     />
   </Story>
 </Canvas>
@@ -55,4 +40,4 @@ The `GlobalHeader` combines a fixed top bar with a collapsible sidebar. It holds
 
 ## Responsive behavior
 
-Below the desktop breakpoint (`1024px`), the sidebar collapses into a menu button and the search bar moves into the drawer. Use the callbacks to hook into navigation, search and notifications.
+Below the desktop breakpoint (`1024px`), the navigation items collapse behind a menu button. The search bar moves inside the drawer. Use the `onNavigate`, `onSearch`, and `onNotificationsOpen` callbacks to capture user actions.
