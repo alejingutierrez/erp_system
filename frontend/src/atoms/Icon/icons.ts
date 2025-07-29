@@ -38,6 +38,7 @@ import {
   BarChart2,
   Sun,
   Moon,
+  HelpCircle,
 } from 'lucide-react';
 
 export const iconMap = {
@@ -80,6 +81,7 @@ export const iconMap = {
   BarChart2,
   Sun,
   Moon,
+  HelpCircle,
 };
 
 export type IconName = keyof typeof iconMap;

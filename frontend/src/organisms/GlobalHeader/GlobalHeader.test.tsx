@@ -84,4 +84,17 @@ describe('GlobalHeader', () => {
     fireEvent.click(screen.getByText('Sales'));
     expect(onNav).toHaveBeenCalledWith('/reports/sales');
   });
+
+  it('selects store and opens search via shortcut', () => {
+    resize(1280);
+    const onStore = vi.fn();
+    render(
+      <GlobalHeader navItems={items} stores={['A', 'B']} selectedStore="A" onStoreChange={onStore} />,
+    );
+    fireEvent.click(screen.getByDisplayValue('A'));
+    fireEvent.click(screen.getByText('B'));
+    expect(onStore).toHaveBeenCalledWith('B');
+    fireEvent.keyDown(window, { key: 'k', ctrlKey: true });
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+  });
 });
