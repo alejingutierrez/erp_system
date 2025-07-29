@@ -1,29 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
-import { AddressForm, AddressFormProps, Address } from './AddressForm';
+import * as React from 'react';
+import { AddressForm } from './AddressForm';
 
 const countries = [
-  { label: 'España', value: 'ES', postalPattern: '^\\d{5}$', postalMask: '28013' },
-  { label: 'Estados Unidos', value: 'US', postalPattern: '^\\d{5}(?:-\\d{4})?$', postalMask: '90210' },
+  { label: 'United States', value: 'US', postalPattern: '^\\d{5}(-\\d{4})?$' },
+  { label: 'Spain', value: 'ES', postalPattern: '^\\d{5}$' },
 ];
 
-const meta: Meta<AddressFormProps> = {
+const meta: Meta<typeof AddressForm> = {
   title: 'Molecules/AddressForm',
   component: AddressForm,
-  tags: ['autodocs'],
-  argTypes: {
-    onChange: { action: 'changed' },
-    value: { table: { disable: true } },
-    countries: { control: 'object' },
-    showPhone: { control: 'boolean' },
+  parameters: {
+    layout: 'centered',
   },
+  tags: ['autodocs'],
 };
+
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const Template = (args: AddressFormProps) => {
-  const [addr, setAddr] = React.useState<Address>(args.value);
+const Template = (args: any) => {
+  const [addr, setAddr] = React.useState({});
   return (
     <AddressForm
       {...args}
@@ -40,16 +38,17 @@ export const WithPhone: Story = {
   render: Template,
   args: {
     value: {
-      line1: '',
-      line2: '',
-      city: '',
-      state: '',
+      line1: '123 Main St',
+      line2: 'Apt 4B',
+      city: 'Madrid',
+      state: 'Madrid',
       country: 'ES',
-      postalCode: '',
-      phone: '',
+      postalCode: '28013',
+      phone: '+34 123 456 789',
     },
     countries,
     showPhone: true,
+    onChange: () => {},
   },
 };
 
@@ -57,14 +56,15 @@ export const Basic: Story = {
   render: Template,
   args: {
     value: {
-      line1: '',
+      line1: '456 Oak Ave',
       line2: '',
-      city: '',
-      state: '',
+      city: 'New York',
+      state: 'NY',
       country: 'US',
-      postalCode: '',
+      postalCode: '10001',
     },
     countries,
     showPhone: false,
+    onChange: () => {},
   },
 };

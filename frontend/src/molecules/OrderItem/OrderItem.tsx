@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { cva } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
-import { Card } from '@/atoms/Card';
-import { Text } from '@/atoms/Text';
-import { Badge, type BadgeProps } from '@/atoms/Badge';
-import { Icon, type IconName, type IconProps } from '@/atoms/Icon';
+import { cn } from '../../lib/utils';
+import { Card } from '../../atoms/Card';
+import { Text } from '../../atoms/Text';
+import { Badge, type BadgeProps } from '../../atoms/Badge';
+import { Icon, type IconName, type IconProps } from '../../atoms/Icon';
 import { MoreHorizontal } from 'lucide-react';
-import { ActionMenu, type ActionMenuOption } from '@/molecules/ActionMenu';
+import { ActionMenu, type ActionMenuOption } from '../ActionMenu';
 
 export type OrderStatus = 'Entregado' | 'Pendiente' | 'Cancelado' | 'En ruta';
 

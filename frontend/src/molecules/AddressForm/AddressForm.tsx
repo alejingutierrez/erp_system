@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Input } from '@/atoms/Input';
-import { FormField } from '@/molecules/FormField';
-import { DropdownSelect } from '@/molecules/DropdownSelect';
+import { Input } from '../../atoms/Input';
+import { FormField } from '../FormField';
+import { DropdownSelect } from '../DropdownSelect';
 
 export interface Option {
   label: string;
