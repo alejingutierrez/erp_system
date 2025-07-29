@@ -11,11 +11,6 @@ const meta: Meta<GlobalHeaderProps> = {
     navItems: { control: 'object' },
     actionLabel: { control: 'text' },
     notificationsCount: { control: 'number' },
-    variant: { control: 'select', options: ['solid', 'glass'] },
-    color: {
-      control: 'select',
-      options: ['default', 'primary', 'secondary', 'tertiary'],
-    },
     divider: { control: 'boolean' },
     onNavigate: { action: 'navigate', table: { category: 'Events' } },
     onSearch: { action: 'search', table: { category: 'Events' } },
@@ -30,62 +25,53 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const baseItems = [
-  { label: 'Dashboard', iconName: 'Home', path: '/dashboard' },
-  { label: 'Orders', iconName: 'Package', path: '/orders' },
-  { label: 'Customers', iconName: 'Users', path: '/customers' },
+const navItems = [
+    { label: 'Panel', iconName: 'LayoutDashboard', path: '/panel' },
+    { label: 'Productos & Catálogo', iconName: 'Package', path: '/productos' },
+    { label: 'Inventario', iconName: 'Warehouse', path: '/inventario' },
+    { label: 'Compras & Abastecimiento', iconName: 'ShoppingCart', path: '/compras' },
+    { label: 'Ventas & Pedidos', iconName: 'ShoppingBag', path: '/ventas' },
+    { label: 'CRM & Atención', iconName: 'Users', path: '/crm' },
+    { label: 'Marketing & Campañas', iconName: 'Megaphone', path: '/marketing' },
+    { label: 'CDP & Audiencias', iconName: 'Target', path: '/cdp' },
+    { label: 'Logística & Fulfillment', iconName: 'Truck', path: '/logistica' },
+    { label: 'Finanzas & Contabilidad', iconName: 'Landmark', path: '/finanzas' },
+    { label: 'Analytics & BI', iconName: 'AreaChart', path: '/analytics' },
+    { label: 'Integraciones', iconName: 'Plug', path: '/integraciones' },
+    { label: 'Configuración', iconName: 'Settings', path: '/configuracion' },
+    { label: 'Ayuda & Soporte', iconName: 'HelpCircle', path: '/ayuda' },
 ];
 
-const submenuItems = [
-  {
-    label: 'Reports',
-    iconName: 'BarChart2',
-    children: [
-      { label: 'Sales', path: '/reports/sales' },
-      { label: 'Inventory', path: '/reports/inventory' },
-    ],
-  },
+const storeMenuItems = [
+    { label: 'Tienda Principal' },
+    { label: 'Tienda Secundaria' },
 ];
 
 export const Default: Story = {
   args: {
-    logo: 'Fashion',
-    title: 'ERP',
-    navItems: baseItems,
-    actionLabel: 'New order',
+    navItems: navItems,
     notificationsCount: 3,
     userName: 'Jane Doe',
     userMenuItems: [
       { label: 'Profile' },
       { label: 'Logout' },
     ],
-    divider: true,
+    storeMenuItems,
+    activeStore: 'Tienda Principal',
+    children: 'Contenido principal de la aplicación'
   },
 };
 
-export const MobileCollapsed: Story = {
-  ...Default,
-  parameters: { viewport: { defaultViewport: 'mobile1' } },
-};
-
-export const WithNotifications: Story = {
-  args: {
-    ...Default.args,
-    notificationsCount: 8,
-  },
-};
-
-export const CustomColors: Story = {
-  args: {
-    ...Default.args,
-    color: 'primary',
-    variant: 'glass',
-  },
-};
-
-export const WithSubmenus: Story = {
-  args: {
-    ...Default.args,
-    navItems: [...baseItems, ...submenuItems],
-  },
-};
+export const WithLevel2Panel: Story = {
+    args: {
+        ...Default.args,
+        activePath: '/productos',
+        level2Title: 'Productos & Catálogo',
+        level2Actions: [
+            { label: 'Crear', onClick: () => alert('Crear') },
+            { label: 'Importar', onClick: () => alert('Importar') },
+            { label: 'Exportar', onClick: () => alert('Exportar') },
+        ],
+        children: 'Aquí iría el contenido del panel de nivel 2, como una tabla de productos.'
+    }
+}
